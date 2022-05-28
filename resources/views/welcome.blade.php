@@ -21,64 +21,27 @@
         </style>
     </head>
     <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-            @if (Route::has('login'))
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                    @auth
-                        <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
+        
 
             <div>
                     <div id="app">
-                        <v-app>
-                            <v-navigation-drawer app>
-                              <!-- -->
-                              v-navigation
-                            </v-navigation-drawer>
-                          
+                        <v-app>    
                             <v-app-bar 
-                            height = "auto"
-                            fixed
-                            app>
-
-                            <v-row 
-                                align ="center"
-                                justify ="center"
-                            >
-                                <v-col 
-                                    cols="12"
-                                    sm ="8"
-                                    md ="4"
-                                >
-                                    <v-form
-                                    ref="form"
-                                    v-model="valid"
-                                    lazy-validation>
-                                        <v-text-field
-                                            label="ツイートしてみよう"
-                                            v-model.trim="tweet"
-                                            :counter="255"
-                                            :rules="tweetRules"
-                                            required
-                                            solo
-                                        ></v-text-field>
-                                        <v-btn
-                                            color="primary mr-4"
-                                            @click="storeTweet"
-                                            :disabled="!canSubmit"
-                                            >投稿する
-                                        </v-btn>
-                                    </v-form>
-                                </v-col>
-                            </v-row>
+                            absolute
+                            color="#6A76AB"
+                            dark
+                            shrink-on-scroll
+                            prominent
+                            fade-img-on-scroll
+                            scroll-target="#scrolling-techniques-3">
+                            
+                            <template v-slot:extension>
+                                <v-tabs align-with-title fixed-tab>
+                                  <v-tab>Tab 1</v-tab>
+                                  <v-tab>Tab 2</v-tab>
+                                  <v-tab>Tab 3</v-tab>
+                                </v-tabs>
+                              </template>
                                         
                             <v-btn
                                 href="/login"
@@ -91,22 +54,34 @@
                           
                             <!-- アプリケーションのコンポーネントに基づいてコンテンツのサイズを決定 -->
                             <v-main>
-                                main
                               <!-- アプリケーションに適切なgutterを提供 -->
                               <v-container fluid>
-                                container
+                                mainnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
                               </v-container>
                             </v-main>
                           
                             <v-footer app>
-                              <!-- -->
-                              footer
+                              <v-bottom-navigation
+                                :value="activeBtn"
+                                color="primary lighten-1"
+                                fixed
+                                >
+                                <v-btn href="/">
+                                    <span>Home</span>
+                                    <v-icon>mdi-home</v-icon>
+                                </v-btn>
+
+                                <v-btn href="/tweet/index">
+                                    <span>Timeline</span>
+                                    <v-icon>mdi-timeline</v-icon>
+                                </v-btn>
+                              </v-bottom-navigation>
                             </v-footer>
                           </v-app>
                     </div>
-                </div>
+               
             </div>
-        </div>
+        
         <script src="{{ mix('js/app.js') }}"></script>
     </body>
 </html>
