@@ -21,64 +21,96 @@
         </style>
     </head>
     <body class="antialiased">
-        
-
             <div>
-                    <div id="app">
-                        <v-app>    
-                            <v-app-bar 
-                            absolute
-                            color="#6A76AB"
-                            dark
-                            shrink-on-scroll
-                            prominent
-                            fade-img-on-scroll
-                            scroll-target="#scrolling-techniques-3">
-                            
-                            <template v-slot:extension>
-                                <v-tabs align-with-title fixed-tab>
-                                  <v-tab>Tab 1</v-tab>
-                                  <v-tab>Tab 2</v-tab>
-                                  <v-tab>Tab 3</v-tab>
-                                </v-tabs>
-                              </template>
-                                        
-                            <v-btn
-                                href="/login"
-                                color="link"
-                                min-height="20"
-                                text 
-                                >ログイン
-                            </v-btn>
-                            </v-app-bar>
+                  <div id="app">
+                      <v-app>    
+                          <v-app-bar 
+                          app
+                          absolute
+                          color="#6A76AB"
+                          dark
+                          shrink-on-scroll
+                          prominent
+                          fade-img-on-scroll
+                          scroll-target="#scrolling-techniques-3"
+                          >
                           
-                            <!-- アプリケーションのコンポーネントに基づいてコンテンツのサイズを決定 -->
-                            <v-main>
-                              <!-- アプリケーションに適切なgutterを提供 -->
-                              <v-container fluid>
-                                mainnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
-                              </v-container>
-                            </v-main>
-                          
-                            <v-footer app>
-                              <v-bottom-navigation
-                                :value="activeBtn"
-                                color="primary lighten-1"
-                                fixed
-                                >
-                                <v-btn href="/">
-                                    <span>Home</span>
-                                    <v-icon>mdi-home</v-icon>
-                                </v-btn>
+                          <template v-slot:extension>
+                              <v-tabs align-with-title fixed-tab class="d-flex justify-center">
+                                <v-tab>Tab 1</v-tab>
+                                <v-tab>Tab 2</v-tab>
+                                <v-tab>Tab 3</v-tab>
+                              </v-tabs>
+                          </template>
+                                      
+                          <v-btn
+                              href="/login"
+                              color="link"
+                              min-height="20"
+                              text 
+                              >ログイン
+                          </v-btn>
+                          </v-app-bar>
 
-                                <v-btn href="/tweet/index">
-                                    <span>Timeline</span>
-                                    <v-icon>mdi-timeline</v-icon>
-                                </v-btn>
-                              </v-bottom-navigation>
-                            </v-footer>
-                          </v-app>
-                    </div>
+                          <v-navigation-drawer app dark>
+
+                            <v-list-item>
+                              <v-list-item-title>
+                                Application
+                              </v-list-item-title>
+                              <v-btn->
+                                <v-icon>mdi-chevron-left</v-icon>
+                              </v-btn->
+                            </v-list-item>
+                            <v-list nav>
+                              <v-list-item v-for="menu in menus" :key="menu.title" :to="menu.url">
+                                <v-list-item-icon>
+                                  <v-icon>@{{ menu.icon }}</v-icon>
+                                </v-list-item-icon>
+                                <v-list-item-content>
+                                  <v-list-item-title>@{{ menu.title }}</v-list-item-title>
+                                </v-list-item-content>
+                              </v-list-item>
+                            </v-list>
+                          </v-navigation-drawer>
+                        
+                          <!-- アプリケーションのコンポーネントに基づいてコンテンツのサイズを決定 -->
+                          <v-main>
+                            <!-- アプリケーションに適切なgutterを提供 -->
+                            <v-container fluid>
+                              <v-row class="d-flex justify-center" v-for="tweet in tweets" :key="tweet.id">
+                                  <v-col class="d-flex justify-center" >
+                                    <v-card>
+                                      <v-img 
+                                      src="http://placehold.jp/300x300.png"
+                                      max-height="250"
+                                      max-width="250">
+                                      </v-img>
+                                    </v-card>
+                                  </v-row>
+                              </v-row>
+                            </v-container>
+                          </v-main>
+                        
+                          <v-footer app>
+                            <v-bottom-navigation
+                              :value="activeBtn"
+                              color="primary lighten-1"
+                              fixed
+                              >
+                              <v-btn href="/">
+                                  <span>Home</span>
+                                  <v-icon>mdi-home</v-icon>
+                              </v-btn>
+
+                              <v-btn href="/tweet/index">
+                                  <span>Timeline</span>
+                                  <v-icon>mdi-timeline</v-icon>
+                              </v-btn>
+                            </v-bottom-navigation>
+                          </v-footer>
+                        </v-app>
+                  </div>
                
             </div>
         
