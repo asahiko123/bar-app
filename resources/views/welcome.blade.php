@@ -23,8 +23,8 @@
     <body class="antialiased">
             <div>
                   <div id="app">
-                      <v-app>    
-                          <v-app-bar 
+                      <v-app>
+                          <v-app-bar
                           app
                           absolute
                           color="#6A76AB"
@@ -34,20 +34,20 @@
                           fade-img-on-scroll
                           scroll-target="#scrolling-techniques-3"
                           >
-                          
+
                           <template v-slot:extension>
                               <v-tabs align-with-title fixed-tab class="d-flex justify-center">
-                                <v-tab>Tab 1</v-tab>
-                                <v-tab>Tab 2</v-tab>
-                                <v-tab>Tab 3</v-tab>
+                                <v-tab>ホーム</v-tab>
+                                <v-tab>お店を探す</v-tab>
+                                <v-tab>お酒で探す</v-tab>
                               </v-tabs>
                           </template>
-                                      
+
                           <v-btn
                               href="/login"
                               color="link"
                               min-height="20"
-                              text 
+                              text
                               >ログイン
                           </v-btn>
                           </v-app-bar>
@@ -73,25 +73,38 @@
                               </v-list-item>
                             </v-list>
                           </v-navigation-drawer>
-                        
-                          <!-- アプリケーションのコンポーネントに基づいてコンテンツのサイズを決定 -->
+
                           <v-main>
                             <!-- アプリケーションに適切なgutterを提供 -->
                             <v-container fluid>
                               <v-row class="d-flex justify-center" v-for="tweet in tweets" :key="tweet.id">
-                                  <v-col class="d-flex justify-center" >
-                                    <v-card>
-                                      <v-img 
-                                      src="http://placehold.jp/300x300.png"
-                                      max-height="250"
-                                      max-width="250">
-                                      </v-img>
-                                    </v-card>
-                                  </v-row>
+                                    <v-col class="d-flex flex-row-reverse" >
+                                        <v-card>
+                                        <v-img
+                                        :src="tweet.img"
+                                        max-height="250"
+                                        max-width="250"
+                                        class="mb-4">
+                                        </v-img>
+                                        @{{tweet.content}}
+                                        </v-card>
+                                    </v-col>
+                                    <v-col class="d-flex flex-row">
+                                        <v-card>
+                                        <v-img
+                                        :src="tweet.subimg"
+                                        max-height="250"
+                                        max-width="250"
+                                        class="mb-4"
+                                        >
+                                        </v-img>
+                                        @{{tweet.subcontent}}
+                                        </v-card>
+                                    </v-col>
                               </v-row>
                             </v-container>
                           </v-main>
-                        
+
                           <v-footer app>
                             <v-bottom-navigation
                               :value="activeBtn"
@@ -111,9 +124,9 @@
                           </v-footer>
                         </v-app>
                   </div>
-               
+
             </div>
-        
+
         <script src="{{ mix('js/app.js') }}"></script>
     </body>
 </html>

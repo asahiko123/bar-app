@@ -12,11 +12,11 @@ new Vue({
         drawer: false,
 
         tweets: [
-            {id: 1,img: "http://placehold.jp/150x150.png", content: "aaaa"},
-            {id: 2,img: "http://placehold.jp/150x150.png", content: "bbbb"},
-            {id: 3,img: "http://placehold.jp/150x150.png", content: "cccc"},
-            {id: 4,img: "http://placehold.jp/150x150.png", content: "dddd"},
-            {id: 5,img: "http://placehold.jp/150x150.png", content: "4444"},
+            {id: 1,img: "http://placehold.jp/150x150.png", content: "aaaa",subimg: "http://placehold.jp/150x150.png",subcontent: "aaaasub"},
+            {id: 2,img: "http://placehold.jp/150x150.png", content: "bbbb",subimg: "http://placehold.jp/150x150.png",subcontent: "bbbbsub"},
+            {id: 3,img: "http://placehold.jp/150x150.png", content: "cccc",subimg: "http://placehold.jp/150x150.png",subcontent: "ccccsub"},
+            {id: 4,img: "http://placehold.jp/150x150.png", content: "dddd",subimg: "http://placehold.jp/150x150.png",subcontent: "ddddsub"},
+            {id: 5,img: "http://placehold.jp/150x150.png", content: "4444",subimg: "http://placehold.jp/150x150.png",subcontent: "eeeesub"},
 
         ],
         menus: [
