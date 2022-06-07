@@ -35,11 +35,12 @@
                           scroll-target="#scrolling-techniques-3"
                           >
 
+
                           <template v-slot:extension>
                               <v-tabs align-with-title fixed-tab class="d-flex justify-center">
                                 <v-tab>ホーム</v-tab>
                                 <v-tab>お店を探す</v-tab>
-                                <v-tab>お酒で探す</v-tab>
+                                <v-tab>このサイトについて</v-tab>
                               </v-tabs>
                           </template>
 
