@@ -61,7 +61,7 @@ services:
         environment:
             - PMA_ARBITRARY=1
             - PMA_HOST=mysql
-            - PMA_USER=root
+            - PMA_USER=
             - PMA_PASSWORD=
         links:
             - mysql
