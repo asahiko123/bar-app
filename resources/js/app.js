@@ -4,8 +4,6 @@ import router from './router'
 import '@mdi/font/css/materialdesignicons.css'
 import App from '../js/components/App.vue'
 
-import ExampleComponent from "./components/ExampleComponent"
-
 
 new Vue({
     el: '#app',
@@ -26,11 +24,12 @@ new Vue({
         ],
         menus: [
         {title: 'Index', icon: 'mdi-web' ,url: '/'},
-        {title: 'Home' , icon: 'mdi-home',url: '/home'}
+        {title: 'Home' , icon: 'mdi-home',url: '/'}
         ],
 
         components: {
-            ExampleComponent,
+            Home,
         }
     }
+    
 })

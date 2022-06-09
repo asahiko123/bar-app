@@ -1,6 +1,5 @@
 <template>
     <v-main>
-        <!-- アプリケーションに適切なgutterを提供 -->
         <v-container fluid>
             <v-row class="d-flex justify-center" v-for="tweet in tweets" :key="tweet.id">
                 <v-col class="d-flex flex-row-reverse" >
@@ -33,8 +32,7 @@
 
 <script>
     export default {
-        mounted() {
-            console.log('Component mounted.')
-        }
+        name: 'Home',
+        
     }
 </script>

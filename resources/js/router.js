@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import BarMap from './components/BarMap'
-import Home from './components/ExampleComponent'
+import BarMap from './components/BarMap.vue'
+import Home from './components/Home.vue'
 
 
 Vue.use(VueRouter);
@@ -12,15 +12,17 @@ export default new VueRouter({
     routes: [
         {
             path: '/barMap',
-            name: 'BarMap',
+            name: 'barMap',
             component: BarMap,
 
         },
         {
             path: '/',
-            name: 'Home',
+            name: 'home',
             component: Home,
+            
         }
         
-    ]
+    ],
+    
 })
