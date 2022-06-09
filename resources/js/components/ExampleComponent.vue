@@ -1,17 +1,34 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Example Component</div>
-
-                    <div class="card-body">
-                        I'm an example component.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <v-main>
+        <!-- アプリケーションに適切なgutterを提供 -->
+        <v-container fluid>
+            <v-row class="d-flex justify-center" v-for="tweet in tweets" :key="tweet.id">
+                <v-col class="d-flex flex-row-reverse" >
+                    <v-card>
+                    <v-img
+                    :src="tweet.img"
+                    max-height="250"
+                    max-width="250"
+                    class="mb-4">
+                    </v-img>
+                    @{{tweet.content}}
+                    </v-card>
+                </v-col>
+                <v-col class="d-flex flex-row">
+                    <v-card>
+                    <v-img
+                    :src="tweet.subimg"
+                    max-height="250"
+                    max-width="250"
+                    class="mb-4"
+                    >
+                    </v-img>
+                    @{{tweet.subcontent}}
+                    </v-card>
+                </v-col>
+            </v-row>
+        </v-container>
+    </v-main>
 </template>
 
 <script>

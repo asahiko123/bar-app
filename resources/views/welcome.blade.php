@@ -38,8 +38,8 @@
 
                           <template v-slot:extension>
                               <v-tabs align-with-title fixed-tab class="d-flex justify-center">
-                                <v-tab>ホーム</v-tab>
-                                <v-tab>お店を探す</v-tab>
+                                <v-tab><router-link :to="{name: 'Home'}">ホーム</router-link></v-tab>
+                                <v-tab><router-link :to="{name: 'BarMap'}">お店を探す</router-link></v-tab>
                                 <v-tab>このサイトについて</v-tab>
                               </v-tabs>
                           </template>
@@ -75,36 +75,9 @@
                             </v-list>
                           </v-navigation-drawer>
 
-                          <v-main>
-                            <!-- アプリケーションに適切なgutterを提供 -->
-                            <v-container fluid>
-                              <v-row class="d-flex justify-center" v-for="tweet in tweets" :key="tweet.id">
-                                    <v-col class="d-flex flex-row-reverse" >
-                                        <v-card>
-                                        <v-img
-                                        :src="tweet.img"
-                                        max-height="250"
-                                        max-width="250"
-                                        class="mb-4">
-                                        </v-img>
-                                        @{{tweet.content}}
-                                        </v-card>
-                                    </v-col>
-                                    <v-col class="d-flex flex-row">
-                                        <v-card>
-                                        <v-img
-                                        :src="tweet.subimg"
-                                        max-height="250"
-                                        max-width="250"
-                                        class="mb-4"
-                                        >
-                                        </v-img>
-                                        @{{tweet.subcontent}}
-                                        </v-card>
-                                    </v-col>
-                              </v-row>
-                            </v-container>
-                          </v-main>
+                          <v-content>
+                            <view-router></view-router>
+                          </v-content>
 
                           <v-footer app>
                             <v-bottom-navigation
