@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 import BarMap from './components/BarMap.vue'
 import Home from './components/Home.vue'
+import AboutUs from './components/AboutUs.vue'
 
 
 Vue.use(VueRouter);
@@ -20,9 +21,13 @@ export default new VueRouter({
             path: '/',
             name: 'home',
             component: Home,
-            
+
+        },{
+            path: '/aboutUs',
+            name: 'aboutUs',
+            component: AboutUs,
         }
-        
+
     ],
-    
+
 })

@@ -16,7 +16,7 @@
         <v-tabs align-with-title fixed-tab class="d-flex justify-center tab">
             <v-tab><router-link to="/" class="tab-link home">ホーム</router-link></v-tab>
             <v-tab><router-link to="/barMap" class="tab-link map">お店を探す</router-link></v-tab>
-            <v-tab>このサイトについて</v-tab>
+            <v-tab><router-link to="/aboutUs" class="tab-link aboutUs">このサイトについて</router-link></v-tab>
         </v-tabs>
     </template>
 
@@ -53,7 +53,7 @@
 
 <style>
 
-a.tab-link.home, a.tab-link.map {
+a.tab-link.home, a.tab-link.map, a.tab-link.aboutUs {
 
     color: hsla(0,0%,100%,.6);
 
