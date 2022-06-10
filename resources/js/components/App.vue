@@ -20,13 +20,19 @@
         </v-tabs>
     </template>
 
+    <v-container>
     <v-btn
         href="/login"
         color="link"
         min-height="20"
         text
-        >ログイン
+        >
+        <v-row class="d-flex flex-column">
+            <v-icon>mdi-account-arrow-left</v-icon>
+            <v-col class="login">ログイン</v-col>
+        </v-row>
     </v-btn>
+    </v-container>
     </v-app-bar>
 
     <router-view />

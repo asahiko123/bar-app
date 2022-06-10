@@ -1290,16 +1290,36 @@ var render = function () {
         [
           _vm._v(" "),
           _c(
-            "v-btn",
-            {
-              attrs: {
-                href: "/login",
-                color: "link",
-                "min-height": "20",
-                text: "",
-              },
-            },
-            [_vm._v("ログイン\n")]
+            "v-container",
+            [
+              _c(
+                "v-btn",
+                {
+                  attrs: {
+                    href: "/login",
+                    color: "link",
+                    "min-height": "20",
+                    text: "",
+                  },
+                },
+                [
+                  _c(
+                    "v-row",
+                    { staticClass: "d-flex flex-column" },
+                    [
+                      _c("v-icon", [_vm._v("mdi-account-arrow-left")]),
+                      _vm._v(" "),
+                      _c("v-col", { staticClass: "login" }, [
+                        _vm._v("ログイン"),
+                      ]),
+                    ],
+                    1
+                  ),
+                ],
+                1
+              ),
+            ],
+            1
           ),
         ],
         1
