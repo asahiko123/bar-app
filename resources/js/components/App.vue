@@ -13,9 +13,9 @@
 
 
     <template v-slot:extension>
-        <v-tabs align-with-title fixed-tab class="d-flex justify-center">
-            <v-tab><router-link to="/">ホーム</router-link></v-tab>
-            <v-tab><router-link to="/barMap">お店を探す</router-link></v-tab>
+        <v-tabs align-with-title fixed-tab class="d-flex justify-center tab">
+            <v-tab><router-link to="/" class="tab-link home">ホーム</router-link></v-tab>
+            <v-tab><router-link to="/barMap" class="tab-link map">お店を探す</router-link></v-tab>
             <v-tab>このサイトについて</v-tab>
         </v-tabs>
     </template>
@@ -51,6 +51,12 @@
     </v-app>
 </template>
 
-<script>
+<style>
 
-</script>
+a.tab-link.home, a.tab-link.map {
+
+    color: hsla(0,0%,100%,.6);
+
+
+}
+</style>
