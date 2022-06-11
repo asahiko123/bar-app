@@ -32,6 +32,17 @@
             <v-col class="login">ログイン</v-col>
         </v-row>
     </v-btn>
+    <v-btn
+        href="/register"
+        color="link"
+        min-height="20"
+        text
+        >
+        <v-row class="d-flex flex-column">
+            <v-icon>mdi-account-arrow-left</v-icon>
+            <v-col class="register">新規登録</v-col>
+        </v-row>
+    </v-btn>
     </v-container>
     </v-app-bar>
 
@@ -44,12 +55,12 @@
         fixed
         >
         <v-btn href="/">
-            <span>Home</span>
+            <span>ホーム</span>
             <v-icon>mdi-home</v-icon>
         </v-btn>
 
         <v-btn href="/tweet/index">
-            <span>Timeline</span>
+            <span>投稿する</span>
             <v-icon>mdi-timeline</v-icon>
         </v-btn>
         </v-bottom-navigation>
