@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -37,4 +38,59 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    /**
+     * login
+     *
+     * 
+     */
+
+     public function login(Request $request){
+        $result = false;
+        $message = '';
+
+        $user = [];
+
+        $credentials = $request->only('email','password');
+        if(Auth::attempt($credentials)){
+            $request->session()->regenerate();
+            $result = true;
+        }else{
+            $message = 'Eメールまたはパスワードが違います';
+        }
+
+        return response()->json(['result' => $result, 'message' => $message]);
+     }
+
+     /**
+     * logout
+     *
+     * 
+     */
+
+     public function logout(Request $request){
+        $reuslt = true;
+        $message = 'ログアウトしました。';
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return response()->json(['result' => $result, 'message' => $message]);
+    }
+
+    /**
+     * ユーザ情報
+     */
+
+     public function auth(){
+        $result = false;
+        $user = [];
+        if(Auth::check()){
+            $user = Auth::user();
+            $result = true;
+        }
+
+        return response()->json(['result' => $result, 'user' => $user]);
+     }
 }

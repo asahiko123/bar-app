@@ -39,6 +39,8 @@
                         required>
                         </v-text-field>
 
+                        <v-btn type="submit" color="rgb(106, 118, 171)" class="float-right">ログイン</v-btn>
+
                         </v-form>
 
                     </v-card>
@@ -46,3 +48,52 @@
         </v-container>
     </v-main>
 </template>
+<script>
+import axios from 'axios'
+
+
+export default{
+
+    data() {
+        return {
+            form: {
+                email: '',
+                password: '',
+            },
+
+            error: '',
+            auth: false,
+        }
+    },
+
+    created(){
+        axios.get('/api/auth')
+        .then((res) => {
+            if(res.data.result){
+                this.auth = true
+            }
+        })
+        .catch((err) => {
+
+        })
+    },
+
+    methods: {
+        login(){
+            this.error = ''
+            axios.get('/sanctum/csrf-cookie')
+            .then((res) => {
+                axios.post('/api/login', this.form)
+                .then((res) => {
+                    if(!res.data.result){
+                        this.error =res.data.message
+                    }else{
+                        this.auth = true
+                    }
+                })
+            })
+        },
+        
+    }
+}
+</script>

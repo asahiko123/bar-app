@@ -70,4 +70,38 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+    /**
+     * register
+     *
+     * 
+     */
+
+     public function register(Request $request){
+
+        $validatedData = $request->validate([
+            'account_name' => 'requested|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8',
+            'pref_code' => 'requested|string',
+            'introduce' => 'requested|string|max:255',
+
+        ]);
+
+        $user = User::create([
+            'account_name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => Hash::make($validatedData['password']),
+            'pref_code' => $validatedData['pref_code'],
+            'introduce' => $validatedData['introduce']
+        ]);
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'Bearer',
+        ]);
+     }
+
 }

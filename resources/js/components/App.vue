@@ -20,7 +20,7 @@
         </v-tabs>
     </template>
 
-    <v-container>
+    <v-container v-if="!auth">
     <v-btn
         href="/login"
         color="link"
@@ -43,6 +43,20 @@
             <v-col class="register">新規登録</v-col>
         </v-row>
     </v-btn>
+    </v-container>
+    
+    <v-container v-else>
+        <v-btn
+            color="link"
+            min-height="20"
+            text
+            @click="logout"
+            >
+            <v-row class="d-flex flex-column">
+                <v-icon>mdi-account-arrow-left</v-icon>
+                <v-col class="logout">ログアウト</v-col>
+            </v-row>
+        </v-btn>
     </v-container>
     </v-app-bar>
 
@@ -68,6 +82,22 @@
     </v-app>
 </template>
 
+<script>
+
+export default {
+     methods: {
+        logout() {
+            axios.post('api/logout')
+            .then((res) => {
+                this.auth = false
+                this.error = res.data.message
+            })
+            .catch((err) => {console.log(err.response)})
+        }
+    }
+}
+
+</script>
 <style>
 
 a.tab-link.home, a.tab-link.map, a.tab-link.aboutUs {
@@ -77,3 +107,5 @@ a.tab-link.home, a.tab-link.map, a.tab-link.aboutUs {
 
 }
 </style>
+
+
