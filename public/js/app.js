@@ -2177,6 +2177,122 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/App.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/App.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      error: '',
+      auth: false
+    };
+  },
+  methods: {
+    logout: function logout() {
+      var _this = this;
+
+      axios.post('api/logout').then(function (res) {
+        _this.auth = false;
+        _this.error = res.data.message;
+      })["catch"](function (err) {
+        console.log(err.response);
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BarMap.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/BarMap.vue?vue&type=script&lang=js& ***!
@@ -2357,6 +2473,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -2391,16 +2508,6 @@ __webpack_require__.r(__webpack_exports__);
             _this2.auth = true;
           }
         });
-      });
-    },
-    logout: function logout() {
-      var _this3 = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post('api/logout').then(function (res) {
-        _this3.auth = false;
-        _this3.error = res.data.message;
-      })["catch"](function (err) {
-        console.log(err.response);
       });
     }
   }
@@ -2530,11 +2637,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var _components_BarMap_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/BarMap.vue */ "./resources/js/components/BarMap.vue");
-/* harmony import */ var _components_Home_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Home.vue */ "./resources/js/components/Home.vue");
-/* harmony import */ var _components_AboutUs_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/AboutUs.vue */ "./resources/js/components/AboutUs.vue");
-/* harmony import */ var _components_auth_Login_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/auth/Login.vue */ "./resources/js/components/auth/Login.vue");
-/* harmony import */ var _components_auth_Register_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/auth/Register.vue */ "./resources/js/components/auth/Register.vue");
+/* harmony import */ var _components_BarMap_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/components/BarMap.vue */ "./resources/js/components/BarMap.vue");
+/* harmony import */ var _components_Home_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/Home.vue */ "./resources/js/components/Home.vue");
+/* harmony import */ var _components_AboutUs_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/AboutUs.vue */ "./resources/js/components/AboutUs.vue");
+/* harmony import */ var _components_auth_Login_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/auth/Login.vue */ "./resources/js/components/auth/Login.vue");
+/* harmony import */ var _components_auth_Register_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/auth/Register.vue */ "./resources/js/components/auth/Register.vue");
 
 
 
@@ -2543,29 +2650,30 @@ __webpack_require__.r(__webpack_exports__);
 
 
 vue__WEBPACK_IMPORTED_MODULE_5__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_6__["default"]);
+var routes = [{
+  path: '/barMap',
+  name: 'barMap',
+  component: _components_BarMap_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+}, {
+  path: '/',
+  name: 'home',
+  component: _components_Home_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+}, {
+  path: '/aboutUs',
+  name: 'aboutUs',
+  component: _components_AboutUs_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+}, {
+  path: '/login',
+  name: 'login',
+  component: _components_auth_Login_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+}, {
+  path: '/register',
+  name: 'register',
+  component: _components_auth_Register_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+}];
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vue_router__WEBPACK_IMPORTED_MODULE_6__["default"]({
   mode: 'history',
-  routes: [{
-    path: '/barMap',
-    name: 'barMap',
-    component: _components_BarMap_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
-  }, {
-    path: '/',
-    name: 'home',
-    component: _components_Home_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
-  }, {
-    path: '/aboutUs',
-    name: 'aboutUs',
-    component: _components_AboutUs_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
-  }, {
-    path: '/login',
-    name: 'login',
-    component: _components_auth_Login_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
-  }, {
-    path: '/register',
-    name: 'register',
-    component: _components_auth_Register_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
-  }]
+  routes: routes
 }));
 
 /***/ }),
@@ -3486,17 +3594,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _App_vue_vue_type_template_id_332fccf4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App.vue?vue&type=template&id=332fccf4& */ "./resources/js/components/App.vue?vue&type=template&id=332fccf4&");
-/* harmony import */ var _App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/App.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.vue?vue&type=script&lang=js& */ "./resources/js/components/App.vue?vue&type=script&lang=js&");
+/* harmony import */ var _App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./App.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/App.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
 ;
 
 
 /* normalize component */
 
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  script,
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _App_vue_vue_type_template_id_332fccf4___WEBPACK_IMPORTED_MODULE_0__.render,
   _App_vue_vue_type_template_id_332fccf4___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
@@ -3682,6 +3792,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AboutUs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AboutUs.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AboutUs.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AboutUs_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/App.vue?vue&type=script&lang=js&":
+/*!******************************************************************!*\
+  !*** ./resources/js/components/App.vue?vue&type=script&lang=js& ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./App.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/App.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -3940,7 +4066,7 @@ var render = function () {
                             "router-link",
                             {
                               staticClass: "tab-link home",
-                              attrs: { to: "/" },
+                              attrs: { to: { name: "home" } },
                             },
                             [_vm._v("ホーム")]
                           ),
@@ -3955,7 +4081,7 @@ var render = function () {
                             "router-link",
                             {
                               staticClass: "tab-link map",
-                              attrs: { to: "/barMap" },
+                              attrs: { to: { name: "barMap" } },
                             },
                             [_vm._v("お店を探す")]
                           ),
@@ -3970,7 +4096,7 @@ var render = function () {
                             "router-link",
                             {
                               staticClass: "tab-link aboutUs",
-                              attrs: { to: "/aboutUs" },
+                              attrs: { to: { name: "aboutUs" } },
                             },
                             [_vm._v("このサイトについて")]
                           ),
@@ -3988,65 +4114,100 @@ var render = function () {
         },
         [
           _vm._v(" "),
-          _c(
-            "v-container",
-            [
-              _c(
-                "v-btn",
-                {
-                  attrs: {
-                    href: "/login",
-                    color: "link",
-                    "min-height": "20",
-                    text: "",
-                  },
-                },
+          !_vm.auth
+            ? _c(
+                "v-container",
                 [
                   _c(
-                    "v-row",
-                    { staticClass: "d-flex flex-column" },
+                    "v-btn",
+                    { attrs: { color: "link", "min-height": "20", text: "" } },
                     [
-                      _c("v-icon", [_vm._v("mdi-account-arrow-left")]),
-                      _vm._v(" "),
-                      _c("v-col", { staticClass: "login" }, [
-                        _vm._v("ログイン"),
-                      ]),
+                      _c(
+                        "v-row",
+                        { staticClass: "d-flex flex-column" },
+                        [
+                          _c("v-icon", [_vm._v("mdi-account-arrow-left")]),
+                          _vm._v(" "),
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "tab-link map",
+                              attrs: { to: { name: "login" } },
+                            },
+                            [
+                              _c("v-col", { staticClass: "login" }, [
+                                _vm._v("ログイン"),
+                              ]),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    { attrs: { color: "link", "min-height": "20", text: "" } },
+                    [
+                      _c(
+                        "v-row",
+                        { staticClass: "d-flex flex-column" },
+                        [
+                          _c("v-icon", [_vm._v("mdi-account-arrow-left")]),
+                          _vm._v(" "),
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "tab-link map",
+                              attrs: { to: { name: "register" } },
+                            },
+                            [
+                              _c("v-col", { staticClass: "register" }, [
+                                _vm._v("新規登録"),
+                              ]),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                ],
+                1
+              )
+            : _c(
+                "v-container",
+                [
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "link", "min-height": "20", text: "" },
+                      on: { click: _vm.logout },
+                    },
+                    [
+                      _c(
+                        "v-row",
+                        { staticClass: "d-flex flex-column" },
+                        [
+                          _c("v-icon", [_vm._v("mdi-account-arrow-left")]),
+                          _vm._v(" "),
+                          _c("v-col", { staticClass: "logout" }, [
+                            _vm._v("ログアウト"),
+                          ]),
+                        ],
+                        1
+                      ),
                     ],
                     1
                   ),
                 ],
                 1
               ),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                {
-                  attrs: {
-                    href: "/register",
-                    color: "link",
-                    "min-height": "20",
-                    text: "",
-                  },
-                },
-                [
-                  _c(
-                    "v-row",
-                    { staticClass: "d-flex flex-column" },
-                    [
-                      _c("v-icon", [_vm._v("mdi-account-arrow-left")]),
-                      _vm._v(" "),
-                      _c("v-col", { staticClass: "register" }, [
-                        _vm._v("新規登録"),
-                      ]),
-                    ],
-                    1
-                  ),
-                ],
-                1
-              ),
-            ],
-            1
-          ),
         ],
         1
       ),
@@ -4287,6 +4448,12 @@ var render = function () {
                       ref: "form",
                       staticClass: "d-flex flex-column",
                       attrs: { "lazy-validation": "" },
+                      on: {
+                        submit: function ($event) {
+                          $event.preventDefault()
+                          return _vm.login.apply(null, arguments)
+                        },
+                      },
                       model: {
                         value: _vm.valid,
                         callback: function ($$v) {
@@ -4309,22 +4476,22 @@ var render = function () {
                       _c("v-text-field", {
                         attrs: { label: "Eメール", required: "" },
                         model: {
-                          value: _vm.email,
+                          value: _vm.form.email,
                           callback: function ($$v) {
-                            _vm.email = $$v
+                            _vm.$set(_vm.form, "email", $$v)
                           },
-                          expression: "email",
+                          expression: "form.email",
                         },
                       }),
                       _vm._v(" "),
                       _c("v-text-field", {
                         attrs: { label: "パスワード", required: "" },
                         model: {
-                          value: _vm.password,
+                          value: _vm.form.password,
                           callback: function ($$v) {
-                            _vm.password = $$v
+                            _vm.$set(_vm.form, "password", $$v)
                           },
-                          expression: "password",
+                          expression: "form.password",
                         },
                       }),
                       _vm._v(" "),
@@ -4472,6 +4639,18 @@ var render = function () {
                           expression: "introduce",
                         },
                       }),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          staticClass: "float-right",
+                          attrs: {
+                            type: "submit",
+                            color: "rgb(106, 118, 171)",
+                          },
+                        },
+                        [_vm._v("登録")]
+                      ),
                     ],
                     1
                   ),

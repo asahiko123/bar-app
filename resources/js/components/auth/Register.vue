@@ -48,7 +48,7 @@
                         label="自己紹介"
                         >
                         </v-text-field>
-
+                            <v-btn type="submit" color="rgb(106, 118, 171)" class="float-right">登録</v-btn>
                         </v-form>
 
                     </v-card>

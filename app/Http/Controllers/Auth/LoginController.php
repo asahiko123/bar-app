@@ -3,12 +3,23 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\AuthController;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
 
-class LoginController extends Controller
+class LoginController extends AuthController
 {
+
+    use ThrottleLogins;
+
+    //ログイン試行回数上限
+    protected $maxAttempts = 3;
+
+    //ログインロックタイム
+
+    protected $decayMinutes = 1;
     /*
     |--------------------------------------------------------------------------
     | Login Controller
@@ -46,37 +57,54 @@ class LoginController extends Controller
      */
 
      public function login(Request $request){
-        $result = false;
-        $message = '';
+        
+        $this->alreadyLogin($request);
 
-        $user = [];
+        $this->validateLogin($request);
 
-        $credentials = $request->only('email','password');
-        if(Auth::attempt($credentials)){
-            $request->session()->regenerate();
-            $result = true;
-        }else{
-            $message = 'Eメールまたはパスワードが違います';
+        if(method_exists($this, 'hasTooManyLoginAttemps') && $this->hasTooManyLoginAttemps($request)){
+
+            $this->fireLockoutEvent($request);
+
+            return $this->sendLockoutResponse($request);
         }
 
-        return response()->json(['result' => $result, 'message' => $message]);
+        if($this->attemptLogin($request)){
+
+            $request->session()->regenerate();
+
+            $this->clearLoginAttemps($request);
+
+            return $this->responseSuccess('ログインしました',[
+                'user' => $request->user()
+            ]);
+        }
+
+        $this->incrementLoginAttempts($request);
+
+        return $this->responseInvalid('Eメールかパスワードに誤りがあります。',[
+            $this->username() => [trans('auth.failed')]
+        ]);
+
      }
 
      /**
      * logout
-     *
+     *@param Request $request
+     * @return \Illuminate\Http\JsonResponse
      * 
      */
 
      public function logout(Request $request){
-        $reuslt = true;
-        $message = 'ログアウトしました。';
-        Auth::logout();
+
+        $this->getGuard()->logout();
 
         $request->session()->invalidate();
+
         $request->session()->regenerateToken();
 
-        return response()->json(['result' => $result, 'message' => $message]);
+        return $this->responseSuccess('ログアウトしました');
+        
     }
 
     /**
@@ -92,5 +120,9 @@ class LoginController extends Controller
         }
 
         return response()->json(['result' => $result, 'user' => $user]);
+     }
+
+     public function user(Request $request){
+        return $request->user();
      }
 }

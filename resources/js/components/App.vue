@@ -14,33 +14,31 @@
 
     <template v-slot:extension>
         <v-tabs align-with-title fixed-tab class="d-flex justify-center tab">
-            <v-tab><router-link to="/" class="tab-link home">ホーム</router-link></v-tab>
-            <v-tab><router-link to="/barMap" class="tab-link map">お店を探す</router-link></v-tab>
-            <v-tab><router-link to="/aboutUs" class="tab-link aboutUs">このサイトについて</router-link></v-tab>
+            <v-tab><router-link :to="{ name: 'home'}" class="tab-link home">ホーム</router-link></v-tab>
+            <v-tab><router-link :to="{ name: 'barMap'}" class="tab-link map">お店を探す</router-link></v-tab>
+            <v-tab><router-link :to="{ name: 'aboutUs'}" class="tab-link aboutUs">このサイトについて</router-link></v-tab>
         </v-tabs>
     </template>
 
     <v-container v-if="!auth">
     <v-btn
-        href="/login"
         color="link"
         min-height="20"
         text
         >
         <v-row class="d-flex flex-column">
             <v-icon>mdi-account-arrow-left</v-icon>
-            <v-col class="login">ログイン</v-col>
+            <router-link :to="{ name: 'login'}" class="tab-link map"><v-col class="login">ログイン</v-col></router-link>
         </v-row>
     </v-btn>
     <v-btn
-        href="/register"
         color="link"
         min-height="20"
         text
         >
         <v-row class="d-flex flex-column">
             <v-icon>mdi-account-arrow-left</v-icon>
-            <v-col class="register">新規登録</v-col>
+            <router-link :to="{ name: 'register'}" class="tab-link map"><v-col class="register">新規登録</v-col></router-link>
         </v-row>
     </v-btn>
     </v-container>
@@ -85,6 +83,13 @@
 <script>
 
 export default {
+
+    data() {
+        return {
+            error: '',
+            auth: false,
+        }
+    },
      methods: {
         logout() {
             axios.post('api/logout')

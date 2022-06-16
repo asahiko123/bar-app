@@ -20,7 +20,8 @@
                         ref="form"
                         v-model="valid"
                         lazy-validation
-                        class="d-flex flex-column">
+                        class="d-flex flex-column"
+                        @submit.prevent = "login">
 
                         <v-card-title
                         class="d-flex justify-center">
@@ -28,13 +29,13 @@
                         </v-card-title>
 
                         <v-text-field
-                        v-model="email"
+                        v-model="form.email"
                         label="Eメール"
                         required>
                 
                         </v-text-field>
                         <v-text-field
-                        v-model="password"
+                        v-model="form.password"
                         label="パスワード"
                         required>
                         </v-text-field>

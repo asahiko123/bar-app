@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,12 @@ Route::post('/login',[LoginController::class,'login']);
 Route::post('/logout',[LoginController::class,'logout']);
 Route::post('/register',[RegisterController::class, 'register']);
 
-Route::middleware('auth:sanctum')->group(function(){
-    Route::get('/auth',[LoginController::class, 'auth']);
+
+Route::group(['middleware' => ['auth:sanctum']],function(){
+
+    Route::get('/test',function(){
+        return response()->json([
+            'message' => 'ログイン完了',
+        ],200);
+    });
 });

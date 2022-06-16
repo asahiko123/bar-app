@@ -1,5 +1,6 @@
 window._ = require('lodash');
 
+
 try {
     require('bootstrap');
 } catch (e) {}
@@ -13,6 +14,18 @@ try {
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+const baseUrl = process.env.MIX_URL;
+
+//ベースURLにapiを追加
+window.axios.defaults.baseUrl = `${baseUrl}/api/`;
+//自動的にクッキーをクライアントサイドに送信
+window.axios.defaults.withCredentials = true;
+//request設定
+window.axios.interceptors.request.use(config =>{
+
+    return config;
+})
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
