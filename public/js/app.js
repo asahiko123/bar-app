@@ -2171,6 +2171,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'AboutUs'
 });
@@ -4006,7 +4025,52 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("v-main", [_vm._v("AboutUs")])
+  return _c(
+    "v-main",
+    [
+      _c(
+        "v-card",
+        { staticClass: "d-flex justify-center", attrs: { outlined: "" } },
+        [
+          _c(
+            "v-tabs",
+            {
+              staticClass: "d-flex justify-center tab",
+              attrs: { "align-with-title": "" },
+            },
+            [
+              _c(
+                "v-list-item",
+                [
+                  _c(
+                    "v-tab",
+                    [_c("v-list-item-title", [_vm._v("お問い合わせ等")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-tab",
+                    [_c("v-list-item-title", [_vm._v("公式Twitter")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-tab",
+                    [_c("v-list-item-title", [_vm._v("プライバシーポリシー")])],
+                    1
+                  ),
+                ],
+                1
+              ),
+            ],
+            1
+          ),
+        ],
+        1
+      ),
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
