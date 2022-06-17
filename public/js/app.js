@@ -2289,6 +2289,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2659,6 +2662,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mdi_font_css_materialdesignicons_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mdi/font/css/materialdesignicons.css */ "./node_modules/@mdi/font/css/materialdesignicons.css");
 /* harmony import */ var _components_App_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/App.vue */ "./resources/js/components/App.vue");
 /* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue2-google-maps */ "./node_modules/vue2-google-maps/dist/main.js");
+/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
 
 
 
@@ -2667,7 +2671,7 @@ __webpack_require__.r(__webpack_exports__);
 
 vue__WEBPACK_IMPORTED_MODULE_5__["default"].use(vue2_google_maps__WEBPACK_IMPORTED_MODULE_4__, {
   load: {
-    key: "AIzaSyD5lqHR0i-eKHjCRRAjFgj_MtHlVCakCHA",
+    key: process.env.VUE_APP_GOOGLE_MAP_API,
     libraries: 'places'
   }
 });
@@ -2896,7 +2900,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\na.tab-link.home, a.tab-link.map, a.tab-link.aboutUs {\r\n\r\n    color: hsla(0,0%,100%,.6);\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\na.tab-link.home, a.tab-link.map, a.tab-link.aboutUs {\n\n    color: hsla(0,0%,100%,.6);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -4983,6 +4987,7 @@ var render = function () {
           !_vm.auth
             ? _c(
                 "v-container",
+                { staticClass: "d-flex justify-end mb-6" },
                 [
                   _c(
                     "v-btn",
