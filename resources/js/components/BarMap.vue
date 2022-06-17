@@ -20,5 +20,18 @@ export default {
         center: {lat: 45.508, lng: -73.587},
     }
   },
+  mounted(){
+    this.geolocate();
+  },
+  methods: {
+    geolocate: function(){
+        navigator.geolocation.getCurrentPosition(position => {
+            this.center = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+            }
+        });
+    },
+  }
 };
 </script>

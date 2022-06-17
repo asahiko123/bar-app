@@ -2346,6 +2346,21 @@ __webpack_require__.r(__webpack_exports__);
         lng: -73.587
       }
     };
+  },
+  mounted: function mounted() {
+    this.geolocate();
+  },
+  methods: {
+    geolocate: function geolocate() {
+      var _this = this;
+
+      navigator.geolocation.getCurrentPosition(function (position) {
+        _this.center = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+      });
+    }
   }
 });
 
@@ -2652,7 +2667,7 @@ __webpack_require__.r(__webpack_exports__);
 
 vue__WEBPACK_IMPORTED_MODULE_5__["default"].use(vue2_google_maps__WEBPACK_IMPORTED_MODULE_4__, {
   load: {
-    key: 'AIzaSyD5lqHR0i-eKHjCRRAjFgj_MtHlVCakCHA',
+    key: "AIzaSyD5lqHR0i-eKHjCRRAjFgj_MtHlVCakCHA",
     libraries: 'places'
   }
 });
