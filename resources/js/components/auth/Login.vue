@@ -2,6 +2,7 @@
     <v-main>
         <v-container fluid class="d-flex justify-center">
             <v-col class="d-flex flex-column col-md-5">
+                <Message :title="message" :contents="errors" @close="close"/>
                 <v-btn
                 color="primary"
                 class="p-4 mb-4">
@@ -51,9 +52,13 @@
 </template>
 <script>
 import axios from 'axios'
-
+import Message from "@/components/Message.vue";
 
 export default{
+
+    components: {
+        Message,
+    },
 
     data() {
         return {
@@ -64,6 +69,8 @@ export default{
 
             error: '',
             auth: false,
+            message: null,
+            errors: null,
         }
     },
 

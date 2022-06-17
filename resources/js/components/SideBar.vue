@@ -21,3 +21,19 @@
     </v-list>
     </v-navigation-drawer>
 </template>
+
+<script>
+export default{
+    data() {
+
+        return{
+
+            menus: [
+                {title: 'Index', icon: 'mdi-web' ,url: '/'},
+                {title: 'Home' , icon: 'mdi-home',url: '/'},
+            ],  
+
+        }
+    }
+}
+</script>

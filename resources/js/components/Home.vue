@@ -47,10 +47,6 @@
                 {id: 5,img: "http://placehold.jp/150x150.png", content: "4444",subimg: "http://placehold.jp/150x150.png",subcontent: "eeeesub"},
 
             ],
-            menus: [
-            {title: 'Index', icon: 'mdi-web' ,url: '/'},
-            {title: 'Home' , icon: 'mdi-home',url: '/'},
-            ],
 
         }
 
