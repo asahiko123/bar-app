@@ -20,7 +20,10 @@
         </v-tabs>
     </template>
 
-    <v-container v-if="!auth">
+    <v-container
+        v-if="!auth"
+        class="d-flex justify-end mb-6"
+    >
     <v-btn
         color="link"
         min-height="20"
@@ -42,7 +45,7 @@
         </v-row>
     </v-btn>
     </v-container>
-    
+
     <v-container v-else>
         <v-btn
             color="link"
