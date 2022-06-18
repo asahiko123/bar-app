@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\AuthController;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class LoginController extends AuthController
 {
 
-    use ThrottleLogins;
+    use ThrottlesLogins;
 
     //ログイン試行回数上限
     protected $maxAttempts = 3;

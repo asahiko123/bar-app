@@ -1,7 +1,7 @@
 <template>
     <v-container class="message" v-if="title">
         <h3 class="message__title">{{title}}</h3>
-        <div class="message__content" v-for="(content,key)in contents" :key="key">
+        <div class="message__content" v-for="(content, key) in contents" :key="key">
             <h4 v-if="key" class="message__content__title">{{ key }}</h4>
             <ul v-if="key" class="message__content__list">
                 <li 

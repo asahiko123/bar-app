@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Support\Facades\Auth;
@@ -135,6 +136,8 @@ abstract class AuthController extends Controller{
             'account_name' => ['required','string','max:255'],
             'email' => ['required','string','email','max:225','unique:users'],
             'password' => ['required',Password::defaults(),'confirmed'],
+            'pref_code'=>['required'],
+            'introduce'=>['required','string','max:140'],
 
         ]);
     }

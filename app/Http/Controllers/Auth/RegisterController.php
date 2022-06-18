@@ -3,13 +3,17 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Auth\AuthController;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\VerificationMail;
 
-class RegisterController extends Controller
+class RegisterController extends AuthController
 {
     /*
     |--------------------------------------------------------------------------
@@ -22,86 +26,59 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
+   public function register(Request $request){
 
-    /**
-     * Where to redirect users after registration.
+    var_dump('qqqq');
+
+    $this->alreadyLogin($request);
+
+    $this->validateRegister($request);
+
+    $token = $this->createToken();
+
+    var_dump($token);
+
+    $registerUser = $this->setRegisterUser($request, $token);
+
+    // $this->sendVerificationMail($registerUser);
+
+    return $this->responseSuccess('Eメールを送信しました。メールボックスから認証してください');
+
+
+   }
+
+   /**
+     * 新規ユーザーの登録
      *
-     * @var string
+     * @param Request $request, string $token
+     * @return $registerUser
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
 
-    /**
-     * Create a new controller instance.
+
+   private function setRegisterUser(Request $request, string $token){
+
+
+    $registerUser = new User($request->all());
+
+    $registerUser->token = $token;
+
+    $registerUser->password = $this->passwordHash($request->password);
+
+    $registerUser->save();
+
+    return $registerUser;
+   }
+
+   /**
+     * 認証メールの送信
      *
+     * @param User $registerUser
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('guest');
+
+    private function sendVerificationMail(User $registerUser){
+        Mail::to($registerUser->email)->queue(new VerificationMail($registerUser->token));
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-    }
-
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-    }
-
-    /**
-     * register
-     *
-     * 
-     */
-
-     public function register(Request $request){
-
-        $validatedData = $request->validate([
-            'account_name' => 'requested|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
-            'pref_code' => 'requested|string',
-            'introduce' => 'requested|string|max:255',
-
-        ]);
-
-        $user = User::create([
-            'account_name' => $validatedData['name'],
-            'email' => $validatedData['email'],
-            'password' => Hash::make($validatedData['password']),
-            'pref_code' => $validatedData['pref_code'],
-            'introduce' => $validatedData['introduce']
-        ]);
-
-        $token = $user->createToken('auth_token')->plainTextToken;
-
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'Bearer',
-        ]);
-     }
 
 }

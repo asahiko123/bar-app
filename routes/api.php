@@ -21,11 +21,11 @@ Route::post('/logout',[LoginController::class,'logout']);
 Route::post('/register',[RegisterController::class, 'register']);
 
 
-Route::group(['middleware' => ['auth:sanctum']],function(){
+// Route::group(['middleware' => ['auth:sanctum']],function(){
 
-    Route::get('/test',function(){
-        return response()->json([
-            'message' => 'ログイン完了',
-        ],200);
-    });
-});
+//     Route::get('/',function(){
+//         return response()->json([
+//             'message' => 'ログイン完了',
+//         ],200);
+//     });
+// });

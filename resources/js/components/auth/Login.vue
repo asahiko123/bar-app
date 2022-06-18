@@ -56,15 +56,25 @@ import Message from "@/components/Message.vue";
 
 export default{
 
+    name: "Login",
+
     components: {
         Message,
     },
 
     data() {
         return {
+
+            user: {
+                id: null,
+                name: null,
+                email: null,
+            },
+
             form: {
                 email: '',
                 password: '',
+                remember: true,
             },
 
             error: '',
@@ -74,34 +84,60 @@ export default{
         }
     },
 
-    created(){
-        axios.get('/api/auth')
-        .then((res) => {
-            if(res.data.result){
-                this.auth = true
-            }
-        })
-        .catch((err) => {
-
-        })
-    },
 
     methods: {
-        login(){
-            this.error = ''
-            axios.get('/sanctum/csrf-cookie')
-            .then((res) => {
-                axios.post('/api/login', this.form)
-                .then((res) => {
-                    if(!res.data.result){
-                        this.error =res.data.message
-                    }else{
-                        this.auth = true
-                    }
-                })
-            })
+        async login(){
+
+            const baseUrl = process.env.MIX_URL
+            await axios.get(`${baseUrl}/sanctum/csrf-cookie`);
+
+            const { data, status } = await axios.post("login", this.form);
+            if(status === 200){
+
+                
+            }else{
+                this.message = data.message;
+                this.error = data.errors;
+            }
+            
         },
+
+        async logout() {
+            const { data, status } = await axios.post("logout");
+            if(status === 200){
+
+                this.user.id = null;
+                this.user.name = null;
+                this.user.email = null;
+                this.message = data.message;
+                this.errors = null;
+
+            }else{
+                this.message = data.message;
+                this.errors = data.errors;
+            }
+        },
+
+        close() {
+            this.message = null;
+            this.errors = null;
+        }
         
-    }
+    },
+
+    async created(){
+        const { data, status } = await axios.post("/user");
+
+        if( status === 200){
+            this.user.id = data.user.id;
+            this.user.name = data.user.name;
+            this.user.email = data.user.email;
+            this.message = data.message;
+            this.errors = null;
+        }else{
+            this.message = data.message;
+            this.errors = data.errors;
+        }
+    },
 }
 </script>

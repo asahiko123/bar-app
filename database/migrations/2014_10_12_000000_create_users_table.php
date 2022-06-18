@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('login_id')->unique();
+            $table->string('email')->index()->comment('Eメール');
+            $table->string('token');
             $table->string('account_name')->unique()->null()->comment('アカウント名');
             $table->string('profile')->nullable()->comment('プロフィール画像');
-            $table->string('email')->unique()->comment('Eメール');
             $table->string('pref_code')->comment('都道府県');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

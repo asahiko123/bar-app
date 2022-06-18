@@ -62,12 +62,10 @@ services:
         environment:
             - PMA_ARBITRARY=1
             - PMA_HOST=mysql
-            - PMA_USER=
-            - PMA_PASSWORD=
         links:
             - mysql
         ports:
-            - 8081:80
+            - 3000:80
         volumes:
             - ./phpmyadmin/sessions:/sessions
         networks:

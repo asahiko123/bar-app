@@ -7,10 +7,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, softDeletes;
+
+    public $timestamps = false;
+
+    protected $table ='users';
 
     /**
      * The attributes that are mass assignable.
@@ -20,7 +25,6 @@ class User extends Authenticatable
     protected $fillable = [
         'email',
         'password',
-        'login_id',
         'account_name',
         'profile',
         'pref_code',
@@ -44,4 +48,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function boot(){
+        parent::boot();
+        static::creating(function($model){
+            $model->created_at = $model->freshTimestamp();
+        });
+    }
 }

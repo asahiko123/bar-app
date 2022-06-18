@@ -2,6 +2,7 @@
     <v-main>
         <v-container fluid class="d-flex justify-center">
             <v-col class="d-flex flex-column col-md-5">
+                <Message :title="message" :contents="errors" @close="close" />
                 
                     <v-card
                     outlined
@@ -9,9 +10,10 @@
 
                         <v-form
                         ref="form"
-                        v-model="valid"
+                        @submit.prevent
                         lazy-validation
-                        class="d-flex flex-column">
+                        class="d-flex flex-column"
+                        >
 
                         <v-card-title
                         class="d-flex justify-center">
@@ -19,36 +21,52 @@
                         </v-card-title>
 
                         <v-text-field
-                        v-model="name"
+                        v-model="form.account_name"
+                        name="account_name"
                         label="アカウント名"
                         required>
                 
                         </v-text-field>
                         
                         <v-text-field
-                        v-model="email"
+                        v-model="form.email"
+                        name="email"
                         label="Eメール"
                         required>
                 
                         </v-text-field>
                         <v-text-field
-                        v-model="password"
+                        type="password"
+                        v-model="form.password"
+                        name="password"
+                        placeholder="password"
                         label="パスワード"
+                        required>
+                        </v-text-field>
+
+                        <v-text-field
+                        type="password"
+                        v-model="form.password_confirmation"
+                        name="password_confirmation"
+                        placeholder="password"
+                        label="パスワード再入力"
                         required>
                         </v-text-field>
 
                         <v-select
                             :items="prefectures"
+                            v-model="form.pref_code"
+                            name="pref_code"
                             filled
                             label="都道府県"
                         ></v-select>
 
                         <v-text-field
-                        v-model="introduce"
+                        v-model="form.introduce"
                         label="自己紹介"
                         >
                         </v-text-field>
-                            <v-btn type="submit" color="rgb(106, 118, 171)" class="float-right">登録</v-btn>
+                            <v-btn @click="register" color="rgb(106, 118, 171)" class="float-right">登録</v-btn>
                         </v-form>
 
                     </v-card>
@@ -58,12 +76,34 @@
 </template>
 
 <script>
+import axios from 'axios'
+import Message from "@/components/Message.vue";
 
 export default {
+
+    name : "Register",
+
+    components: {
+        Message,
+    },
 
     data(){
 
         return{
+
+            form: {
+
+                account_name: "asdf",
+                email: "evolution4532@gmail.com",
+                password: "Aa@111111",
+                password_confirmation: "Aa@111111",
+                pref_code: "北海道",
+                introduce: "aaaa"
+
+            },
+
+            message: null,
+            errors: null,
 
             prefectures:[
             '北海道',
@@ -117,6 +157,30 @@ export default {
 
         }
         
+    },
+
+    methods: {
+        async register(){
+
+             await axios.post("api/register", this.form)
+             .then(res =>{
+
+                console.log(res);
+                this.$router.push('/');
+
+             })
+             .catch(error => {
+
+                this.message = "aaaaa";
+                this.errors = {content: "bbbb"};
+                this.$router.push('/register')
+             })
+            
+        },
+        close(){
+            this.message = null;
+            this.errors = null;
+        }
     }
 
 }
