@@ -38,6 +38,7 @@ export default{
     },
     watch: {
         title: function(after,before){
+            console.log('変化したよ');
             clearTimeout(this.id);
             this.id = setTimeout(()=>this.$emit("close"),this.timeout);
         }

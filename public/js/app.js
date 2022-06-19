@@ -2380,6 +2380,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _components_Message_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/components/Message.vue */ "./resources/js/components/Message.vue");
 //
 //
 //
@@ -2412,11 +2413,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Home',
+  components: {
+    Message: _components_Message_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
       drawer: false,
+      snackbar: false,
+      text: null,
+      timeout: 5000,
       tweets: [{
         id: 1,
         img: "http://placehold.jp/150x150.png",
@@ -2447,8 +2458,19 @@ __webpack_require__.r(__webpack_exports__);
         content: "4444",
         subimg: "http://placehold.jp/150x150.png",
         subcontent: "eeeesub"
-      }]
+      }],
+      methods: {
+        close: function close() {
+          this.message = null;
+          this.errors = null;
+        }
+      }
     };
+  },
+  mounted: function mounted() {
+    console.log(this.$route.params.message);
+    this.snackbar = true;
+    this.text = this.$route.params.message;
   }
 });
 
@@ -2505,6 +2527,7 @@ __webpack_require__.r(__webpack_exports__);
     title: function title(after, before) {
       var _this = this;
 
+      console.log('変化したよ');
       clearTimeout(this.id);
       this.id = setTimeout(function () {
         return _this.$emit("close");
@@ -2833,6 +2856,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2842,6 +2867,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
+      snackbar: false,
+      text: null,
+      timeout: 5000,
       form: {
         account_name: "asdf",
         email: "evolution4532@gmail.com",
@@ -2866,14 +2894,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context.next = 2;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default().post("api/register", _this.form).then(function (res) {
+                  _this.message = "登録が完了しました！";
                   console.log(res);
 
-                  _this.$router.push('/');
+                  _this.$router.push({
+                    name: 'home',
+                    params: {
+                      message: _this.message
+                    }
+                  });
                 })["catch"](function (error) {
-                  _this.message = "aaaaa";
-                  _this.errors = {
-                    content: "bbbb"
-                  };
+                  _this.snackbar = true;
+                  _this.text = "エラーが発生しました。もう一度お試しください。";
 
                   _this.$router.push('/register');
                 });
@@ -5523,69 +5555,86 @@ var render = function () {
       _c(
         "v-container",
         { attrs: { fluid: "" } },
-        _vm._l(_vm.tweets, function (tweet) {
-          return _c(
-            "v-row",
-            { key: tweet.id, staticClass: "d-flex justify-center" },
-            [
-              _c(
-                "v-col",
-                { staticClass: "d-flex flex-row-reverse" },
-                [
-                  _c(
-                    "v-card",
-                    [
-                      _c("v-img", {
-                        staticClass: "mb-4",
-                        attrs: {
-                          src: tweet.img,
-                          "max-height": "250",
-                          "max-width": "250",
-                        },
-                      }),
-                      _vm._v(
-                        "\n                @" +
-                          _vm._s(tweet.content) +
-                          "\n                "
-                      ),
-                    ],
-                    1
-                  ),
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-col",
-                { staticClass: "d-flex flex-row" },
-                [
-                  _c(
-                    "v-card",
-                    [
-                      _c("v-img", {
-                        staticClass: "mb-4",
-                        attrs: {
-                          src: tweet.subimg,
-                          "max-height": "250",
-                          "max-width": "250",
-                        },
-                      }),
-                      _vm._v(
-                        "\n                @" +
-                          _vm._s(tweet.subcontent) +
-                          "\n                "
-                      ),
-                    ],
-                    1
-                  ),
-                ],
-                1
-              ),
-            ],
-            1
-          )
-        }),
-        1
+        [
+          _c(
+            "v-snackbar",
+            {
+              attrs: { timeout: _vm.timeout },
+              model: {
+                value: _vm.snackbar,
+                callback: function ($$v) {
+                  _vm.snackbar = $$v
+                },
+                expression: "snackbar",
+              },
+            },
+            [_vm._v("\n                " + _vm._s(_vm.text) + "\n        ")]
+          ),
+          _vm._v(" "),
+          _vm._l(_vm.tweets, function (tweet) {
+            return _c(
+              "v-row",
+              { key: tweet.id, staticClass: "d-flex justify-center" },
+              [
+                _c(
+                  "v-col",
+                  { staticClass: "d-flex flex-row-reverse" },
+                  [
+                    _c(
+                      "v-card",
+                      [
+                        _c("v-img", {
+                          staticClass: "mb-4",
+                          attrs: {
+                            src: tweet.img,
+                            "max-height": "250",
+                            "max-width": "250",
+                          },
+                        }),
+                        _vm._v(
+                          "\n                @" +
+                            _vm._s(tweet.content) +
+                            "\n                "
+                        ),
+                      ],
+                      1
+                    ),
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "v-col",
+                  { staticClass: "d-flex flex-row" },
+                  [
+                    _c(
+                      "v-card",
+                      [
+                        _c("v-img", {
+                          staticClass: "mb-4",
+                          attrs: {
+                            src: tweet.subimg,
+                            "max-height": "250",
+                            "max-width": "250",
+                          },
+                        }),
+                        _vm._v(
+                          "\n                @" +
+                            _vm._s(tweet.subcontent) +
+                            "\n                "
+                        ),
+                      ],
+                      1
+                    ),
+                  ],
+                  1
+                ),
+              ],
+              1
+            )
+          }),
+        ],
+        2
       ),
     ],
     1
@@ -5832,10 +5881,24 @@ var render = function () {
             "v-col",
             { staticClass: "d-flex flex-column col-md-5" },
             [
-              _c("Message", {
-                attrs: { title: _vm.message, contents: _vm.errors },
-                on: { close: _vm.close },
-              }),
+              _c(
+                "v-snackbar",
+                {
+                  attrs: { timeout: _vm.timeout },
+                  model: {
+                    value: _vm.snackbar,
+                    callback: function ($$v) {
+                      _vm.snackbar = $$v
+                    },
+                    expression: "snackbar",
+                  },
+                },
+                [
+                  _vm._v(
+                    "\n                " + _vm._s(_vm.text) + "\n            "
+                  ),
+                ]
+              ),
               _vm._v(" "),
               _c(
                 "v-card",

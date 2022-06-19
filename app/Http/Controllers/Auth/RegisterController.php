@@ -42,7 +42,7 @@ class RegisterController extends AuthController
 
     // $this->sendVerificationMail($registerUser);
 
-    return $this->responseSuccess('Eメールを送信しました。メールボックスから認証してください');
+    return $this->responseSuccess('登録が完了しました。');
 
 
    }

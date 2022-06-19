@@ -2,7 +2,9 @@
     <v-main>
         <v-container fluid class="d-flex justify-center">
             <v-col class="d-flex flex-column col-md-5">
-                <Message :title="message" :contents="errors" @close="close" />
+                <v-snackbar v-model = "snackbar" :timeout = "timeout">
+                    {{ text }}
+                </v-snackbar>
                 
                     <v-card
                     outlined
@@ -91,6 +93,10 @@ export default {
 
         return{
 
+            snackbar: false,
+            text: null,
+            timeout: 5000,
+
             form: {
 
                 account_name: "asdf",
@@ -165,14 +171,15 @@ export default {
              await axios.post("api/register", this.form)
              .then(res =>{
 
+                this.message = "登録が完了しました！";
                 console.log(res);
-                this.$router.push('/');
+                this.$router.push({ name: 'home', params: { message: this.message}});
 
              })
              .catch(error => {
 
-                this.message = "aaaaa";
-                this.errors = {content: "bbbb"};
+                this.snackbar = true;
+                this.text = "エラーが発生しました。もう一度お試しください。";
                 this.$router.push('/register')
              })
             
