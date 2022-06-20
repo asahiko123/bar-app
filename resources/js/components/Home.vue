@@ -1,7 +1,7 @@
 <template>
     <v-main>
         <v-container fluid>
-            <v-snackbar v-model = "snackbar" :timeout = "timeout">
+            <v-snackbar v-if="text != null" v-model = "snackbar" :timeout = "timeout">
                     {{ text }}
             </v-snackbar>
             <v-row class="d-flex justify-center" v-for="tweet in tweets" :key="tweet.id">
@@ -66,7 +66,7 @@
                         this.message = null;
                         this.errors = null;
                     },
-            
+
                 }
 
             }
