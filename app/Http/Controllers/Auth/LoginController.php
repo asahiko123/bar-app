@@ -51,9 +51,7 @@ class LoginController extends AuthController
     }
 
     /**
-     * login
-     *
-     * 
+     * ログイン処理の実行
      */
 
      public function login(Request $request){
@@ -89,7 +87,7 @@ class LoginController extends AuthController
      }
 
      /**
-     * logout
+     * ログアウト処理の実行
      *@param Request $request
      * @return \Illuminate\Http\JsonResponse
      * 

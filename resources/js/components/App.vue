@@ -104,10 +104,10 @@ export default {
         logout() {
             axios.post('api/logout')
             .then((res) => {
-                this.auth = false
+
                 this.logoutUser();
-                this.error = res.data.message
                 console.log('ログアウト完了');
+                // this.$router.push({ name: 'home', params: { message: this.message}});
             })
             .catch((err) => {console.log(err.response)})
         },

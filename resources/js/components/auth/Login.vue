@@ -92,19 +92,22 @@ export default{
             const baseUrl = process.env.MIX_URL
             await axios.get(`${baseUrl}/sanctum/csrf-cookie`);
 
-            const { data, status } = await axios.post("api/login", this.form);
-            if(status === 200){
+            const { data, status } = await axios.post("api/login", this.form)
+            .then(res => {
 
-                this.snackbar = true;
-                this.text = "ログインが完了しました";
                 this.$emit('loginUser');
+                this.message = 'ログインが完了しました。';
                 console.log(res);
                 this.$router.push({ name: 'home', params: { message: this.message}});
-                
-            }else{
+
+            })
+            .catch(error =>{
+
                 this.message = data.message;
                 this.error = data.errors;
-            }
+
+            });
+            
             
         },
 

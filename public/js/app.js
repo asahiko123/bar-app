@@ -2662,7 +2662,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var baseUrl, _yield$axios$post, data, status;
+        var baseUrl, _yield$axios$post$the, data, status;
 
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
@@ -2674,19 +2674,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
                 _context.next = 5;
-                return axios__WEBPACK_IMPORTED_MODULE_0___default().post("api/login", _this.form);
-
-              case 5:
-                _yield$axios$post = _context.sent;
-                data = _yield$axios$post.data;
-                status = _yield$axios$post.status;
-
-                if (status === 200) {
-                  _this.snackbar = true;
-                  _this.text = "ログインが完了しました";
-
+                return axios__WEBPACK_IMPORTED_MODULE_0___default().post("api/login", _this.form).then(function (res) {
                   _this.$emit('loginUser');
 
+                  _this.message = 'ログインが完了しました。';
                   console.log(res);
 
                   _this.$router.push({
@@ -2695,12 +2686,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       message: _this.message
                     }
                   });
-                } else {
+                })["catch"](function (error) {
                   _this.message = data.message;
                   _this.error = data.errors;
-                }
+                });
 
-              case 9:
+              case 5:
+                _yield$axios$post$the = _context.sent;
+                data = _yield$axios$post$the.data;
+                status = _yield$axios$post$the.status;
+
+              case 8:
               case "end":
                 return _context.stop();
             }
@@ -2712,7 +2708,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        var _yield$axios$post2, data, status;
+        var _yield$axios$post, data, status;
 
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
@@ -2722,9 +2718,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios__WEBPACK_IMPORTED_MODULE_0___default().post("logout");
 
               case 2:
-                _yield$axios$post2 = _context2.sent;
-                data = _yield$axios$post2.data;
-                status = _yield$axios$post2.status;
+                _yield$axios$post = _context2.sent;
+                data = _yield$axios$post.data;
+                status = _yield$axios$post.status;
 
                 if (status === 200) {
                   _this2.user.id = null;
@@ -2754,7 +2750,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _this3 = this;
 
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
-      var _yield$axios$post3, data, status;
+      var _yield$axios$post2, data, status;
 
       return _regeneratorRuntime().wrap(function _callee3$(_context3) {
         while (1) {
@@ -2764,9 +2760,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return axios__WEBPACK_IMPORTED_MODULE_0___default().post("/user");
 
             case 2:
-              _yield$axios$post3 = _context3.sent;
-              data = _yield$axios$post3.data;
-              status = _yield$axios$post3.status;
+              _yield$axios$post2 = _context3.sent;
+              data = _yield$axios$post2.data;
+              status = _yield$axios$post2.status;
 
               if (status === 200) {
                 _this3.user.id = data.user.id;
