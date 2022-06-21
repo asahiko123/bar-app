@@ -2631,6 +2631,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2673,14 +2674,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
                 _context.next = 5;
-                return axios__WEBPACK_IMPORTED_MODULE_0___default().post("login", _this.form);
+                return axios__WEBPACK_IMPORTED_MODULE_0___default().post("api/login", _this.form);
 
               case 5:
                 _yield$axios$post = _context.sent;
                 data = _yield$axios$post.data;
                 status = _yield$axios$post.status;
 
-                if (status === 200) {} else {
+                if (status === 200) {
+                  _this.snackbar = true;
+                  _this.text = "ログインが完了しました";
+
+                  _this.$emit('loginUser');
+
+                  console.log(res);
+
+                  _this.$router.push({
+                    name: 'home',
+                    params: {
+                      message: _this.message
+                    }
+                  });
+                } else {
                   _this.message = data.message;
                   _this.error = data.errors;
                 }
@@ -5829,7 +5844,11 @@ var render = function () {
                       }),
                       _vm._v(" "),
                       _c("v-text-field", {
-                        attrs: { label: "パスワード", required: "" },
+                        attrs: {
+                          label: "パスワード",
+                          type: "password",
+                          required: "",
+                        },
                         model: {
                           value: _vm.form.password,
                           callback: function ($$v) {

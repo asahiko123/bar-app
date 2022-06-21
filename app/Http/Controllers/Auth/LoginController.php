@@ -73,7 +73,7 @@ class LoginController extends AuthController
 
             $request->session()->regenerate();
 
-            $this->clearLoginAttemps($request);
+            // $this->clearLoginAttemps($request);
 
             return $this->responseSuccess('ログインしました',[
                 'user' => $request->user()

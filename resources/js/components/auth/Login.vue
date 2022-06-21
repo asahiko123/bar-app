@@ -38,6 +38,7 @@
                         <v-text-field
                         v-model="form.password"
                         label="パスワード"
+                        type = "password"
                         required>
                         </v-text-field>
 
@@ -91,9 +92,14 @@ export default{
             const baseUrl = process.env.MIX_URL
             await axios.get(`${baseUrl}/sanctum/csrf-cookie`);
 
-            const { data, status } = await axios.post("login", this.form);
+            const { data, status } = await axios.post("api/login", this.form);
             if(status === 200){
 
+                this.snackbar = true;
+                this.text = "ログインが完了しました";
+                this.$emit('loginUser');
+                console.log(res);
+                this.$router.push({ name: 'home', params: { message: this.message}});
                 
             }else{
                 this.message = data.message;
