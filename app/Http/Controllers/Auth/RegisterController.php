@@ -40,10 +40,26 @@ class RegisterController extends AuthController
 
     $registerUser = $this->setRegisterUser($request, $token);
 
-    // $this->sendVerificationMail($registerUser);
+    if($this->attemptLogin($request)){
+
+      var_dump('loginattempt');
+
+        $request->session()->regenerate();
+
+        var_dump('loginattempt2');
+
+        // $this->clearLoginAttemps($request);
+
+        var_dump('loginattempt3');
+
+        return $this->responseSuccess('ログインしました',[
+            'user' => $request->user()
+        ]);
+    }
 
     return $this->responseSuccess('登録が完了しました。');
 
+    // $this->sendVerificationMail($registerUser);
 
    }
 

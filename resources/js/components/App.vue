@@ -8,7 +8,6 @@
     shrink-on-scroll
     prominent
     fade-img-on-scroll
-    scroll-target="#scrolling-techniques-3"
     >
 
 
@@ -46,7 +45,7 @@
     </v-btn>
     </v-container>
 
-    <v-container v-else>
+    <v-container v-else class="d-flex justify-end mb-6">
         <v-btn
             color="link"
             min-height="20"
@@ -61,11 +60,10 @@
     </v-container>
     </v-app-bar>
 
-    <router-view />
+    <router-view @loginUser="loginUser" />
 
     <v-footer app>
         <v-bottom-navigation
-        :value="activeBtn"
         color="primary lighten-1"
         fixed
         >
@@ -85,7 +83,16 @@
 
 <script>
 
+import Register from '../components/auth/Register.vue'
+import axios from 'axios'
+
 export default {
+
+    name: 'App',
+
+    components: {
+        Register,
+    },
 
     data() {
         return {
@@ -98,9 +105,21 @@ export default {
             axios.post('api/logout')
             .then((res) => {
                 this.auth = false
+                this.logoutUser();
                 this.error = res.data.message
+                console.log('ログアウト完了');
             })
             .catch((err) => {console.log(err.response)})
+        },
+
+        loginUser(){
+            console.log('login');
+            this.auth = true;
+        },
+
+        logoutUser(){
+            console.log('logout');
+            this.auth = false;
         }
     }
 }

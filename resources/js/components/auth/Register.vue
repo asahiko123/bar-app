@@ -96,6 +96,7 @@ export default {
             snackbar: false,
             text: null,
             timeout: 5000,
+            auth: false,
 
             form: {
 
@@ -172,6 +173,7 @@ export default {
              .then(res =>{
 
                 this.message = "登録が完了しました！";
+                this.$emit('loginUser');
                 console.log(res);
                 this.$router.push({ name: 'home', params: { message: this.message}});
 
