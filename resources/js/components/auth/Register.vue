@@ -175,6 +175,7 @@ export default {
                 this.message = "登録が完了しました！";
                 this.$emit('loginUser');
                 console.log(res);
+
                 this.$router.push({ name: 'home', params: { message: this.message}});
 
              })
@@ -183,7 +184,8 @@ export default {
                 this.snackbar = true;
                 this.text = "エラーが発生しました。もう一度お試しください。";
                 this.$router.push('/register')
-             })
+             });
+                
             
         },
         close(){

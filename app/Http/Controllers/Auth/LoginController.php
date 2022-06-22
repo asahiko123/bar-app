@@ -87,7 +87,7 @@ class LoginController extends AuthController
      }
 
      /**
-     * ログアウト処理の実行
+     * ログアウト処理の実行とセッションの破棄、セッションidの再発行
      *@param Request $request
      * @return \Illuminate\Http\JsonResponse
      * 

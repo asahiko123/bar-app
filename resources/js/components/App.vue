@@ -60,7 +60,7 @@
     </v-container>
     </v-app-bar>
 
-    <router-view @loginUser="loginUser" />
+    <router-view @loginUser="loginUser" :logout_message = "logout_message" />
 
     <v-footer app>
         <v-bottom-navigation
@@ -84,6 +84,7 @@
 <script>
 
 import Register from '../components/auth/Register.vue'
+import Home from '../components/Home.vue'
 import axios from 'axios'
 
 export default {
@@ -92,12 +93,14 @@ export default {
 
     components: {
         Register,
+        Home
     },
 
     data() {
         return {
             error: '',
             auth: false,
+            logout_message: null,
         }
     },
      methods: {
@@ -107,7 +110,8 @@ export default {
 
                 this.logoutUser();
                 console.log('ログアウト完了');
-                // this.$router.push({ name: 'home', params: { message: this.message}});
+                this.logout_message = "ログアウトしました。"
+                
             })
             .catch((err) => {console.log(err.response)})
         },

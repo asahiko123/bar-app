@@ -2208,8 +2208,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _components_auth_Register_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/auth/Register.vue */ "./resources/js/components/auth/Register.vue");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_Home_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Home.vue */ "./resources/js/components/Home.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 //
 //
 //
@@ -2293,30 +2294,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'App',
   components: {
-    Register: _components_auth_Register_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    Register: _components_auth_Register_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    Home: _components_Home_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
       error: '',
-      auth: false
+      auth: false,
+      logout_message: null
     };
   },
   methods: {
     logout: function logout() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default().post('api/logout').then(function (res) {
-        _this.auth = false;
-
+      axios__WEBPACK_IMPORTED_MODULE_2___default().post('api/logout').then(function (res) {
         _this.logoutUser();
 
-        _this.error = res.data.message;
         console.log('ログアウト完了');
+        _this.logout_message = "ログアウトしました。";
       })["catch"](function (err) {
         console.log(err.response);
       });
@@ -2399,7 +2401,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _components_Message_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/components/Message.vue */ "./resources/js/components/Message.vue");
 //
 //
 //
@@ -2435,18 +2436,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Home',
-  components: {
-    Message: _components_Message_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
+  props: ['logout_message'],
   data: function data() {
     return {
       drawer: false,
       snackbar: false,
       text: null,
       timeout: 5000,
+      message: null,
       tweets: [{
         id: 1,
         img: "http://placehold.jp/150x150.png",
@@ -2647,8 +2651,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         email: null
       },
       form: {
-        email: '',
-        password: '',
+        email: 'evolution4532@gmail.com',
+        password: 'Aa@111111',
         remember: true
       },
       error: '',
@@ -2662,8 +2666,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var baseUrl, _yield$axios$post$the, data, status;
-
+        var baseUrl;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -2674,11 +2677,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
                 _context.next = 5;
-                return axios__WEBPACK_IMPORTED_MODULE_0___default().post("api/login", _this.form).then(function (res) {
+                return axios__WEBPACK_IMPORTED_MODULE_0___default().post("api/login", _this.form).then(function (_ref) {
+                  var data = _ref.data;
+
                   _this.$emit('loginUser');
 
-                  _this.message = 'ログインが完了しました。';
-                  console.log(res);
+                  _this.message = "\u3088\u3046\u3053\u305D\uFF01".concat(data.user.account_name, "\u3055\u3093\uFF01\u30ED\u30B0\u30A4\u30F3\u304C\u5B8C\u4E86\u3057\u307E\u3057\u305F\u3002");
+                  console.log(data.user.account_name);
 
                   _this.$router.push({
                     name: 'home',
@@ -2692,11 +2697,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
               case 5:
-                _yield$axios$post$the = _context.sent;
-                data = _yield$axios$post$the.data;
-                status = _yield$axios$post$the.status;
-
-              case 8:
               case "end":
                 return _context.stop();
             }
@@ -2746,36 +2746,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.errors = null;
     }
   },
-  created: function created() {
-    var _this3 = this;
+  created: function created() {// const { data, status } = await axios.post("/user");
+    // if( status === 200){
+    //     this.user.id = data.user.id;
+    //     this.user.name = data.user.name;
+    //     this.user.email = data.user.email;
+    //     this.message = data.message;
+    //     this.errors = null;
+    // }else{
+    //     this.message = data.message;
+    //     this.errors = data.errors;
+    // }
 
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
-      var _yield$axios$post2, data, status;
-
       return _regeneratorRuntime().wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              _context3.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default().post("/user");
-
-            case 2:
-              _yield$axios$post2 = _context3.sent;
-              data = _yield$axios$post2.data;
-              status = _yield$axios$post2.status;
-
-              if (status === 200) {
-                _this3.user.id = data.user.id;
-                _this3.user.name = data.user.name;
-                _this3.user.email = data.user.email;
-                _this3.message = data.message;
-                _this3.errors = null;
-              } else {
-                _this3.message = data.message;
-                _this3.errors = data.errors;
-              }
-
-            case 6:
             case "end":
               return _context3.stop();
           }
@@ -5468,7 +5455,10 @@ var render = function () {
         1
       ),
       _vm._v(" "),
-      _c("router-view", { on: { loginUser: _vm.loginUser } }),
+      _c("router-view", {
+        attrs: { logout_message: _vm.logout_message },
+        on: { loginUser: _vm.loginUser },
+      }),
       _vm._v(" "),
       _c(
         "v-footer",
@@ -5599,7 +5589,26 @@ var render = function () {
                 },
                 [_vm._v("\n                " + _vm._s(_vm.text) + "\n        ")]
               )
-            : _vm._e(),
+            : _c(
+                "v-snackbar",
+                {
+                  attrs: { timeout: _vm.timeout },
+                  model: {
+                    value: _vm.snackbar,
+                    callback: function ($$v) {
+                      _vm.snackbar = $$v
+                    },
+                    expression: "snackbar",
+                  },
+                },
+                [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(_vm.logout_message) +
+                      "\n        "
+                  ),
+                ]
+              ),
           _vm._v(" "),
           _vm._l(_vm.tweets, function (tweet) {
             return _c(
@@ -5765,11 +5774,6 @@ var render = function () {
             "v-col",
             { staticClass: "d-flex flex-column col-md-5" },
             [
-              _c("Message", {
-                attrs: { title: _vm.message, contents: _vm.errors },
-                on: { close: _vm.close },
-              }),
-              _vm._v(" "),
               _c(
                 "v-btn",
                 { staticClass: "p-4 mb-4", attrs: { color: "primary" } },

@@ -2,7 +2,7 @@
     <v-main>
         <v-container fluid class="d-flex justify-center">
             <v-col class="d-flex flex-column col-md-5">
-                <Message :title="message" :contents="errors" @close="close"/>
+                
                 <v-btn
                 color="primary"
                 class="p-4 mb-4">
@@ -73,8 +73,8 @@ export default{
             },
 
             form: {
-                email: '',
-                password: '',
+                email: 'evolution4532@gmail.com',
+                password: 'Aa@111111',
                 remember: true,
             },
 
@@ -92,12 +92,13 @@ export default{
             const baseUrl = process.env.MIX_URL
             await axios.get(`${baseUrl}/sanctum/csrf-cookie`);
 
-            const { data, status } = await axios.post("api/login", this.form)
-            .then(res => {
+            await axios.post("api/login", this.form)
+            .then(({data}) => {
 
                 this.$emit('loginUser');
-                this.message = 'ログインが完了しました。';
-                console.log(res);
+                this.message = `ようこそ！${data.user.account_name}さん！ログインが完了しました。`;
+                console.log(data.user.account_name);
+            
                 this.$router.push({ name: 'home', params: { message: this.message}});
 
             })
@@ -135,18 +136,18 @@ export default{
     },
 
     async created(){
-        const { data, status } = await axios.post("/user");
+        // const { data, status } = await axios.post("/user");
 
-        if( status === 200){
-            this.user.id = data.user.id;
-            this.user.name = data.user.name;
-            this.user.email = data.user.email;
-            this.message = data.message;
-            this.errors = null;
-        }else{
-            this.message = data.message;
-            this.errors = data.errors;
-        }
+        // if( status === 200){
+        //     this.user.id = data.user.id;
+        //     this.user.name = data.user.name;
+        //     this.user.email = data.user.email;
+        //     this.message = data.message;
+        //     this.errors = null;
+        // }else{
+        //     this.message = data.message;
+        //     this.errors = data.errors;
+        // }
     },
 }
 </script>

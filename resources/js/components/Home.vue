@@ -4,6 +4,11 @@
             <v-snackbar v-if="text != null" v-model = "snackbar" :timeout = "timeout">
                     {{ text }}
             </v-snackbar>
+            <v-snackbar v-else v-model = "snackbar" :timeout = "timeout">
+                    {{ logout_message }}
+            </v-snackbar>
+            
+            
             <v-row class="d-flex justify-center" v-for="tweet in tweets" :key="tweet.id">
                 <v-col class="d-flex flex-row-reverse" >
                     <v-card>
@@ -34,14 +39,10 @@
 </template>
 
 <script>
-    import Message from "@/components/Message.vue";
 
     export default {
         name: 'Home',
-
-        components: {
-            Message,
-        },
+        props:['logout_message'],
 
         data() {
 
@@ -51,6 +52,8 @@
                 snackbar: false,
                 text: null,
                 timeout: 5000,
+                message: null,
+
 
                 tweets: [
                     {id: 1,img: "http://placehold.jp/150x150.png", content: "aaaa",subimg: "http://placehold.jp/150x150.png",subcontent: "aaaasub"},

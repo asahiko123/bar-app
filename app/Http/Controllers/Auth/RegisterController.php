@@ -42,15 +42,7 @@ class RegisterController extends AuthController
 
     if($this->attemptLogin($request)){
 
-      var_dump('loginattempt');
-
         $request->session()->regenerate();
-
-        var_dump('loginattempt2');
-
-        // $this->clearLoginAttemps($request);
-
-        var_dump('loginattempt3');
 
         return $this->responseSuccess('ログインしました',[
             'user' => $request->user()
