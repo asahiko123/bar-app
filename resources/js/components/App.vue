@@ -23,26 +23,26 @@
         v-if="!auth"
         class="d-flex justify-end mb-6"
     >
-    <v-btn
-        color="link"
-        min-height="20"
-        text
-        >
-        <v-row class="d-flex flex-column">
-            <v-icon>mdi-account-arrow-left</v-icon>
-            <router-link :to="{ name: 'login'}" class="tab-link map"><v-col class="login">ログイン</v-col></router-link>
-        </v-row>
-    </v-btn>
-    <v-btn
-        color="link"
-        min-height="20"
-        text
-        >
-        <v-row class="d-flex flex-column">
-            <v-icon>mdi-account-arrow-left</v-icon>
-            <router-link :to="{ name: 'register'}" class="tab-link map"><v-col class="register">新規登録</v-col></router-link>
-        </v-row>
-    </v-btn>
+        <v-btn
+            color="link"
+            min-height="20"
+            text
+            >
+            <v-row class="d-flex flex-column">
+                <v-icon>mdi-account-arrow-left</v-icon>
+                <router-link :to="{ name: 'login'}" class="tab-link map"><v-col class="login">ログイン</v-col></router-link>
+            </v-row>
+        </v-btn>
+        <v-btn
+            color="link"
+            min-height="20"
+            text
+            >
+            <v-row class="d-flex flex-column">
+                <v-icon>mdi-account-arrow-left</v-icon>
+                <router-link :to="{ name: 'register'}" class="tab-link map"><v-col class="register">新規登録</v-col></router-link>
+            </v-row>
+        </v-btn>
     </v-container>
 
     <v-container v-else class="d-flex justify-end mb-6">
@@ -60,7 +60,8 @@
     </v-container>
     </v-app-bar>
 
-    <router-view @loginUser="loginUser" :logout_message = "logout_message" />
+    <router-view :auth = "this.$route.params.auth" @loginUser="loginUser" :logout_message = "logout_message"/>
+
 
     <v-footer app v-if=" auth = true">
         <v-bottom-navigation

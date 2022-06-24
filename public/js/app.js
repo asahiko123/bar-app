@@ -2294,6 +2294,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -5457,7 +5458,10 @@ var render = function () {
       ),
       _vm._v(" "),
       _c("router-view", {
-        attrs: { logout_message: _vm.logout_message },
+        attrs: {
+          auth: this.$route.params.auth,
+          logout_message: _vm.logout_message,
+        },
         on: { loginUser: _vm.loginUser },
       }),
       _vm._v(" "),
