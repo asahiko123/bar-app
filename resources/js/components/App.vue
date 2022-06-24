@@ -62,7 +62,7 @@
 
     <router-view @loginUser="loginUser" :logout_message = "logout_message" />
 
-    <v-footer app>
+    <v-footer app v-if=" auth = true">
         <v-bottom-navigation
         color="primary lighten-1"
         fixed
@@ -111,7 +111,7 @@ export default {
                 this.logoutUser();
                 console.log('ログアウト完了');
                 this.logout_message = "ログアウトしました。"
-                
+
             })
             .catch((err) => {console.log(err.response)})
         },
