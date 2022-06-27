@@ -24,6 +24,6 @@ const path = require('path');
 .vue();
 
 mix.browserSync({
-    proxy: "nginx",
+    proxy: "0.0.0.0:80",
     open: false
-})
+}).version();

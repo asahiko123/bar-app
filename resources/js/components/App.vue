@@ -85,8 +85,8 @@
 import Register from '../components/auth/Register.vue'
 import Home from '../components/Home.vue'
 import axios from 'axios'
-import Modal from './message/modal.vue'
-import Modal1 from './message/modal.vue'
+import Modal from './message/Modal.vue'
+
 
 export default {
 
@@ -96,7 +96,6 @@ export default {
     Register,
     Home,
     Modal,
-    Modal1
 },
 
     data() {
