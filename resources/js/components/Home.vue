@@ -4,9 +4,9 @@
             <v-snackbar v-if="text != null" v-model = "snackbar" :timeout = "timeout">
                     {{ text }}
             </v-snackbar>
-            <v-snackbar v-else v-model = "snackbar" :timeout = "timeout">
+            <!-- <v-snackbar v-if="text = null" v-model = "snackbar" :timeout = "timeout">
                     {{ logout_message }}
-            </v-snackbar>
+            </v-snackbar> -->
             
             
             <v-row class="d-flex justify-center" v-for="tweet in tweets" :key="tweet.id">

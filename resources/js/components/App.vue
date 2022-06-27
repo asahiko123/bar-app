@@ -63,7 +63,7 @@
     <router-view :auth = "this.$route.params.auth" @loginUser="loginUser" :logout_message = "logout_message"/>
 
 
-    <v-footer app v-if=" auth = true">
+    <v-footer app v-if="auth">
         <v-bottom-navigation
         color="primary lighten-1"
         fixed
@@ -73,10 +73,8 @@
             <v-icon>mdi-home</v-icon>
         </v-btn>
 
-        <v-btn href="/tweet/index">
-            <span>投稿する</span>
-            <v-icon>mdi-timeline</v-icon>
-        </v-btn>
+        <Modal></Modal>
+        
         </v-bottom-navigation>
     </v-footer>
     </v-app>
@@ -87,15 +85,19 @@
 import Register from '../components/auth/Register.vue'
 import Home from '../components/Home.vue'
 import axios from 'axios'
+import Modal from './message/modal.vue'
+import Modal1 from './message/modal.vue'
 
 export default {
 
     name: 'App',
 
     components: {
-        Register,
-        Home
-    },
+    Register,
+    Home,
+    Modal,
+    Modal1
+},
 
     data() {
         return {
