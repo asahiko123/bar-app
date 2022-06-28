@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import vuetify from '../plugins/vuetify'
 import router from './router'
+import store from './store'
 import '@mdi/font/css/materialdesignicons.css'
 import App from './components/App.vue'
 import *as VueGoogleMaps from 'vue2-google-maps'
+import './bootstrap'
 
 
 Vue.use(VueGoogleMaps,{
@@ -14,12 +16,22 @@ Vue.use(VueGoogleMaps,{
     }
 });
 
+const createApp = async() => {
 
-new Vue({
-    el: '#app',
-    vuetify,
-    router,
-    render: h => h(App),
+    await store.dispatch('auth/currentUser')
 
 
-})
+    new Vue({
+        el: '#app',
+        vuetify,
+        router,
+        store,
+        render: h => h(App),
+    
+    
+    })
+
+
+}
+
+createApp();

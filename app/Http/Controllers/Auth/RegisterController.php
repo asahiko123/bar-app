@@ -28,7 +28,6 @@ class RegisterController extends AuthController
 
    public function register(Request $request){
 
-    var_dump('qqqq');
 
     $this->alreadyLogin($request);
 
@@ -36,7 +35,6 @@ class RegisterController extends AuthController
 
     $token = $this->createToken();
 
-    var_dump($token);
 
     $registerUser = $this->setRegisterUser($request, $token);
 
@@ -45,7 +43,7 @@ class RegisterController extends AuthController
         $request->session()->regenerate();
 
         return $this->responseSuccess('ログインしました',[
-            'user' => $request->user()
+            'user' => $request->user(),
         ]);
     }
 

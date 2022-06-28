@@ -169,22 +169,26 @@ export default {
     methods: {
         async register(){
 
-             await axios.post("api/register", this.form)
-             .then(res =>{
+            await this.$store.dispatch('auth/register',this.form)
 
-                this.message = "登録が完了しました！";
-                this.$emit('loginUser');
-                console.log(res);
+            this.$router.push('/')
 
-                this.$router.push({ name: 'home', params: { message: this.message}});
+            //  await axios.post("api/register", this.form)
+            //  .then(res =>{
 
-             })
-             .catch(error => {
+            //     this.message = "登録が完了しました！";
+            //     this.$emit('loginUser');
+            //     console.log(res);
 
-                this.snackbar = true;
-                this.text = "エラーが発生しました。もう一度お試しください。";
-                this.$router.push('/register')
-             });
+            //     this.$router.push({ name: 'home', params: { message: this.message}});
+
+            //  })
+            //  .catch(error => {
+
+            //     this.snackbar = true;
+            //     this.text = "エラーが発生しました。もう一度お試しください。";
+            //     this.$router.push('/register')
+            //  });
                 
             
         },

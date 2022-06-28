@@ -20,7 +20,7 @@
     </template>
 
     <v-container
-        v-if="!auth"
+        v-if="!isLogin"
         class="d-flex justify-end mb-6"
     >
         <v-btn
@@ -46,6 +46,7 @@
     </v-container>
 
     <v-container v-else class="d-flex justify-end mb-6">
+        <span>{{ username }}</span>
         <v-btn
             color="link"
             min-height="20"
@@ -106,16 +107,20 @@ export default {
         }
     },
      methods: {
-        logout() {
-            axios.post('api/logout')
-            .then((res) => {
+        async logout() {
 
-                this.logoutUser();
-                console.log('ログアウト完了');
-                this.logout_message = "ログアウトしました。"
+            await this.$store.dispatch('auth/logout')
 
-            })
-            .catch((err) => {console.log(err.response)})
+            this.$router.push('/login')
+            // axios.post('api/logout')
+            // .then((res) => {
+
+            //     this.logoutUser();
+            //     console.log('ログアウト完了');
+            //     this.logout_message = "ログアウトしました。"
+
+            // })
+            // .catch((err) => {console.log(err.response)})
         },
 
         loginUser(){
@@ -126,6 +131,14 @@ export default {
         logoutUser(){
             console.log('logout');
             this.auth = false;
+        }
+    },
+    computed: {
+        isLogin(){
+            return this.$store.getters['auth/check']
+        },
+        username(){
+            return this.$store.getters['auth/username']
         }
     }
 }

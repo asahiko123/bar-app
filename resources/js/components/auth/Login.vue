@@ -92,22 +92,26 @@ export default{
             const baseUrl = process.env.MIX_URL
             await axios.get(`${baseUrl}/sanctum/csrf-cookie`);
 
-            await axios.post("api/login", this.form)
-            .then(({data}) => {
+            await this.$store.dispatch('auth/login',this.form);
+            this.auth = true;
+            this.$router.push('/');
 
-                this.$emit('loginUser');
-                this.message = `ようこそ！${data.user.account_name}さん！ログインが完了しました。`;
-                console.log(data.user.account_name);
+            // await axios.post("api/login", this.form)
+            // .then(({data}) => {
+
+            //     this.$emit('loginUser');
+            //     this.message = `ようこそ！${data.user.account_name}さん！ログインが完了しました。`;
+            //     console.log(data.user.account_name);
             
-                this.$router.push({ name: 'home', params: { message: this.message}});
+            //     this.$router.push({ name: 'home', params: { message: this.message}});
 
-            })
-            .catch(error =>{
+            // })
+            // .catch(error =>{
 
-                this.message = data.message;
-                this.error = data.errors;
+            //     this.message = data.message;
+            //     this.error = data.errors;
 
-            });
+            // });
             
             
         },

@@ -1,8 +1,10 @@
-window._ = require('lodash');
+import { getCookieValue } from './util'
 
-try {
-    require('bootstrap');
-} catch (e) {}
+// window._ = require('lodash');
+
+// try {
+//     require('bootstrap');
+// } catch (e) {}
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -15,14 +17,16 @@ try {
  window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
-const baseUrl = process.env.MIX_URL;
+// const baseUrl = process.env.MIX_URL;
 
 //ベースURLにapiを追加
-window.axios.defaults.baseUrl = `${baseUrl}/api/`;
+// window.axios.defaults.baseUrl = `${baseUrl}/api/`;
 //自動的にクッキーをクライアントサイドに送信
 window.axios.defaults.withCredentials = true;
 //request設定
 window.axios.interceptors.request.use(config =>{
+
+    config.headers['X-XSRF-TOKEN'] = getCookieValue('XSRF-TOKEN')
 
     return config;
 })
