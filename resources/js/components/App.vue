@@ -64,7 +64,7 @@
     <router-view :auth = "this.$route.params.auth" @loginUser="loginUser" :logout_message = "logout_message"/>
 
 
-    <v-footer app v-if="auth">
+    <v-footer app v-if="isLogin">
         <v-bottom-navigation
         color="primary lighten-1"
         fixed
@@ -87,6 +87,7 @@ import Register from '../components/auth/Register.vue'
 import Home from '../components/Home.vue'
 import axios from 'axios'
 import Modal from './message/Modal.vue'
+import { INTERNAL_SERVER_ERROR } from '../util'
 
 
 export default {
@@ -94,10 +95,10 @@ export default {
     name: 'App',
 
     components: {
-    Register,
-    Home,
-    Modal,
-},
+        Register,
+        Home,
+        Modal,
+    },
 
     data() {
         return {
@@ -139,7 +140,23 @@ export default {
         },
         username(){
             return this.$store.getters['auth/username']
+        },
+        errorCode(){
+            return this.$store.state.error.code
         }
+    },
+    watch: {
+        errorCode:{
+            handler(val) {
+                if(val === INTERNAL_SERVER_ERROR){
+                    this.$router.push('/500')
+                }
+            },
+            immediate: true
+        }
+    },
+    $route (){
+        this.$store.commit('error/setCode',null)
     }
 }
 

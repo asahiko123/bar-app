@@ -6,6 +6,7 @@ import Home from '@/components/Home.vue'
 import AboutUs from '@/components/AboutUs.vue'
 import Login from '@/components/auth/Login.vue'
 import Register from '@/components/auth/Register.vue'
+import SystemErr from '@/pages/errors/System.vue'
 
 
 Vue.use(VueRouter);
@@ -37,6 +38,10 @@ const routes = [
         path: '/register',
         name: 'register',
         component: Register 
+    },
+    {
+        path: '500',
+        component: SystemErr
     }
 
 ]
