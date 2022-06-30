@@ -2,7 +2,6 @@
     <v-main>
         <v-container fluid class="d-flex justify-center">
             <v-col class="d-flex flex-column col-md-5">
-                
                 <v-btn
                 color="primary"
                 class="p-4 mb-4">
@@ -29,6 +28,15 @@
                         ログイン
                         </v-card-title>
 
+                        <div v-if="loginErrors" class="errors">
+                            <ul v-if="loginErrors.email">
+                                <li v-for="msg in loginErrors.email" :key="msg">{{ msg }}</li>
+                            </ul>
+                            <ul v-if="loginErrors.password">
+                                <li v-for="msg in loginErrors.password" :key="msg">{{ msg }}</li>
+                            </ul>
+                        </div>
+
                         <v-text-field
                         v-model="form.email"
                         label="Eメール"
@@ -54,6 +62,7 @@
 <script>
 import axios from 'axios'
 import Message from "@/components/Message.vue";
+import { mapState } from 'vuex'
 
 export default{
 
@@ -93,26 +102,10 @@ export default{
             await axios.get(`${baseUrl}/sanctum/csrf-cookie`);
 
             await this.$store.dispatch('auth/login',this.form);
-            this.auth = true;
-            this.$router.push('/');
 
-            // await axios.post("api/login", this.form)
-            // .then(({data}) => {
-
-            //     this.$emit('loginUser');
-            //     this.message = `ようこそ！${data.user.account_name}さん！ログインが完了しました。`;
-            //     console.log(data.user.account_name);
-            
-            //     this.$router.push({ name: 'home', params: { message: this.message}});
-
-            // })
-            // .catch(error =>{
-
-            //     this.message = data.message;
-            //     this.error = data.errors;
-
-            // });
-            
+            if(this.apiStatus){
+                 this.$router.push('/');    
+            }
             
         },
 
@@ -132,6 +125,10 @@ export default{
             }
         },
 
+        clearError(){
+            this.$store.commit('auth/setLoginErrorMessages',null)
+        },
+
         close() {
             this.message = null;
             this.errors = null;
@@ -139,19 +136,23 @@ export default{
         
     },
 
-    async created(){
-        // const { data, status } = await axios.post("/user");
+    computed:{
 
-        // if( status === 200){
-        //     this.user.id = data.user.id;
-        //     this.user.name = data.user.name;
-        //     this.user.email = data.user.email;
-        //     this.message = data.message;
-        //     this.errors = null;
-        // }else{
-        //     this.message = data.message;
-        //     this.errors = data.errors;
+        // apiStatus() =>{
+        //     return this.$store.state.auth.apiStatus
+        // },
+        // loginErrors(){
+        //     return this.$store.state.auth.loginErrorMessages
         // }
+
+        ...mapState({
+            apiStatus: state => state.auth.apiStatus,
+            loginErrors: state => state.auth.loginErrorMessages
+        })
+
     },
+    created (){
+        this.clearError()
+    }
 }
 </script>
