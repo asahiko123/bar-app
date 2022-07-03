@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('cards', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->string('id')->primary();
             $table->unsignedBigInteger('user_id')->comment('ユーザID');
             $table->string('post')->comment('本文');
             $table->longtext('posted_image')->comment('投稿画像');

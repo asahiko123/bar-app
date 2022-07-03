@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('favorites', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->comment('ユーザーID');
-            $table->unsignedBigInteger('cards_id')->comment('カードID');
+            $table->string('cards_id')->comment('カードID');
             
             $table->index('id');
             $table->index('user_id');

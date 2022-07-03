@@ -22,7 +22,7 @@
 
 <script>
 export default {
-    name: "Message",
+    name: "MessageCard",
     props: {
         title: {
             type: String,
@@ -43,7 +43,7 @@ export default {
         };
     },
     watch: {
-        title: function (after, before) {
+        title: function () {
             console.log("変化したよ");
             clearTimeout(this.id);
             this.id = setTimeout(() => this.$emit("close"), this.timeout);
