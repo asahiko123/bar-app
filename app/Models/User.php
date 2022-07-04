@@ -55,4 +55,8 @@ class User extends Authenticatable
             $model->created_at = $model->freshTimestamp();
         });
     }
+
+    public function cards(){
+        return $this->hasMany('App\Cards');
+    }
 }
