@@ -88,21 +88,21 @@
                     <v-icon>mdi-home</v-icon>
                 </v-btn>
 
-                <Modal></Modal>
+                <PostModal></PostModal>
             </v-bottom-navigation>
         </v-footer>
     </v-app>
 </template>
 
 <script>
-import Modal from "./message/Modal.vue";
+import PostModal from './message/PostModal';
 import { INTERNAL_SERVER_ERROR } from "../util";
 
 export default {
     name: "App",
 
     components: {
-        Modal,
+        PostModal,
     },
 
     data() {

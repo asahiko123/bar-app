@@ -48,7 +48,7 @@
 
 <script>
 export default {
-    name: "Home",
+    name: "HomeTimeline",
     props: ["logout_message"],
 
     data() {

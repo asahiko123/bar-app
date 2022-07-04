@@ -78,16 +78,10 @@
 </template>
 
 <script>
-import axios from 'axios'
-import Message from "@/components/Message.vue";
 
 export default {
 
-    name : "Register",
-
-    components: {
-        Message,
-    },
+    name : "RegisterForm",
 
     data(){
 

@@ -61,16 +61,11 @@
 </template>
 <script>
 import axios from 'axios'
-import Message from "@/components/Message.vue";
 import { mapState } from 'vuex'
 
 export default{
 
-    name: "Login",
-
-    components: {
-        Message,
-    },
+    name: "LoginForm",
 
     data() {
         return {

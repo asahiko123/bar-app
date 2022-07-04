@@ -21,11 +21,7 @@ Route::post('/logout',[LoginController::class,'logout'])->name('login');
 Route::post('/register',[RegisterController::class, 'register'])->name('register');
 Route::get('/user',fn() => Auth::user())->name('user');
 
-// Route::group(['middleware' => ['auth:sanctum']],function(){
+Route::group(['middleware' => ['auth:sanctum']],function(){
 
-//     Route::get('/',function(){
-//         return response()->json([
-//             'message' => 'ログイン完了',
-//         ],200);
-//     });
-// });
+    Route::post('/cards',[CardsController::class, 'create'])->name('cards.create');
+});
