@@ -95,7 +95,7 @@
 </template>
 
 <script>
-import Modal from "./message/Modal.vue";
+import Modal from "../message/Modal.vue";
 import { INTERNAL_SERVER_ERROR } from "../util";
 
 export default {
