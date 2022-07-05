@@ -4,57 +4,47 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
+
+use App\Http\Helper;
 
 class Cards extends Model
 {
     use HasFactory;
+   
 
 
     protected $keyType = 'string';
+    protected $table = 'cards';
     public $incrementing = false;
+    protected $guarded =[];
+    
 
-    const ID_LENGTH = 12;
+    protected static function boot(){
 
-    /**
-     * 文字列をPrimaryKeyにしているので、Modelを作成するたびに
-     * ID属性に新しいsetIdを行う
-     */
+        parent::boot();
 
-    public function __construct(array $attributes =[]){
+        static::creating(function($model){
 
-        parent::__construct($attributes);
+            for($i = 0; $i < 5; $i++){
 
-        if(! Arr::get($this->attributes,'id')){
-            $this->setId();
-        }
+                
+                $randomId = Helper::getRandomId();
+
+                $exists = self::where('id',$randomId)->exists();
+
+                if(!$exists){
+                    $model->id = $randomId;
+                    break;
+                }
+                if($i === 4){
+                    Log::alert('正しくユーザーIDが作られませんでした');
+                    throw new Exception('正しくユーザーIDが作られませんでした');
+                }
+
+            }
+            
+        });
     }
-
-    public function setId(){
-        $this->attributes['id'] = $this->getRandomId();
-    }
-
-    public function getRandomId(){
-
-        $characters = array_merge(
-            range(0,9),
-            range('a','z'),
-            range('A','Z'),
-            ['_','-']
-        );
-
-        $length = count($characters);
-
-        $id = '';
-
-        for($i = 0; $i < ID_LENGTH; $i++){
-
-            $id .= $characters[random_int(0,$length -1)];
-        }
-
-        return $id;
-        
-    }
-
-
 
 }
