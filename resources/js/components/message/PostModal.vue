@@ -25,16 +25,10 @@
             name = "post"
             required
             outlined
-            dense>
+            dense
+            v-model="post">
             </v-text-field>
 
-            <!-- <v-file-input
-                label="画像を選択する"
-                outlined
-                dense
-                name = "posted_image"
-                @change = "onFileChange"
-            ></v-file-input> -->
 
             <input class="form__item" type="file" @change="onFileChange">
 
@@ -45,7 +39,12 @@
             
             <v-card-actions class="justify-end">
                 <v-form ref="form" @submit.prevent ="submit">
-                    <v-btn type="submit" color="rgb(106, 118, 171)" class="float-right">投稿する</v-btn>
+                <!-- <div class="errors" v-if="errors">
+                    <ul v-if="errors.posted_image">
+                    <li v-for="msg in errors.posted_image" :key="msg">{{ msg }}</li>
+                    </ul>
+                </div> -->
+                <v-btn type="submit" color="rgb(106, 118, 171)" class="float-right">投稿する</v-btn>
                 </v-form>
                 <v-btn
                 text
@@ -61,6 +60,9 @@
 
 <script>
 
+import axios from 'axios'
+import { INTERNAL_SERVER_ERROR} from '../../util'
+
 
 export default{
 
@@ -71,7 +73,8 @@ export default{
         return{
             preview: null,
             posted_image: null,
-            post: null
+            post: null,
+            errors: null
         }
 
     },
@@ -102,6 +105,8 @@ export default{
             reader.readAsDataURL(event.target.files[0])
 
             this.posted_image = event.target.files[0]
+            console.log(this.posted_image)
+            
 
         },
         reset(){
@@ -111,11 +116,20 @@ export default{
         },
         async submit(){
             const formData = new FormData();
-            formData.append('posted_image',this.posted_image)
+            formData.append('posted_image',this.posted_image);
+            formData.append('post',this.post);
             
-            // console.log(...formData.entries());
+            console.log(...formData.entries());
+            // const baseUrl = process.env.MIX_URL
+            // await axios.get(`${baseUrl}/sanctum/csrf-cookie`);
             const response = await axios.post('/api/cards',formData)
+            console.log(response.status)
 
+                if (response.status === INTERNAL_SERVER_ERROR) {
+                    this.errors = response.data.errors
+                    return false
+                }
+           
             this.reset()
             this.$router.push(`/cards/${response.data.id}`)
 
