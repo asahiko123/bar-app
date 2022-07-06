@@ -36,22 +36,15 @@ class CardsController extends Controller
     public function create(StoreCards $request)
     {
         $extension = $request->posted_image->extension();
-        // dd($request);
 
         $cards = new Cards();
-        // dd($cards);
 
         $cards->posted_image = $cards->id . '.' . $extension;
         $cards->post = $request->post;
 
-        var_dump($cards->posted_image);
-
         // dd($cards->posted_image,$cards->post);
 
-        // Storage::cloud()
-        //     ->putFileAs('', $request->photo, $photo->filename, 'public');
-
-        Storage::disk('public')->putFile('storage/app/public/', $cards->posted_image, 'public');
+        Storage::disk('public')->putFileAs('', $request->posted_image, $cards->posted_image);
 
         DB::beginTransaction();
 
@@ -61,7 +54,6 @@ class CardsController extends Controller
         } catch(Exception $exception){
             DB::rollback();
 
-            // Storage::cloud()->delete($photo->filename);
             throw $exception;
         }
 

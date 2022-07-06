@@ -23,6 +23,6 @@ Route::post('/register',[RegisterController::class, 'register'])->name('register
 Route::get('/user',fn() => Auth::user())->name('user');
 
 
-
-Route::post('/cards',[CardsController::class, 'create'])->name('cards.create');
-
+Route::middleware('auth:sanctum')->group(function(){
+    Route::post('/cards',[CardsController::class, 'create'])->name('cards.create');
+});
