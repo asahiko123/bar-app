@@ -2,48 +2,53 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Log;
-
-use App\Http\Helper;
+use Illuminate\Support\Arr;
 
 class Cards extends Model
 {
-    use HasFactory;
-   
-
+    /** プライマリキーの型 */
     protected $keyType = 'string';
-    protected $table = 'cards';
-    public $incrementing = false;
-    protected $guarded =[];
-    
 
-    protected static function boot(){
+    /** IDの桁数 */
+    const ID_LENGTH = 12;
 
-        parent::boot();
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
 
-        static::creating(function($model){
-
-            for($i = 0; $i < 5; $i++){
-
-                
-                $randomId = Helper::getRandomId();
-
-                $exists = self::where('id',$randomId)->exists();
-
-                if(!$exists){
-                    $model->id = $randomId;
-                    break;
-                }
-                if($i === 4){
-                    Log::alert('正しくユーザーIDが作られませんでした');
-                    throw new Exception('正しくユーザーIDが作られませんでした');
-                }
-
-            }
-            
-        });
+        if (! Arr::get($this->attributes, 'id')) {
+            $this->setId();
+        }
     }
 
+    /**
+     * ランダムなID値をid属性に代入する
+     */
+    private function setId()
+    {
+        $this->attributes['id'] = $this->getRandomId();
+    }
+
+    /**
+     * ランダムなID値を生成する
+     * @return string
+     */
+    private function getRandomId()
+    {
+        $characters = array_merge(
+            range(0, 9), range('a', 'z'),
+            range('A', 'Z'), ['-', '_']
+        );
+
+        $length = count($characters);
+
+        $id = "";
+
+        for ($i = 0; $i < self::ID_LENGTH; $i++) {
+            $id .= $characters[random_int(0, $length - 1)];
+        }
+
+        return $id;
+    }
 }
