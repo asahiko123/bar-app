@@ -110,6 +110,7 @@ services:
             - '/dev/shm:/dev/shm'
         networks:
             - sail
+    
 networks:
     sail:
         driver: bridge

@@ -20,7 +20,8 @@ use App\Http\Controllers\CardsController;
 Route::post('/login',[LoginController::class,'login']);
 Route::post('/logout',[LoginController::class,'logout'])->name('login');
 Route::post('/register',[RegisterController::class, 'register'])->name('register');
-Route::get('/user',fn() => Auth::user())->name('user');
+// Route::get('/user',fn() => Auth::user())->name('user');
+Route::get('/phpinfo',fn() => phpinfo());
 
 
 Route::middleware('auth:sanctum')->group(function(){

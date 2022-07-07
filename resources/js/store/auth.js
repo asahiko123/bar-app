@@ -25,8 +25,8 @@ const mutations = {
     setUser(state, user){
         state.user = user
     },
-    setApiStatus(state,error){
-        state.error = error
+    setApiStatus(state,status){
+        state.apiStatus = status
     },
     setLoginErrorMessages(state,messages){
         state.loginErrorMessages = messages
