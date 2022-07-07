@@ -2,10 +2,10 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 import BarMap from "@/components/BarMap.vue";
-import Home from "@/components/Home.vue";
+import Home from "@/components/HomeTimeline.vue";
 import AboutUs from "@/components/AboutUs.vue";
-import Login from "@/components/auth/Login.vue";
-import Register from "@/components/auth/Register.vue";
+import Login from "@/components/auth/LoginForm.vue";
+import Register from "@/components/auth/RegisterForm.vue";
 import SystemErr from "@/pages/errors/System.vue";
 
 Vue.use(VueRouter);
