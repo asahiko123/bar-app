@@ -2312,6 +2312,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2323,7 +2325,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       error: "",
       auth: false,
-      logout_message: null
+      logout_message: null,
+      user: null
     };
   },
   methods: {
@@ -2339,14 +2342,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _this.$store.dispatch("auth/logout");
 
               case 2:
-                _this.$router.push("/login"); // axios.post('api/logout')
-                // .then((res) => {
-                //     this.logoutUser();
-                //     console.log('ログアウト完了');
-                //     this.logout_message = "ログアウトしました。"
-                // })
-                // .catch((err) => {console.log(err.response)})
-
+                _this.$router.push("/login");
 
               case 3:
               case "end":
@@ -2355,14 +2351,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee);
       }))();
-    },
-    loginUser: function loginUser() {
-      console.log("login");
-      this.auth = true;
-    },
-    logoutUser: function logoutUser() {
-      console.log("logout");
-      this.auth = false;
     }
   },
   computed: {
@@ -3348,8 +3336,8 @@ var mutations = {
   setUser: function setUser(state, user) {
     state.user = user;
   },
-  setApiStatus: function setApiStatus(state, error) {
-    state.error = error;
+  setApiStatus: function setApiStatus(state, status) {
+    state.apiStatus = status;
   },
   setLoginErrorMessages: function setLoginErrorMessages(state, messages) {
     state.loginErrorMessages = messages;
@@ -6064,7 +6052,15 @@ var render = function () {
                 "v-container",
                 { staticClass: "d-flex justify-end mb-6" },
                 [
-                  _c("span", [_vm._v(_vm._s(_vm.username))]),
+                  _vm.isLogin
+                    ? _c("span", [
+                        _vm._v(
+                          "\n                " +
+                            _vm._s(_vm.username) +
+                            "\n            "
+                        ),
+                      ])
+                    : _vm._e(),
                   _vm._v(" "),
                   _c(
                     "v-btn",
