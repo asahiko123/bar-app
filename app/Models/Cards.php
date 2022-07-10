@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 
 class Cards extends Model
 {
@@ -13,6 +14,14 @@ class Cards extends Model
 
     /** IDの桁数 */
     const ID_LENGTH = 12;
+
+    /**
+     * ユーザー定義したアクセサに関して戻り値のjsonに含まれる属性
+     */
+
+    protected $appends =[
+        'url'
+    ];
 
     public function __construct(array $attributes = [])
     {
@@ -52,4 +61,26 @@ class Cards extends Model
 
         return $id;
     }
+
+     /**
+     * Userモデルとのリレーション
+     * @param 'App\Models\User'
+     * @param string $localkey
+     * @param string $foreignkey
+     * @param string $parent
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(){
+        return $this->belongsTo('App\Models\User','user_id','id','users');
+    }
+
+    /**
+     * URLアクセサ
+     * @return string
+     */
+    
+    public function getUrlAttribute(){
+        return Storage::url($this->attributes['posted_image']);
+    }
+
 }

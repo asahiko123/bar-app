@@ -49,6 +49,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * アクセサでデータを取得したときにjsonに含む属性
+     */
+
+    protected $visible = [
+        'account_name'
+    ];
+
     public static function boot(){
         parent::boot();
         static::creating(function($model){

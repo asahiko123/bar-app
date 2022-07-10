@@ -26,4 +26,5 @@ Route::get('/phpinfo',fn() => phpinfo());
 
 Route::middleware('auth:sanctum')->group(function(){
     Route::post('/cards',[CardsController::class, 'create'])->name('cards.create');
+    Route::get('/cards/index',[CardsController::class, 'index'])->name('cards.index');
 });

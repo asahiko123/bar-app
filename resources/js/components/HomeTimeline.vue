@@ -41,15 +41,24 @@
                         @{{ tweet.subcontent }}
                     </v-card>
                 </v-col>
+    
             </v-row>
+        </v-container>
+        <v-container>
+             <CardList></CardList>
         </v-container>
     </v-main>
 </template>
 
 <script>
+
+import CardList from './card/CardList.vue'
+
 export default {
     name: "HomeTimeline",
     props: ["logout_message"],
+
+    components:{ CardList },
 
     data() {
         return {

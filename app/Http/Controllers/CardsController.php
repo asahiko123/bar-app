@@ -12,20 +12,23 @@ use Illuminate\Support\Facades\Auth;
 
 class CardsController extends Controller
 {
-
     public function __construct(){
 
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['index']);
 
     }
     /**
-     * Display a listing of the resource.
+     * 投稿取得
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $cards = Cards::with(['user'])
+                ->orderBy('created_at','desc')
+                ->paginate();
+
+        return $cards;
     }
 
     /**

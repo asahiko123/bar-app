@@ -79,7 +79,6 @@
 
         <router-view
             :auth="this.$route.params.auth"
-            @loginUser="loginUser"
             :logout_message="logout_message"
         />
 
