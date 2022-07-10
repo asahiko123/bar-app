@@ -14,10 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('comments', function (Blueprint $table) {
+
             $table->increments('id');
             $table->unsignedBigInteger('user_id')->comment('ユーザID');
             $table->string('cards_id')->comment('投稿ID');
             $table->string('content')->comment('本文');
+
             $table->timestamps();
 
             $table->index('id');

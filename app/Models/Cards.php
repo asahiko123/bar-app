@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
@@ -82,5 +83,6 @@ class Cards extends Model
     public function getUrlAttribute(){
         return Storage::url($this->attributes['posted_image']);
     }
+
 
 }

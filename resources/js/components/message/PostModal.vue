@@ -60,13 +60,11 @@
 
 <script>
 
-
 import axios from 'axios'
 import { INTERNAL_SERVER_ERROR} from '../../util'
 
 
 export default{
-
 
     name: "PostModal",
 

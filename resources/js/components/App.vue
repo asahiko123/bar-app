@@ -97,8 +97,8 @@
 
 <script>
 
-import PostModal from './message/PostModal';
 
+import PostModal from './message/PostModal';
 import { INTERNAL_SERVER_ERROR } from "../util";
 
 export default {
