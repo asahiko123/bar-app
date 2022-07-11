@@ -10274,3 +10274,12 @@ textarea.form-control-lg {
 .login {
   padding: 0;
 }
+
+.image_info {
+  position: relative;
+  padding-bottom: 50px;
+}
+.image_info .card-overlay {
+  position: absolute;
+  bottom: 0;
+}

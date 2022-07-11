@@ -2,7 +2,7 @@
     <div class="card-list">
         <div class="grid">
             <CardItem
-                class="grid__item"
+                class="grid__item d-flex justify-center"
                 v-for="card in cards"
                 :key="card.id"
                 :item="card">
