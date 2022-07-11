@@ -10275,11 +10275,11 @@ textarea.form-control-lg {
   padding: 0;
 }
 
-.image_info {
+.container.card-wrapper {
   position: relative;
   padding-bottom: 50px;
 }
-.image_info .card-overlay {
+.container.card-wrapper .d-flex.align-start.flex-column.name {
   position: absolute;
   bottom: 0;
 }

@@ -18,7 +18,6 @@
 
                         <v-form
                         ref="form"
-                        v-model="valid"
                         lazy-validation
                         class="d-flex flex-column"
                         @submit.prevent = "login">

@@ -9,20 +9,24 @@
                 :src="item.url" 
                 :alt="`${item.user.account_name}`" 
                 width="500" height="400">
-            <v-container class="image_info">
-                <v-row class="d-flex align-end flex-column">
-                    <v-btn
+            <div class="card-wrapper">
+
+                <v-row justify="end">
+                    <v-card-actions>
+                        <v-btn
                         class="card-action favorite"
-                    >
-                    <v-icon>mdi-cards-heart-outline</v-icon>
-                    </v-btn>
+                        >
+                        <v-icon>mdi-cards-heart-outline</v-icon>
+                        </v-btn>
+                    </v-card-actions>
+
                 </v-row>
 
-                <v-row class="d-flex align-start flex-column mt-auto">
+                <v-row justify="start">
                     <v-card-title>{{ item.user.account_name}}</v-card-title>
                 </v-row>
-
-            </v-container>
+                
+            </div>
 
             
             </v-img>

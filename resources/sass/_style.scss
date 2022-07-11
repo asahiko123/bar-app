@@ -1,9 +1,9 @@
-.image_info {
+.container.card-wrapper {
     position: relative;
     padding-bottom: 50px;
 
 
-    .card-overlay{
+    .d-flex.align-start.flex-column.name{
         position: absolute;
         bottom: 0;
     }

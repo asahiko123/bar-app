@@ -20,12 +20,12 @@ use App\Http\Controllers\CardsController;
 Route::post('/login',[LoginController::class,'login'])->name('login');
 Route::post('/logout',[LoginController::class,'logout'])->name('logout');
 Route::post('/register',[RegisterController::class, 'register'])->name('register');
+Route::get('/cards/index',[CardsController::class, 'index'])->name('cards.index');
 // Route::get('/user',fn() => Auth::user())->name('user');
 Route::get('/phpinfo',fn() => phpinfo());
 
 
 Route::middleware('auth:sanctum')->group(function(){
     Route::post('/cards',[CardsController::class, 'create'])->name('cards.create');
-    Route::get('/cards/index',[CardsController::class, 'index'])->name('cards.index');
 
 });
