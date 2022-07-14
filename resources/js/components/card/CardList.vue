@@ -3,14 +3,14 @@
         <div class="grid">
             <CardItem
                 class="grid__item d-flex justify-center"
-                v-for="card in cards"
-                :key="card.id"
-                :item="card">
+                v-for="item in list"
+                :key="`list${item.id}`"
+                >
             </CardItem>
-
             <infinite-loading @infinite="infiniteHandler">
-                <span slot="no-more">これ以上データはありません</span>
-                <span slot="no-results">検索結果はありません</span>
+                    <span slot="no-more">これ以上データはありません</span>
+                    <span slot="no-results">検索結果はありません</span>
+                    <span slot="spinner">取得中...</span>
             </infinite-loading>
         </div>
     </div>
@@ -30,10 +30,26 @@ export default{
     },
     data(){
         return {
-            cards:[]
+            list:[]
         }
     },
     methods:{
+        async infiniteHandler($state){
+            await this.fetchCards().then((res) => {
+
+                console.log(res)
+            
+                if(!res){
+                    $state.error()
+                }else if(res.length){
+                    this.list.push(res)
+                    $state.loaded()
+                }else if(res.length === 0){
+                    $state.complete()
+                }
+
+            })
+       },
 
        async fetchCards(){
 
@@ -41,26 +57,25 @@ export default{
 
             console.log(res.data.data)
 
+            let cards =[]
+
             if(res.status !== OK){
                 this.$store.commit('error/setCode',res.status);
                 return false;
             }
 
-            this.cards = res.data.data
+            cards.push(res.data.data)
 
-            this.totalCount = res.data.total
+            console.log(cards);
+
+            // this.totalCount = res.data.total
+
+            return cards
 
             
         })
        },
-       infiniteHandler($state){
-            if(this.totalCount <= this.cards.length > 100){
-                $state.complete()
-            }else{
-                this.fetchCards()
-                $state.loaded()
-            }
-       }
+       
     },
     watch: {
         $route: {

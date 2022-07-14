@@ -3036,11 +3036,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      cards: []
+      list: []
     };
   },
   methods: {
-    fetchCards: function fetchCards() {
+    infiniteHandler: function infiniteHandler($state) {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -3049,17 +3049,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_2___default().get('/api/cards/index').then(function (res) {
-                  console.log(res.data.data);
+                return _this.fetchCards().then(function (res) {
+                  console.log(res);
 
-                  if (res.status !== _util__WEBPACK_IMPORTED_MODULE_0__.OK) {
-                    _this.$store.commit('error/setCode', res.status);
+                  if (!res) {
+                    $state.error();
+                  } else if (res.length) {
+                    _this.list.push(res);
 
-                    return false;
+                    $state.loaded();
+                  } else if (res.length === 0) {
+                    $state.complete();
                   }
-
-                  _this.cards = res.data.data;
-                  _this.totalCount = res.data.total;
                 });
 
               case 2:
@@ -3070,34 +3071,59 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    infiniteHandler: function infiniteHandler($state) {
-      if (this.totalCount <= this.cards.length > 100) {
-        $state.complete();
-      } else {
-        this.fetchCards();
-        $state.loaded();
-      }
+    fetchCards: function fetchCards() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_2___default().get('/api/cards/index').then(function (res) {
+                  console.log(res.data.data);
+                  var cards = [];
+
+                  if (res.status !== _util__WEBPACK_IMPORTED_MODULE_0__.OK) {
+                    _this2.$store.commit('error/setCode', res.status);
+
+                    return false;
+                  }
+
+                  cards.push(res.data.data);
+                  console.log(cards); // this.totalCount = res.data.total
+
+                  return cards;
+                });
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
     }
   },
   watch: {
     $route: {
       handler: function handler() {
-        var _this2 = this;
+        var _this3 = this;
 
-        return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-          return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+          return _regeneratorRuntime().wrap(function _callee3$(_context3) {
             while (1) {
-              switch (_context2.prev = _context2.next) {
+              switch (_context3.prev = _context3.next) {
                 case 0:
-                  _context2.next = 2;
-                  return _this2.fetchCards();
+                  _context3.next = 2;
+                  return _this3.fetchCards();
 
                 case 2:
                 case "end":
-                  return _context2.stop();
+                  return _context3.stop();
               }
             }
-          }, _callee2);
+          }, _callee3);
         }))();
       },
       immediate: true
@@ -3327,6 +3353,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+ // import InfiniteLoading from 'vue-infinite-loading';
 
 
 vue__WEBPACK_IMPORTED_MODULE_7__["default"].use(vue2_google_maps__WEBPACK_IMPORTED_MODULE_5__, {
@@ -7127,11 +7154,10 @@ var render = function () {
       "div",
       { staticClass: "grid" },
       [
-        _vm._l(_vm.cards, function (card) {
+        _vm._l(_vm.list, function (item) {
           return _c("CardItem", {
-            key: card.id,
+            key: "list" + item.id,
             staticClass: "grid__item d-flex justify-center",
-            attrs: { item: card },
           })
         }),
         _vm._v(" "),
@@ -7142,6 +7168,10 @@ var render = function () {
           _vm._v(" "),
           _c("span", { attrs: { slot: "no-results" }, slot: "no-results" }, [
             _vm._v("検索結果はありません"),
+          ]),
+          _vm._v(" "),
+          _c("span", { attrs: { slot: "spinner" }, slot: "spinner" }, [
+            _vm._v("取得中..."),
           ]),
         ]),
       ],
