@@ -29,7 +29,7 @@ class CardsController extends Controller
 
         $cards = Cards::with(['user'])
                 ->orderBy('created_at','desc')
-                ->paginate();
+                ->paginate(4);
 
         return $cards;
 
