@@ -21,7 +21,7 @@ Route::post('/login',[LoginController::class,'login'])->name('login');
 Route::post('/logout',[LoginController::class,'logout'])->name('logout');
 Route::post('/register',[RegisterController::class, 'register'])->name('register');
 Route::get('/cards/index',[CardsController::class, 'index'])->name('cards.index');
-// Route::get('/user',fn() => Auth::user())->name('user');
+Route::get('/user',fn() => Auth::user())->name('user');
 Route::get('/phpinfo',fn() => phpinfo());
 
 

@@ -16,7 +16,7 @@ const state = {
 }
 
 const getters = {
-    check: state => !! state.user,
+    check: state => !!state.user,
     username: state => state.user ? state.user.account_name: ''
 }
 
@@ -77,6 +77,7 @@ const actions = {
         context.commit('setApiStatus', null)
         const response = await axios.get('/api/user')
         const user = response.data || null
+        console.log(user)
 
         if (response.status === OK) {
         context.commit('setApiStatus', true)

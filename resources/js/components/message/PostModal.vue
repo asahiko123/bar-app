@@ -48,7 +48,7 @@
                 </v-form>
                 <v-btn
                 text
-                @click="dialog.value= false">Close</v-btn>
+                @click="closeDialog(dialog)">Close</v-btn>
 
             </v-card-actions>
         </v-card>
@@ -111,9 +111,17 @@ export default{
         },
         reset(){
             this.preview = '',
-            this.posted_image = null,
-            this.$el.querySelector('input[type="file"]').value = null
+            this.post = null,
+            document.querySelector('input[type="file"]').value = null
         },
+
+        closeDialog(dialog){
+
+            dialog.value = false
+            this.reset()
+
+        },
+
         async submit(){
             const formData = new FormData();
             formData.append('posted_image',this.posted_image);
