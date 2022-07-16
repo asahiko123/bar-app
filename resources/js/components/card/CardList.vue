@@ -1,17 +1,18 @@
 <template>
     <div class="card-list">
         <div class="grid">
-            <!-- <CardItem
+            <CardItem
                 class="grid__item d-flex justify-center"
                 v-for="item in list"
-                :key="`list${item.id}`"
+                :key="item.index"
+                :item="item"
                 >
-            </CardItem> -->
+            </CardItem>
 
-            <div class="d-flex justify-center">
+            <!-- <div class="d-flex justify-center">
                 <ul>
                 <li v-for="item in list" :key="item.index">
-                    {{ item.user.account_name }}
+                    <p>{{ item.user.account_name }}</p>
                     <img
                         :src="`/storage/${item.posted_image}`"
                         height="400"
@@ -20,7 +21,7 @@
                     >
                 </li>
                 </ul>
-            </div>
+            </div> -->
             <infinite-loading spinner="spiral" @infinite="infiniteHandler">
                     <span slot="no-more">これ以上データはありません</span>
                     <span slot="no-results">検索結果はありません</span>
@@ -32,14 +33,14 @@
 
 <script>
 // import { OK } from '../../util'
-// import CardItem from './CardItem.vue'
+import CardItem from './CardItem.vue'
 import axios from 'axios'
 import InfiniteLoading from 'vue-infinite-loading';
 
 
 export default{
     components: {
-        // CardItem,
+        CardItem,
         InfiniteLoading,
     },
     data(){
@@ -54,13 +55,13 @@ export default{
             axios.get('/api/cards/index',{
             params: {
                 page: this.page,
-                per_page: 1
             },
             }).then(({ data }) => {
                 console.log({ data })
                 setTimeout(() => {
                     if(this.page < data.data.length){
                         this.page += 1
+                        console.log(this.page)
                         this.list.push(...data.data)
                         console.log('読み込み')
                         $state.loaded()

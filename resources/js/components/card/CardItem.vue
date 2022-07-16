@@ -1,5 +1,5 @@
 <template>
-    <v-card class="card">
+    <div class="card">
 
         <Router-Link
             class="card-overlay"
@@ -8,7 +8,8 @@
             <v-img 
                 :src="item.url" 
                 :alt="`${item.user.account_name}`" 
-                width="500" height="400">
+                width="500" height="400"
+            >
             <div class="card-wrapper">
 
                 <v-row justify="end">
@@ -22,17 +23,16 @@
 
                 </v-row>
 
-                <v-row justify="start">
+                <v-row justify="start" class="name">
                     <v-card-title>{{ item.user.account_name}}</v-card-title>
                 </v-row>
                 
             </div>
-
-            
             </v-img>
         </Router-Link>
-    </v-card>
+    </div>
 </template>
+
 
 <script>
 
@@ -45,3 +45,25 @@ export default{
     }
 }
 </script>
+
+<style lang="scss">
+
+    .card-wrapper {
+        
+        width: 100% !important;
+        height: 100% !important;
+
+        position: relative;
+        padding-bottom: 50px;
+    
+    
+        .name{
+            position: absolute;
+            bottom: 0;
+        }
+    }
+
+
+
+
+</style>

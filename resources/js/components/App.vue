@@ -82,7 +82,7 @@
             :logout_message="logout_message"
         />
 
-        <!-- <v-footer app v-if="isLogin">
+        <v-footer app v-if="isLogin">
             <v-bottom-navigation color="primary lighten-1" fixed>
                 <v-btn href="/">
                     <span>ホーム</span>
@@ -91,22 +91,22 @@
 
                 <PostModal></PostModal>
             </v-bottom-navigation>
-        </v-footer> -->
+        </v-footer>
     </v-app>
 </template>
 
 <script>
 
 
-// import PostModal from './message/PostModal';
+import PostModal from './message/PostModal';
 import { INTERNAL_SERVER_ERROR } from "../util";
 
 export default {
     name: "App",
 
-    // components: {
-    //     PostModal,
-    // },
+    components: {
+        PostModal,
+    },
 
     data() {
         return {
