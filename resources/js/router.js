@@ -7,6 +7,7 @@ import AboutUs from "@/components/AboutUs.vue";
 import Login from "@/components/auth/LoginForm.vue";
 import Register from "@/components/auth/RegisterForm.vue";
 import SystemErr from "@/pages/errors/System.vue";
+import CardsForm from "@/components/form/CardsForm.vue";
 // import CardList from "@/components/card/CardList.vue";
 
 Vue.use(VueRouter);
@@ -42,6 +43,11 @@ const routes = [
         path: "500",
         component: SystemErr,
     },
+    {
+        path: "/cards/new",
+        name: "cardsForm",
+        component: CardsForm,
+    }
 ];
 
 export default new VueRouter({

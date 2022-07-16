@@ -8,9 +8,10 @@
 
     <v-btn
         v-bind="attrs"
-        v-on="on">
-        <span>投稿する</span>
-        <v-icon>mdi-timeline</v-icon>
+        v-on="on"
+        @click="dialog = true"
+        >
+        <span>店名を選択する</span>
     </v-btn>
 
     </template>
@@ -121,6 +122,10 @@ export default{
             this.reset()
 
         },
+        openDialog(dialog){
+            dialog.value = true
+        },
+
 
         async submit(){
             const formData = new FormData();
@@ -142,6 +147,13 @@ export default{
             this.$router.push(`/cards/${response.data.id}`)
 
         }
-    }
+    },
+
+    mounted(dialog){
+       this.openDialog(dialog)
+    }  
+
+
+    
 }
 </script>

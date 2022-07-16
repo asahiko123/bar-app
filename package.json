@@ -38,6 +38,7 @@
         "@vue/compiler-sfc": "^3.2.37",
         "vue-infinite-loading": "^2.4.5",
         "vue-router": "^3.5.4",
+        "vue-star-rating": "^1.7.0",
         "vue2-google-maps": "^0.10.7",
         "vuetify": "^2.6.6",
         "vuex-persistedstate": "^4.1.0"
