@@ -42,16 +42,27 @@ class CardsController extends Controller
      */
     public function create(StoreCards $request)
     {
-        $extension = $request->posted_image->extension();
+
+        $data = $request->validated();
+    
+        $extension = $data['posted_image']->extension();
 
         $cards = new Cards();
-
         $cards->posted_image = $cards->id . '.' . $extension;
-        $cards->post = $request->post;
+        $cards->menu = $data['menu'];
+        $cards->price = $data['price'];
+        $cards->bar = $data['bar'];
+        $cards->comment = $data['comment'];
+        $cards->easyToDrink = $data['easyToDrink'];
+        $cards->sweet = $data['sweet'];
+        $cards->dry = $data['dry'];
+        $cards->fresh = $data['fresh'];
+        $cards->sharp = $data['sharp'];
+        $cards->mellow = $data['mellow'];
 
         // dd($cards->posted_image,$cards->post);
 
-        Storage::disk('public')->putFileAs('', $request->posted_image, $cards->posted_image);
+        Storage::disk('public')->putFileAs('', $data['posted_image'], $cards->posted_image);
 
         DB::beginTransaction();
 
