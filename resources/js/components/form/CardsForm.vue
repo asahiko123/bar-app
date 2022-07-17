@@ -13,10 +13,14 @@
                         class="d-flex flex-column"
                         @submit.prevent = "create">
 
+
                         <v-card-title
                         class="d-flex justify-center">
                         お酒を記録する
                         </v-card-title>
+
+                        <v-row
+                        id ="output"></v-row>
 
                         <v-text-field
                         v-model="form.menu"
@@ -32,7 +36,7 @@
                         required>
                         </v-text-field>
 
-                        <PostModal></PostModal>
+                        <SelectModal></SelectModal>
 
                         <v-text-field
                         v-model="form.comment"
@@ -101,6 +105,7 @@
                         <v-btn type="submit" color="rgb(106, 118, 171)" class="float-right">ログイン</v-btn>
 
                         </v-form>
+                        <PostModal @catchPreviewImage="displayPreviewImage"></PostModal>
 
                     </v-card>
             </v-col>
@@ -109,6 +114,7 @@
 </template>
 <script>
 import PostModal from '../message/PostModal.vue'
+import SelectModal from '../message/SelectModal.vue'
 import StarRating from 'vue-star-rating'
 
 
@@ -160,8 +166,30 @@ export default{
             ]
         };
     },
+
+    methods: {
+        displayPreviewImage(posted_image){
+            console.log(posted_image)
+            const output = document.createElement('output')
+            const img = document.createElement('img')
+            const app = document.getElementById('output')
+
+            const reader = new FileReader()
+            reader.addEventListener("load",function(){
+                img.src = reader.result
+            },false)
+            reader.readAsDataURL(posted_image)
+
+
+            output.appendChild(img)
+            img.setAttribute('width','300')
+            img.setAttribute('height','200')
+            app.appendChild(output)
+        }
+    },
     components: { 
         PostModal,
+        SelectModal,
         StarRating,
     },
   
