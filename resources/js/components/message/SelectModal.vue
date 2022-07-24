@@ -19,22 +19,30 @@
     <template v-slot="dialog">
         <v-card>
 
-            <input type="file" @change="onFileChange">
+            <!-- <v-card-actions>
+                <v-btn
+                outlined
+                rounded
+                text
+                @click="geoLocation"
+                >
+                現在地で検索
+                </v-btn>
+            </v-card-actions> -->
 
-            <output v-if="preview">
-            <img :src="preview" alt="" width="400" height="400">
-            </output>
+            <v-text-field
+            @change="onChange"
+            v-model="address">
+            </v-text-field>
+            
+            
+            <div id="results"></div>
+
+            <div id="map"></div>
 
             
             <v-card-actions class="justify-end">
-                <v-form ref="form" @submit.prevent ="submit">
-                <!-- <div class="errors" v-if="errors">
-                    <ul v-if="errors.posted_image">
-                    <li v-for="msg in errors.posted_image" :key="msg">{{ msg }}</li>
-                    </ul>
-                </div> -->
-                <v-btn type="submit" color="rgb(106, 118, 171)" class="float-right">投稿する</v-btn>
-                </v-form>
+                
                 <v-btn
                 text
                 @click="closeDialog(dialog)">Close</v-btn>
@@ -46,94 +54,213 @@
 
     
 </template>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDI3YFriHHFy59N8o-mItG7vn1LyVJT9go&libraries=places" async defer></script>
 
 <script>
-
-import axios from 'axios'
-import { INTERNAL_SERVER_ERROR} from '../../util'
-
+import * as VueGoogleMaps from "vue2-google-maps";
 
 export default{
 
-    name: "PostModal",
+    name: "SelectModal",
 
     data(){
-
-        return{
-            preview: null,
-            posted_image: null,
-            post: null,
-            errors: null,
+        return {
+            address: "",
+            lat: "",
+            lng: "",
             dialog: false,
         }
+    },
 
+    mounted(){
+        this.$gmapApiPromiseLazy().then(() => {
+            this.geocoder = new google.maps.Geocoder()
+        })
     },
 
     methods: {
-        onFileChange(event){
-            console.log(event);
-            //何も選択されない場合
-            if(event.target.files.length === 0){
-                this.reset()
-                return false
-            }
-            //入力ファイルが画像ではない場合
-            if(! event.target.files[0].type.match('image.*')){
-                this.reset()
-                return false
-            }
-            
-            const reader = new FileReader()
-            console.log(reader)
-
-            //PREVIEWの値がtrueになるので、画像がoutputタグで表示される
-            reader.onload = e =>{
-                
-                 this.preview = e.target.result
-            }
-
-            reader.readAsDataURL(event.target.files[0])
-
-            this.posted_image = event.target.files[0]
-            console.log(this.posted_image)
-            
-
-        },
-        reset(){
-            this.preview = '',
-            this.post = null,
-            document.querySelector('input[type="file"]').value = null
-        },
-
-        closeDialog(dialog){
-
-            dialog.value = false
-            this.reset()
-
-        },
-
-
-        async submit(){
-            const formData = new FormData();
-            formData.append('posted_image',this.posted_image);
-            formData.append('post',this.post);
-            
-            console.log(...formData.entries());
-            // const baseUrl = process.env.MIX_URL
-            // await axios.get(`${baseUrl}/sanctum/csrf-cookie`);
-            const response = await axios.post('/api/cards',formData)
-            console.log(response.status)
-
-                if (response.status === INTERNAL_SERVER_ERROR) {
-                    this.errors = response.data.errors
-                    return false
+        onChange(){
+            this.geocoder.geocode({
+                'address': this.address
+            },(results,status) => {
+                if(status === google.maps.GeocoderStatus.OK){
+                    // this.lat = results[0].geometry.location.lat()
+                    // this.lng = results[0].geometry.location.lng()
+                    // console.log(this.lat)
+                    // console.log(this.lng)
+                    this.mapSearch(results[0].geometry.location)
                 }
-           
-            this.reset()
-            this.$router.push(`/cards/${response.data.id}`)
+            })
+        },
+        
 
+        mapSearch(latLng){
+            console.log('mapSearch')
+
+            document.getElementById("results").innerHTML = "Now Loading..."
+            let map = new google.maps.Map(document.createElement("div"));
+            let placeService = new google.maps.places.PlacesService(map)
+
+            placeService.nearBySearch({
+
+                location: latLng,
+                radius: 500,
+                type: ['bar'],
+                keyword: this.address,
+                language: 'ja',
+                
+            },
+            this.displayBars);
+        },
+        displayBars(results,status,pagination){
+            if(status === google.maps.places.placesServiceStatus.OK){
+                this.placesList = this.placesList.concat(results)
+                console.log(this.placesList)
+
+                if(pagination.hasNextPage){
+                    setTimeout(pagination.nextPage(),1000)
+                }else{
+
+                    let resultHTML = "<ol>"
+
+                    for(let i = 0; i < this.placesList.length;i++){
+                        let place = this.placesList[i]
+
+                        let content = place.name
+
+                        resultHTML += "<li>"
+                        resultHTML += content
+                        resultHTML += "</li>"
+                    }
+
+                    resultHTML += "</oi>"
+
+                    document.getElementById("results").innerHTML = resultHTML
+                }
+            }
         }
-    },
+    }
+
+
+    // data(){
+
+    //     return{
+    //         preview: null,
+    //         posted_image: null,
+    //         post: null,
+    //         errors: null,
+    //         dialog: false,
+    //         placesList:[],
+    //         maplocation:{lat:0, lng:0},
+    //         field: null,
+    //         map:{},
+    //         geocoder: {},
+    //         address: ''
+
+    //     }
+
+    // },
+
+    // computed:{
+    //     google: VueGoogleMaps.gmapApi
+    // },
+
+    // methods: {
+
+
+    //     getLocation(){
+    //         console.log('処理開始')
+    //         console.log(this.field)
+    //         let geocoder = new google.maps.Geocoder()
+    //         geocoder.geocode({
+    //             address: this.field
+    //         },nearBySearch)
+    //     },
+
+    //     nearBySearch(results,status){
+    //         if(status == google.maps.GeocoderStatus.OK){
+    //             mapSearch(results[0].geometry.location)
+    //         }else{
+    //             alert(this.field + "位置を取得できませんでした")
+    //         }
+
+    //     },
+
+    //     geoLocation(){
+    //         navigator.geolocation.getCurrentPosition(this.localPosition,this.getPositionError)
+    //     },
+    //     localPosition(position){
+    //         let currentPosition = position.coords
+    //         console.log(currentPosition)
+
+    //         this.maplocation.lat = currentPosition.latitude
+    //         this.maplocation.lng = currentPosition.longitude
+
+    //     },
+    //     getPositionError(error){
+    //         console.warn(`ERROR(${error.code}): ${error.message}`)
+    //     },
+
+    //     mapSearch(latLng){
+    //         console.log('mapSearch')
+
+    //         document.getElementById("results").innerHTML = "Now Loading..."
+    //         let map = new google.maps.Map(document.createElement("div"));
+    //         let placeService = new google.maps.places.PlacesService(map)
+
+    //         placeService.nearBySearch({
+    //             location: latLng,
+    //             radius: 500,
+    //             type: ['bar'],
+    //             keyword: this.field,
+    //             language: 'ja',
+    //         },this.displayBars);
+    //     },
+
+    //     displayBars(results,status,pagination){
+    //         if(status === google.maps.places.placesServiceStatus.OK){
+    //             this.placesList = this.placesList.concat(results)
+    //             console.log(this.placesList)
+
+    //             if(pagination.hasNextPage){
+    //                 setTimeout(pagination.nextPage(),1000)
+    //             }else{
+
+    //                 let resultHTML = "<ol>"
+
+    //                 for(let i = 0; i < this.placesList.length;i++){
+    //                     let place = this.placesList[i]
+
+    //                     let content = place.name
+
+    //                     resultHTML += "<li>"
+    //                     resultHTML += content
+    //                     resultHTML += "</li>"
+    //                 }
+
+    //                 resultHTML += "</oi>"
+
+    //                 document.getElementById("results").innerHTML = resultHTML
+    //             }
+    //         }
+    //     },
+
+    //     reset(){
+    //         this.preview = '',
+    //         this.post = null,
+    //         document.querySelector('input[type="file"]').value = null
+    //     },
+
+    //     closeDialog(dialog){
+
+    //         dialog.value = false
+    //         this.reset()
+
+    //     },
+
+
+        
+    // },
 
 }
 </script>
