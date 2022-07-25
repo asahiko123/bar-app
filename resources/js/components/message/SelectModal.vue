@@ -69,6 +69,7 @@ export default{
             lat: "",
             lng: "",
             dialog: false,
+            placesList:[]
         }
     },
 
@@ -80,6 +81,8 @@ export default{
 
     methods: {
         onChange(){
+            this.placesList.splice(0)
+
             this.geocoder.geocode({
                 'address': this.address
             },(results,status) => {
@@ -98,22 +101,23 @@ export default{
             console.log('mapSearch')
 
             document.getElementById("results").innerHTML = "Now Loading..."
-            let map = new google.maps.Map(document.createElement("div"));
+            let map = new google.maps.Map(document.getElementById("map"));
+            console.log(map)
             let placeService = new google.maps.places.PlacesService(map)
+            console.log(placeService)
 
-            placeService.nearBySearch({
-
+            placeService.nearbySearch({
+                
                 location: latLng,
                 radius: 500,
                 type: ['bar'],
                 keyword: this.address,
                 language: 'ja',
-                
             },
             this.displayBars);
         },
         displayBars(results,status,pagination){
-            if(status === google.maps.places.placesServiceStatus.OK){
+            if(status == google.maps.places.PlacesServiceStatus.OK){
                 this.placesList = this.placesList.concat(results)
                 console.log(this.placesList)
 
@@ -138,7 +142,13 @@ export default{
                     document.getElementById("results").innerHTML = resultHTML
                 }
             }
-        }
+        },
+        closeDialog(dialog){
+
+            dialog.value = false
+            
+
+        },
     }
 
 

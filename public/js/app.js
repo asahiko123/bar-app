@@ -3703,7 +3703,8 @@ __webpack_require__.r(__webpack_exports__);
       address: "",
       lat: "",
       lng: "",
-      dialog: false
+      dialog: false,
+      placesList: []
     };
   },
   mounted: function mounted() {
@@ -3717,6 +3718,7 @@ __webpack_require__.r(__webpack_exports__);
     onChange: function onChange() {
       var _this2 = this;
 
+      this.placesList.splice(0);
       this.geocoder.geocode({
         'address': this.address
       }, function (results, status) {
@@ -3732,9 +3734,11 @@ __webpack_require__.r(__webpack_exports__);
     mapSearch: function mapSearch(latLng) {
       console.log('mapSearch');
       document.getElementById("results").innerHTML = "Now Loading...";
-      var map = new google.maps.Map(document.createElement("div"));
+      var map = new google.maps.Map(document.getElementById("map"));
+      console.log(map);
       var placeService = new google.maps.places.PlacesService(map);
-      placeService.nearBySearch({
+      console.log(placeService);
+      placeService.nearbySearch({
         location: latLng,
         radius: 500,
         type: ['bar'],
@@ -3743,7 +3747,7 @@ __webpack_require__.r(__webpack_exports__);
       }, this.displayBars);
     },
     displayBars: function displayBars(results, status, pagination) {
-      if (status === google.maps.places.placesServiceStatus.OK) {
+      if (status == google.maps.places.PlacesServiceStatus.OK) {
         this.placesList = this.placesList.concat(results);
         console.log(this.placesList);
 
@@ -3764,6 +3768,9 @@ __webpack_require__.r(__webpack_exports__);
           document.getElementById("results").innerHTML = resultHTML;
         }
       }
+    },
+    closeDialog: function closeDialog(dialog) {
+      dialog.value = false;
     }
   } // data(){
   //     return{
