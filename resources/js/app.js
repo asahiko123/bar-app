@@ -10,7 +10,7 @@ import "./bootstrap";
 
 Vue.use(VueGoogleMaps, {
     load: {
-        key: "AIzaSyDI3YFriHHFy59N8o-mItG7vn1LyVJT9go",
+        key: "",
         libraries: "places",
     },
 });

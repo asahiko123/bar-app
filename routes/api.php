@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CardsController;
+use App\Http\Controllers\SocialiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,9 @@ Route::post('/register',[RegisterController::class, 'register'])->name('register
 Route::get('/cards/index',[CardsController::class, 'index'])->name('cards.index');
 Route::get('/user',fn() => Auth::user())->name('user');
 Route::get('/phpinfo',fn() => phpinfo());
+Route::get('/login/{provider}',[SocialiteController::class,'redirectToProvider'])->where('social','twitter | facebook');
+Route::get('/login/{provider}/callback',[SocialiteController::class,'handleProviderCallback'])->where('social','twitter | facebook');
+
 
 
 Route::middleware('auth:sanctum')->group(function(){
