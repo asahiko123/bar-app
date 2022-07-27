@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\SocialiteProvider;
 
 class User extends Authenticatable
 {
@@ -66,5 +67,9 @@ class User extends Authenticatable
 
     public function cards(){
         return $this->hasMany('App\Models\Cards');
+    }
+
+    public function socialiteProvider(){
+        return $this->hasMany(SocialiteProvider::class);
     }
 }
