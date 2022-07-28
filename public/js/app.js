@@ -2648,6 +2648,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3901,7 +3902,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 vue__WEBPACK_IMPORTED_MODULE_7__["default"].use(vue2_google_maps__WEBPACK_IMPORTED_MODULE_5__, {
   load: {
-    key: "AIzaSyDI3YFriHHFy59N8o-mItG7vn1LyVJT9go",
+    key: "",
     libraries: "places"
   }
 });
@@ -7487,7 +7488,9 @@ var render = function () {
                 { staticClass: "p-4 mb-4", attrs: { color: "info" } },
                 [
                   _c("span", { attrs: { color: "#FFFFFF" } }, [
-                    _vm._v("twitterでログイン"),
+                    _c("a", { attrs: { href: "/login/twitter" } }, [
+                      _vm._v("twitterでログイン"),
+                    ]),
                   ]),
                 ]
               ),

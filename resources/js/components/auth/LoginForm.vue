@@ -10,8 +10,9 @@
                 <v-btn
                 color="info"
                 class="p-4 mb-4">
-                    <span color="#FFFFFF">twitterでログイン</span>
+                    <span color="#FFFFFF"><a href="/login/twitter">twitterでログイン</a></span>
                 </v-btn>
+
                     <v-card
                     outlined
                     class="d-flex justify-center">

@@ -72,4 +72,45 @@ class User extends Authenticatable
     public function socialiteProvider(){
         return $this->hasMany(SocialiteProvider::class);
     }
+
+    public static function socialFindOrCreate($providerUser , $provider){
+        $existingUser = SocialiteUser::whereProviderName($provider)
+                    ->whereProviderUserId($providerUser->getId())
+                    ->first();
+
+        if($existingUser){
+
+
+            $user = DB::transaction(function() use ($existingUser, $providerUser, $provider){
+                $existingUser->update(['auth_type' => AuthType::BOTH]);
+                $existingUser->socialiteProvider()->create([
+                    'provider_id' => $providerUser->getId(),
+                    'provider_name' => $provider,
+                ]);
+
+                return $existingUser;
+            });
+        } else {
+
+            $user = DB::transaction(function() use ($providerUser, $provider){
+                $providerUserName = $providerUser->getName() ? $providerUser->getName() : $providerUser->getNickname();
+
+                $user = User::create([
+                    'name' => $providerUserName,
+                    'auth_type' => AuthType::SOCIAL,
+                    'email' =>$providerUser->getEmail(),
+                ]);
+
+                $user->socialiteProvider()->create([
+                    'provider_id' => $providerUser->getId(),
+                    'provider_name' => $provider
+                ]);
+
+                return $user;
+            });
+
+        }
+
+        return $user;
+    }
 }

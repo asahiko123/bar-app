@@ -11,28 +11,35 @@ use Socialite;
 
 class SocialiteController extends Controller
 {
-    use AuthenticatesUsers;
 
-    protected $redirectTo ='/home';
+    /**
+     * OAuth認可画面URL取得API
+     * @param string $provider
+     * @return \Illuminate\Http\JsonResponse
+     */
 
-    public function redirectToProvider($social){
-        return Socialite::driver($social)->redirect();
+    public function getProviderOAuthURL(string $provider){
+
+        $redirectUrl = Socialite::driver($provider)
+                       ->redirect()
+                       ->getTargetUrl();
+        
+        return response()->json([
+            'redirect_url' => $redirectUrl,
+        ]);
     }
 
-    public function handleProviderCallback($provider){
+    public function handleProviderCallback(string $provider){
+
         try{
-            $user = Socialite::driver($provider)->user();
+            $providerUser = Socialite::driver($provider)->user();
         }catch(Exception $e){
-            return redirect('/login');
+            abort(500, $e->getMessage());
         }
 
-        $authUser = $this->findOrCreateUser($user,$provider);
+        $authUser = User::socialFindOrCreate($providerUser,$provider);
         Auth::login($authUser,true);
-        return redirect($this->redirectTo);
 
-    }
-
-    public function findOrCreateUser($providerUser,$provider){
-       
+        return $authUser;
     }
 }
