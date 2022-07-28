@@ -14,6 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('socialite_provider', function (Blueprint $table) {
+
+            $table->dropForeign(['user_id']);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->change();
             
 
@@ -28,7 +30,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('socialite_provider', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->change();
         });
     }
 };
