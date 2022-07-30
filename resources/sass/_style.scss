@@ -1,0 +1,19 @@
+
+.inner{
+
+    width: 100% !important;
+    height: 100% !important;
+
+    .card-wrapper {
+        position: relative;
+        padding-bottom: 50px;
+    
+    
+        .name{
+            position: absolute;
+            bottom: 0;
+        }
+    }
+
+
+}

@@ -10274,3 +10274,16 @@ textarea.form-control-lg {
 .login {
   padding: 0;
 }
+
+.inner {
+  width: 100% !important;
+  height: 100% !important;
+}
+.inner .card-wrapper {
+  position: relative;
+  padding-bottom: 50px;
+}
+.inner .card-wrapper .name {
+  position: absolute;
+  bottom: 0;
+}

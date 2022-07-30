@@ -2,11 +2,13 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 import BarMap from "@/components/BarMap.vue";
-import Home from "@/components/HomeTimeline.vue";
+import HomeTimeline from "@/components/HomeTimeline.vue";
 import AboutUs from "@/components/AboutUs.vue";
 import Login from "@/components/auth/LoginForm.vue";
 import Register from "@/components/auth/RegisterForm.vue";
 import SystemErr from "@/pages/errors/System.vue";
+import CardsForm from "@/components/form/CardsForm.vue";
+// import CardList from "@/components/card/CardList.vue";
 
 Vue.use(VueRouter);
 
@@ -19,8 +21,9 @@ const routes = [
     {
         path: "/",
         name: "home",
-        component: Home,
+        component: HomeTimeline,
     },
+
     {
         path: "/aboutUs",
         name: "aboutUs",
@@ -40,6 +43,11 @@ const routes = [
         path: "500",
         component: SystemErr,
     },
+    {
+        path: "/cards/new",
+        name: "cardsForm",
+        component: CardsForm,
+    }
 ];
 
 export default new VueRouter({

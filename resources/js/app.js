@@ -5,11 +5,12 @@ import store from "./store";
 import "@mdi/font/css/materialdesignicons.css";
 import App from "./components/App.vue";
 import * as VueGoogleMaps from "vue2-google-maps";
+// import InfiniteLoading from 'vue-infinite-loading';
 import "./bootstrap";
 
 Vue.use(VueGoogleMaps, {
     load: {
-        key: process.env.VUE_APP_GOOGLE_MAP_API,
+        key: "",
         libraries: "places",
     },
 });

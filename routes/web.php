@@ -29,6 +29,7 @@ use Illuminate\Support\Facades\Route;
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//apiルートでWHERE制約がある時にweb.phpで200が返らないようにapiプレフィックスは除外。
 Route::get('/{any?}',function(){
     return view('index');
 })->where('any','.+');

@@ -2,53 +2,33 @@
 
 <v-dialog
     transition="dialog-bottom-transition"
-    max-width="600">
+    max-width="600"
+    v-model="dialog">
 
-    <template v-slot:activator="{ on, attrs }">
-
-    <v-btn
-        v-bind="attrs"
-        v-on="on">
-        <span>投稿する</span>
-        <v-icon>mdi-timeline</v-icon>
-    </v-btn>
-
-    </template>
     <template v-slot="dialog">
         <v-card>
-            <v-toolbar>
 
-            </v-toolbar>
+            <input type="file" @change="onFileChange">
 
-            <v-text-field
-            placeholder="ここに投稿"
-            name = "post"
-            required
-            outlined
-            dense
-            v-model="post">
-            </v-text-field>
-
-
-            <input class="form__item" type="file" @change="onFileChange">
-
-            <output class="form__output" v-if="preview" >
+            <output v-if="preview">
             <img :src="preview" alt="" width="400" height="400">
             </output>
 
             
             <v-card-actions class="justify-end">
-                <v-form ref="form" @submit.prevent ="submit">
+            
                 <!-- <div class="errors" v-if="errors">
                     <ul v-if="errors.posted_image">
                     <li v-for="msg in errors.posted_image" :key="msg">{{ msg }}</li>
                     </ul>
                 </div> -->
-                <v-btn type="submit" color="rgb(106, 118, 171)" class="float-right">投稿する</v-btn>
-                </v-form>
+                <v-btn @click="proceedPost(dialog)">決定</v-btn>
+                
                 <v-btn
                 text
-                @click="dialog.value= false">Close</v-btn>
+                @click="cancelPost(dialog)">
+                Close
+                </v-btn>
 
             </v-card-actions>
         </v-card>
@@ -73,8 +53,8 @@ export default{
         return{
             preview: null,
             posted_image: null,
-            post: null,
-            errors: null
+            errors: null,
+            dialog: false,
         }
 
     },
@@ -111,9 +91,38 @@ export default{
         },
         reset(){
             this.preview = '',
-            this.posted_image = null,
-            this.$el.querySelector('input[type="file"]').value = null
+            document.querySelector('input[type="file"]').value = null
+            
         },
+
+        cancelPost(dialog){
+
+            dialog.value = false
+            this.reset()
+            this.$router.push('/')
+
+        },
+
+        proceedPost(dialog){
+
+            if(this.preview){
+
+                dialog.value = false
+                this.sendPreviewImage()
+                this.reset()
+
+
+            }
+
+            return false
+            
+        },
+
+        sendPreviewImage(){
+            this.$emit('catchPreviewImage',this.posted_image)
+        },
+
+
         async submit(){
             const formData = new FormData();
             formData.append('posted_image',this.posted_image);
@@ -134,6 +143,11 @@ export default{
             this.$router.push(`/cards/${response.data.id}`)
 
         }
+    },
+    mounted(){
+
+        this.dialog = true
     }
+
 }
 </script>

@@ -79,7 +79,6 @@
 
         <router-view
             :auth="this.$route.params.auth"
-            @loginUser="loginUser"
             :logout_message="logout_message"
         />
 
@@ -90,22 +89,23 @@
                     <v-icon>mdi-home</v-icon>
                 </v-btn>
 
-                <PostModal></PostModal>
+                <v-btn
+                    href="/cards/new">
+                    <span>投稿する</span>
+                    <v-icon>mdi-timeline</v-icon>
+                </v-btn>
+
             </v-bottom-navigation>
         </v-footer>
     </v-app>
 </template>
 
 <script>
-import PostModal from './message/PostModal';
+
 import { INTERNAL_SERVER_ERROR } from "../util";
 
 export default {
     name: "App",
-
-    components: {
-        PostModal,
-    },
 
     data() {
         return {

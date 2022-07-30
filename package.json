@@ -8,7 +8,7 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "format":"prettier --write ./resources/js/components/*.vue "
+        "format": "prettier --write ./resources/js/components/*.vue "
     },
     "devDependencies": {
         "@mdi/font": "^6.7.96",
@@ -36,8 +36,11 @@
     },
     "dependencies": {
         "@vue/compiler-sfc": "^3.2.37",
+        "vue-infinite-loading": "^2.4.5",
         "vue-router": "^3.5.4",
+        "vue-star-rating": "^1.7.0",
         "vue2-google-maps": "^0.10.7",
-        "vuetify": "^2.6.6"
+        "vuetify": "^2.6.6",
+        "vuex-persistedstate": "^4.1.0"
     }
 }

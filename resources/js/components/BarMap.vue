@@ -25,6 +25,7 @@ export default {
     },
     methods: {
         geolocate: function () {
+            
             navigator.geolocation.getCurrentPosition((position) => {
                 this.center = {
                     lat: position.coords.latitude,
