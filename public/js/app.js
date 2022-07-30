@@ -2649,6 +2649,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2668,7 +2671,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       error: '',
       auth: false,
       message: null,
-      errors: null
+      errors: null,
+      twitter: "twitter"
     };
   },
   methods: {
@@ -7487,10 +7491,19 @@ var render = function () {
                 "v-btn",
                 { staticClass: "p-4 mb-4", attrs: { color: "info" } },
                 [
-                  _c("span", { attrs: { color: "#FFFFFF" } }, [
-                    _c("a", { attrs: { href: "/login/twitter" } }, [
-                      _vm._v("twitterでログイン"),
-                    ]),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-danger",
+                        attrs: { href: "login/twitter" },
+                      },
+                      [
+                        _c("i", { staticClass: "fa fa-twitter" }, [
+                          _vm._v(" Twitter"),
+                        ]),
+                      ]
+                    ),
                   ]),
                 ]
               ),

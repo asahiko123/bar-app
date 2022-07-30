@@ -9,10 +9,13 @@
                 </v-btn>
                 <v-btn
                 color="info"
-                class="p-4 mb-4">
-                    <span color="#FFFFFF"><a href="/login/twitter">twitterでログイン</a></span>
+                class="p-4 mb-4"
+                >
+                    <div class="col-md-6">
+                        <a href="login/twitter" class="btn btn-danger"><i class="fa fa-twitter"> Twitter</i></a>
+                    </div>
                 </v-btn>
-
+                
                     <v-card
                     outlined
                     class="d-flex justify-center">
@@ -86,6 +89,7 @@ export default{
             auth: false,
             message: null,
             errors: null,
+            twitter: "twitter"
         }
     },
 
@@ -119,6 +123,7 @@ export default{
                 this.errors = data.errors;
             }
         },
+
 
         clearError(){
             this.$store.commit('auth/setLoginErrorMessages',null)

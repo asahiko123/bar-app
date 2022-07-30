@@ -20,6 +20,8 @@ class SocialiteController extends Controller
 
     public function getProviderOAuthURL(string $provider){
 
+        var_dump('OAuth proceeding');
+
         $redirectUrl = Socialite::driver($provider)
                        ->redirect()
                        ->getTargetUrl();

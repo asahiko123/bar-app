@@ -24,8 +24,8 @@ Route::post('/register',[RegisterController::class, 'register'])->name('register
 Route::get('/cards/index',[CardsController::class, 'index'])->name('cards.index');
 Route::get('/user',fn() => Auth::user())->name('user');
 Route::get('/phpinfo',fn() => phpinfo());
-Route::get('/login/{provider}',[SocialiteController::class,'getProviderOAuthURL'])->where('provider','twitter | facebook')->name('oauth.request');
-Route::post('/login/{provider}/callback',[SocialiteController::class,'handleProviderCallback'])->where('provider','twitter | facebook')->name('oauth.callback');
+Route::get('/login/twitter',[SocialiteController::class,'getProviderOAuthURL']);
+Route::post('/login/twitter/callback',[SocialiteController::class,'handleProviderCallback']);
 
 
 
