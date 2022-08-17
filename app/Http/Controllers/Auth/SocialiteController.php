@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
-use Auth;
 use Socialite;
 
 class SocialiteController extends Controller
@@ -18,30 +16,26 @@ class SocialiteController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
 
-    public function getProviderOAuthURL(string $provider){
+    public function redirectToProvider(string $provider){
 
-        var_dump('OAuth proceeding');
-
-        $redirectUrl = Socialite::driver($provider)
-                       ->redirect()
-                       ->getTargetUrl();
-        
-        return response()->json([
-            'redirect_url' => $redirectUrl,
-        ]);
+        return Socialite::driver($provider)->redirect();
     }
 
     public function handleProviderCallback(string $provider){
-
+        
         try{
-            $providerUser = Socialite::driver($provider)->user();
+
+            // if($provider === "twitter"){
+                
+            //     $user = Socialite::driver($provider)->userFromTokenAndSecret(env('TWITTER_AUTH_CLIENT_ID'),env('TWITTER_AUTH_CLIENT_SECRET'));
+            //     dd($user);
+            // }
+            $user = Socialite::driver($provider)->stateless()->user();
+            dd($user);
         }catch(Exception $e){
-            abort(500, $e->getMessage());
+            return redirect('/login');
         }
-
-        $authUser = User::socialFindOrCreate($providerUser,$provider);
-        Auth::login($authUser,true);
-
-        return $authUser;
     }
+
+   
 }

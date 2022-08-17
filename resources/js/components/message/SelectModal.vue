@@ -1,56 +1,56 @@
 <template>
 
-<v-dialog
-    transition="dialog-bottom-transition"
-    max-width="600"
-    v-model="dialog">
+    <v-dialog
+        transition="dialog-bottom-transition"
+        max-width="600"
+        v-model="dialog">
 
-    <template v-slot:activator="{ on, attrs }">
+        <template v-slot:activator="{ on, attrs }">
 
-    <v-btn
-        v-bind="attrs"
-        v-on="on"
-        @click="dialog = true"
-        >
-        <span>店名を選択する</span>
-    </v-btn>
+        <v-btn
+            v-bind="attrs"
+            v-on="on"
+            @click="dialog = true"
+            >
+            <span>店名を選択する</span>
+        </v-btn>
 
-    </template>
-    <template v-slot="dialog">
-        <v-card>
+        </template>
+        <template v-slot="dialog">
+            <v-card>
 
-            <!-- <v-card-actions>
-                <v-btn
-                outlined
-                rounded
-                text
-                @click="geoLocation"
-                >
-                現在地で検索
-                </v-btn>
-            </v-card-actions> -->
+                <!-- <v-card-actions>
+                    <v-btn
+                    outlined
+                    rounded
+                    text
+                    @click="geoLocation"
+                    >
+                    現在地で検索
+                    </v-btn>
+                </v-card-actions> -->
 
-            <v-text-field
-            @change="onChange"
-            v-model="address">
-            </v-text-field>
-            
-            
-            <div id="results"></div>
-
-            <div id="map"></div>
-
-            
-            <v-card-actions class="justify-end">
+                <v-text-field
+                @change="onChange"
+                v-model="address">
+                </v-text-field>
                 
-                <v-btn
-                text
-                @click="closeDialog(dialog)">Close</v-btn>
+                
+                <div id="results"></div>
 
-            </v-card-actions>
-        </v-card>
-    </template>
-</v-dialog>
+                <div id="map"></div>
+
+                
+                <v-card-actions class="justify-end">
+                    
+                    <v-btn
+                    text
+                    @click="closeDialog(dialog)">Close</v-btn>
+
+                </v-card-actions>
+            </v-card>
+        </template>
+    </v-dialog>
 
     
 </template>

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 
-class SocialiteProvider extends Model
+class SocialiteUser extends Model
 {
     use HasFactory;
 
@@ -16,4 +16,6 @@ class SocialiteProvider extends Model
     function user(){
         return $this->belongsTo(User::class);
     }
+
+
 }

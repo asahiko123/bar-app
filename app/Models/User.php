@@ -30,6 +30,8 @@ class User extends Authenticatable
         'account_name',
         'profile',
         'pref_code',
+        'twitter_id',
+        'oauth_type'
     ];
 
     /**

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Auth\SocialiteController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,7 +29,10 @@ use Illuminate\Support\Facades\Route;
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//apiルートでWHERE制約がある時にweb.phpで200が返らないようにapiプレフィックスは除外。
+Route::get('/login/{provider}',[SocialiteController::class,'redirectToProvider']);
+Route::get('/login/{provider}/callback',[SocialiteController::class,'handleProviderCallback']);
+
+//api以外はindexをかえす
 Route::get('/{any?}',function(){
     return view('index');
 })->where('any','.+');

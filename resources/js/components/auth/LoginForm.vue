@@ -2,19 +2,33 @@
     <v-main>
         <v-container fluid class="d-flex justify-center">
             <v-col class="d-flex flex-column col-md-5">
-                <v-btn
-                color="primary"
-                class="p-4 mb-4">
-                    <span color="#FFFFFF">FaceBookでログイン</span>
-                </v-btn>
-                <v-btn
-                color="info"
-                class="p-4 mb-4"
+                <v-form
+                ref="form"
+                @submit.prevent="facebookLogin"
                 >
-                    <div class="col-md-6">
-                        <a href="login/twitter" class="btn btn-danger"><i class="fa fa-twitter"> Twitter</i></a>
-                    </div>
-                </v-btn>
+                    <v-btn
+                    color="primary"
+                    class="p-4 mb-4">
+                        <span color="#FFFFFF">FaceBookでログイン</span>
+                    </v-btn>
+                
+                </v-form>
+
+                <!-- <v-form 
+                ref="form"
+                @submit.prevent="googleLogin"
+                >
+                    <v-btn type="submit" 
+                            color="info" 
+                            class="p-4 mb-4">
+                        Googleでログイン
+                    </v-btn>
+                </v-form> -->
+
+                
+            <!-- <a class="button" href="/login/twitter" title="twitter">twitter</a> -->
+            <a class="button" href="/login/google" title="google">google</a>
+
                 
                     <v-card
                     outlined
@@ -95,6 +109,7 @@ export default{
 
 
     methods: {
+
         async login(){
 
             const baseUrl = process.env.MIX_URL
@@ -122,6 +137,14 @@ export default{
                 this.message = data.message;
                 this.errors = data.errors;
             }
+        },
+
+        async googleLogin(){
+            const baseUrl = process.env.MIX_URL
+            await axios.get(`${baseUrl}/sanctum/csrf-cookie`);
+            
+            const doOauth = (provider) => axios.get('/login/' + provider);
+            doOauth('google');
         },
 
 

@@ -2652,6 +2652,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2741,6 +2755,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee2);
+      }))();
+    },
+    googleLogin: function googleLogin() {
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        var baseUrl, doOauth;
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                baseUrl = "localhost";
+                _context3.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(baseUrl, "/sanctum/csrf-cookie"));
+
+              case 3:
+                doOauth = function doOauth(provider) {
+                  return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/login/' + provider);
+                };
+
+                doOauth('google');
+
+              case 5:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
       }))();
     },
     clearError: function clearError() {
@@ -7478,34 +7518,37 @@ var render = function () {
             { staticClass: "d-flex flex-column col-md-5" },
             [
               _c(
-                "v-btn",
-                { staticClass: "p-4 mb-4", attrs: { color: "primary" } },
+                "v-form",
+                {
+                  ref: "form",
+                  on: {
+                    submit: function ($event) {
+                      $event.preventDefault()
+                      return _vm.facebookLogin.apply(null, arguments)
+                    },
+                  },
+                },
                 [
-                  _c("span", { attrs: { color: "#FFFFFF" } }, [
-                    _vm._v("FaceBookでログイン"),
-                  ]),
-                ]
+                  _c(
+                    "v-btn",
+                    { staticClass: "p-4 mb-4", attrs: { color: "primary" } },
+                    [
+                      _c("span", { attrs: { color: "#FFFFFF" } }, [
+                        _vm._v("FaceBookでログイン"),
+                      ]),
+                    ]
+                  ),
+                ],
+                1
               ),
               _vm._v(" "),
               _c(
-                "v-btn",
-                { staticClass: "p-4 mb-4", attrs: { color: "info" } },
-                [
-                  _c("div", { staticClass: "col-md-6" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-danger",
-                        attrs: { href: "login/twitter" },
-                      },
-                      [
-                        _c("i", { staticClass: "fa fa-twitter" }, [
-                          _vm._v(" Twitter"),
-                        ]),
-                      ]
-                    ),
-                  ]),
-                ]
+                "a",
+                {
+                  staticClass: "button",
+                  attrs: { href: "/login/google", title: "google" },
+                },
+                [_vm._v("google")]
               ),
               _vm._v(" "),
               _c(
