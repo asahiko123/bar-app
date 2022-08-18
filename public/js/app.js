@@ -3805,7 +3805,11 @@ __webpack_require__.r(__webpack_exports__);
             var place = this.placesList[i];
             var content = place.name;
             resultHTML += "<li>";
+            resultHTML += "<a>";
+            resultHTML += "<p>";
             resultHTML += content;
+            resultHTML += "</p>";
+            resultHTML += "</a>";
             resultHTML += "</li>";
           }
 
