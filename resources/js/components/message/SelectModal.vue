@@ -1,3 +1,4 @@
+
 <template>
 
     <v-dialog
@@ -56,12 +57,18 @@
 </template>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDI3YFriHHFy59N8o-mItG7vn1LyVJT9go&libraries=places" async defer></script>
 
+
 <script>
-import * as VueGoogleMaps from "vue2-google-maps";
+import BarList from '../list/BarList.vue'
+import Vue from 'vue'
 
 export default{
 
     name: "SelectModal",
+
+    components:{
+        BarList,
+    },
 
     data(){
         return {
@@ -100,7 +107,11 @@ export default{
         mapSearch(latLng){
             console.log('mapSearch')
 
-            document.getElementById("results").innerHTML = "Now Loading..."
+            const loading = document.createElement("p");
+            loading.className = 'loading';
+            loading.innerHTML = "Now Loading...";
+
+            document.getElementById("results").appendChild(loading);
             let map = new google.maps.Map(document.getElementById("map"));
             console.log(map)
             let placeService = new google.maps.places.PlacesService(map)
@@ -125,34 +136,47 @@ export default{
                     setTimeout(pagination.nextPage(),1000)
                 }else{
 
-                    let resultHTML = "<ol>"
+                    // let resultHTML = "<ol>"
 
                     for(let i = 0; i < this.placesList.length;i++){
                         let place = this.placesList[i]
 
                         let content = place.name
 
-                        resultHTML += "<li>"
-                        resultHTML += "<a>"
-                        resultHTML += "<p>"
-                        resultHTML += content
-                        resultHTML += "</p>"
-                        resultHTML += "</a>"
-                        resultHTML += "</li>"
+                        var ComponentClass = Vue.extend(BarList);
+                        var instance = new ComponentClass({
+                            propsData: {
+                                barName: content
+                            }
+                        });
+
+                        instance.$mount();
+                        let loading = document.getElementsByClassName("loading");
+                        loading[0].innerHTML = "";
+
+                        document.getElementById("results").appendChild(instance.$el);
+
+                        // resultHTML += "<li>"
+                        // resultHTML += "<a  v-on:click='onSelectBar()'>"
+                        // resultHTML += "<p class = 'barName'>"
+                        // resultHTML += content
+                        // resultHTML += "</p>"
+                        // resultHTML += "</a>"
+                        // resultHTML += "</li>"
                     }
 
-                    resultHTML += "</oi>"
+                    // resultHTML += "</oi>"
 
-                    document.getElementById("results").innerHTML = resultHTML
+                    // document.getElementById("results").innerHTML = resultHTML
                 }
             }
         },
         closeDialog(dialog){
 
             dialog.value = false
-            
-
+        
         },
+
     }
 
 

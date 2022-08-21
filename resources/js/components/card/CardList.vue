@@ -32,7 +32,6 @@
 </template>
 
 <script>
-// import { OK } from '../../util'
 import CardItem from './CardItem.vue'
 import axios from 'axios'
 import InfiniteLoading from 'vue-infinite-loading';

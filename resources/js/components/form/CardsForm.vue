@@ -36,6 +36,12 @@
                         required>
                         </v-text-field>
 
+                        <v-card>
+                            <v-card-actions>
+                                {{ barName }}
+                            </v-card-actions>
+                        </v-card>
+
                         <SelectModal></SelectModal>
 
                         <v-text-field
@@ -160,6 +166,14 @@ export default{
             ]
         };
     },
+
+    computed:{
+
+        barName(){
+            return this.$store.state.data.barName;
+        }
+    },
+
 
     methods: {
         displayPreviewImage(posted_image){
