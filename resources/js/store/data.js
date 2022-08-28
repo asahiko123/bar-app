@@ -6,9 +6,14 @@
 const state = {
 
     barName: null,
+    dialog: false,
 }
 
 const getters = {
+
+    getDialog(state){
+        return state.dialog;
+    }
 
 }
 
@@ -17,6 +22,9 @@ const mutations = {
 
     setBarName(state,barName){
         state.barName = barName;
+    },
+    setDialog(state,dialog){
+        state.dialog = dialog;
     }
 
 

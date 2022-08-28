@@ -28,6 +28,7 @@ export default{
 
             // newPost.onSelectBar();
             store.commit('data/setBarName',this.barName);
+            store.commit('data/setDialog',false);
         }
 
     }

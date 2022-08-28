@@ -4,14 +4,15 @@
     <v-dialog
         transition="dialog-bottom-transition"
         max-width="600"
-        v-model="dialog">
+        v-model="dialog"
+        >
 
         <template v-slot:activator="{ on, attrs }">
 
         <v-btn
             v-bind="attrs"
             v-on="on"
-            @click="dialog = true"
+            @click="openDialog"
             >
             <span>店名を選択する</span>
         </v-btn>
@@ -46,7 +47,7 @@
                     
                     <v-btn
                     text
-                    @click="closeDialog(dialog)">Close</v-btn>
+                    @click="closeDialog(dialog)">Close{{getDialog}}</v-btn>
 
                 </v-card-actions>
             </v-card>
@@ -61,6 +62,8 @@
 <script>
 import BarList from '../list/BarList.vue'
 import Vue from 'vue'
+import store from "../../store";
+import { mapGetters } from 'vuex';
 
 export default{
 
@@ -85,6 +88,19 @@ export default{
             this.geocoder = new google.maps.Geocoder()
         })
     },
+
+    computed: {
+        getDialog(){
+            return this.$store.getters['data/getDialog']
+        }
+    },
+
+    watch:{
+        getDialog(val){
+           this.dialog = val;
+        }
+    },
+
 
     methods: {
         onChange(){
@@ -176,8 +192,22 @@ export default{
             dialog.value = false
         
         },
+        
+        openDialog(dialog){
+            store.commit('data/setDialog',true);
+            dialog.value = this.$store.getters.getDialog;
+        }
 
-    }
+    },
+
+    
+
+   
+    
+
+    
+
+    
 
 
     // data(){

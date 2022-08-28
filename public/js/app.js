@@ -3526,6 +3526,7 @@ __webpack_require__.r(__webpack_exports__);
     onSelectBar: function onSelectBar() {
       // newPost.onSelectBar();
       _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit('data/setBarName', this.barName);
+      _store__WEBPACK_IMPORTED_MODULE_0__["default"].commit('data/setDialog', false);
     }
   }
 });
@@ -3733,7 +3734,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _list_BarList_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../list/BarList.vue */ "./resources/js/components/list/BarList.vue");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../store */ "./resources/js/store/index.js");
 //
 //
 //
@@ -3794,6 +3796,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3816,6 +3821,16 @@ __webpack_require__.r(__webpack_exports__);
     this.$gmapApiPromiseLazy().then(function () {
       _this.geocoder = new google.maps.Geocoder();
     });
+  },
+  computed: {
+    getDialog: function getDialog() {
+      return this.$store.getters['data/getDialog'];
+    }
+  },
+  watch: {
+    getDialog: function getDialog(val) {
+      this.dialog = val;
+    }
   },
   methods: {
     onChange: function onChange() {
@@ -3864,7 +3879,7 @@ __webpack_require__.r(__webpack_exports__);
           for (var i = 0; i < this.placesList.length; i++) {
             var place = this.placesList[i];
             var content = place.name;
-            var ComponentClass = vue__WEBPACK_IMPORTED_MODULE_1__["default"].extend(_list_BarList_vue__WEBPACK_IMPORTED_MODULE_0__["default"]);
+            var ComponentClass = vue__WEBPACK_IMPORTED_MODULE_2__["default"].extend(_list_BarList_vue__WEBPACK_IMPORTED_MODULE_0__["default"]);
             var instance = new ComponentClass({
               propsData: {
                 barName: content
@@ -3888,6 +3903,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     closeDialog: function closeDialog(dialog) {
       dialog.value = false;
+    },
+    openDialog: function openDialog(dialog) {
+      _store__WEBPACK_IMPORTED_MODULE_1__["default"].commit('data/setDialog', true);
+      dialog.value = this.$store.getters.getDialog;
     }
   } // data(){
   //     return{
@@ -4386,12 +4405,20 @@ __webpack_require__.r(__webpack_exports__);
 ログイン、ログアウト情報以外で複数コンポーネントをまたいでデータを共有するモジュール
 */
 var state = {
-  barName: null
+  barName: null,
+  dialog: false
 };
-var getters = {};
+var getters = {
+  getDialog: function getDialog(state) {
+    return state.dialog;
+  }
+};
 var mutations = {
   setBarName: function setBarName(state, barName) {
     state.barName = barName;
+  },
+  setDialog: function setDialog(state, dialog) {
+    state.dialog = dialog;
   }
 };
 var actions = {};
@@ -8731,13 +8758,7 @@ var render = function () {
               "v-btn",
               _vm._g(
                 _vm._b(
-                  {
-                    on: {
-                      click: function ($event) {
-                        _vm.dialog = true
-                      },
-                    },
-                  },
+                  { on: { click: _vm.openDialog } },
                   "v-btn",
                   attrs,
                   false
@@ -8785,7 +8806,7 @@ var render = function () {
                           },
                         },
                       },
-                      [_vm._v("Close")]
+                      [_vm._v("Close" + _vm._s(_vm.getDialog))]
                     ),
                   ],
                   1
