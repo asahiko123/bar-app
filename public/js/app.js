@@ -3607,6 +3607,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -8648,7 +8649,11 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("v-dialog", {
-    attrs: { transition: "dialog-bottom-transition", "max-width": "600" },
+    attrs: {
+      transition: "dialog-bottom-transition",
+      "max-width": "600",
+      persistent: "",
+    },
     scopedSlots: _vm._u([
       {
         key: "default",
