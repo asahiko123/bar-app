@@ -91,15 +91,15 @@ export default{
 
     computed: {
         getDialog(){
-            return this.$store.getters['data/getDialog']
+            return this.dialog = this.$store.getters['data/getDialog']
         }
     },
 
-    watch:{
-        getDialog(val){
-           this.dialog = val;
-        }
-    },
+    // watch:{
+    //     getDialog(val){
+    //        this.dialog = val;
+    //     }
+    // },
 
 
     methods: {

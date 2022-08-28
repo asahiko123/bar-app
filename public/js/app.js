@@ -3824,14 +3824,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     getDialog: function getDialog() {
-      return this.$store.getters['data/getDialog'];
+      return this.dialog = this.$store.getters['data/getDialog'];
     }
   },
-  watch: {
-    getDialog: function getDialog(val) {
-      this.dialog = val;
-    }
-  },
+  // watch:{
+  //     getDialog(val){
+  //        this.dialog = val;
+  //     }
+  // },
   methods: {
     onChange: function onChange() {
       var _this2 = this;
