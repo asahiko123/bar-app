@@ -3034,7 +3034,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     favorite: function favorite() {
-      console.log('aaaa');
+      console.log(this.item.already_liked);
       this.$emit('like', {
         id: this.item.id,
         liked: this.item.already_liked
@@ -3154,15 +3154,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 })["catch"](function () {
                   console.log('終了');
                   $state.complete();
-                }); //    const data = await this.fetchCards($state)
-                //         if(!data){
-                //             $state.error()
-                //         }else if(data.length){
-                //             this.list.push(...data)
-                //             $state.loaded()
-                //         }else if(data.length === 0){
-                //             $state.complete()
-                //         }
+                });
 
               case 1:
               case "end":
@@ -3205,7 +3197,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 response = _context2.sent;
                 console.log(response);
                 _this2.list = _this2.list.map(function (card) {
-                  if (card.id === response.data.id) {
+                  if (card.id === response.data.cards_id) {
                     card.likes_count += 1;
                     card.already_liked = true;
                   }
@@ -3237,7 +3229,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 3:
                 response = _context3.sent;
                 _this3.list = _this3.list.map(function (card) {
-                  if (card.id === response.data.id) {
+                  if (card.id === response.data.cards_id) {
                     card.likes_count -= 1;
                     card.already_liked = false;
                   }
@@ -3252,63 +3244,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee3);
       }))();
-    } //    async fetchCards($state){
-    // axios.get('/api/cards/index',{
-    //     params: {
-    //         page: this.page,
-    //         per_page: 1
-    //     },
-    // }).then(({ data }) => {
-    //     console.log({ data })
-    //     setTimeout(() => {
-    //         if(this.page < data.data.length){
-    //             this.page += 1
-    //             this.list.push(...data.data)
-    //             console.log('読み込み')
-    //             $state.loaded()
-    //         }else{
-    //             console.log('終了')
-    //             $state.complete()
-    //         }
-    //     },1500)
-    // }).catch(() => {
-    //     console.log('終了')
-    //     $state.complete()
-    // })
-    // await this.sleep(1500);
-    // await axios.get('/api/cards/index').then((res) => {
-    //     console.log(res.data.data)
-    //     let cards =[]
-    // if(res.status !== OK){
-    //     this.$store.commit('error/setCode',res.status);
-    //     return false;
-    // }
-    // cards.push(res.data.data)
-    // console.log(cards);
-    // // this.totalCount = res.data.total
-    // return cards
-    // let data = []
-    // let num = this.list.length
-    // if (num < 200) { // 最大200件まで
-    //     for (let i = 1; i <= 20; i++) {
-    //     data.push({ id: num + i , title: `記事タイトル${num + i}` })
-    //     }
-    // }
-    // return data
-
-  } //    sleep(time){
-  //         return new Promise(resolve => {
-  //             setTimeout(() => {
-  //                 resolve()
-  //             },time)
-  //         })
-  //    }
-  // watch: {
-  //     list(){
-  //         console.log('change');
-  //     }
-  // }
-
+    }
+  }
 });
 
 /***/ }),

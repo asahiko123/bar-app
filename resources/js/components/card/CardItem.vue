@@ -52,15 +52,16 @@ export default{
             required: true,
         }
     },
+    
     methods:{
         favorite(){
-            console.log('aaaa');
+            console.log(this.item.already_liked);
             this.$emit('like',{
                 id: this.item.id,
                 liked: this.item.already_liked,
             })
         }
-    }
+    },
 }
 </script>
 

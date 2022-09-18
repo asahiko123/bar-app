@@ -39,162 +39,79 @@ export default{
     methods:{
         async infiniteHandler($state){
 
-            axios.get('/api/cards/index',{
-            params: {
-                page: this.page,
-            },
-            }).then(({ data }) => {
-                console.log({ data })
-                setTimeout(() => {
-                    if(this.page < data.data.length){
-                        this.page += 1
-                        console.log(this.page)
-                        this.list.push(...data.data)
-                        console.log(this.list);
-                        console.log('読み込み')
-                        $state.loaded()
-                    }else{
-                        console.log('終了')
-                        $state.complete()
-                    }
-                },1500)
-            }).catch(() => {
-                console.log('終了')
-                $state.complete()
+                axios.get('/api/cards/index',{
+                params: {
+                    page: this.page,
+                },
+                }).then(({ data }) => {
+                    console.log({ data })
+                    setTimeout(() => {
+                        if(this.page < data.data.length){
+                            this.page += 1
+                            console.log(this.page)
+                            this.list.push(...data.data)
+                            console.log(this.list);
+                            console.log('読み込み')
+                            $state.loaded()
+                        }else{
+                            console.log('終了')
+                            $state.complete()
+                        }
+                    },1500)
+                }).catch(() => {
+                    console.log('終了')
+                    $state.complete()
+                })
+        },
+
+        onLikeClick({id,liked}){
+            if(!this.$store.getters['auth/check']){
+                alert('いいね機能はログインしてから使えます！');
+                return false;
+            }
+
+            console.log(liked);
+
+                if(liked){
+                    this.unliked(id);
+                }else{
+                    this.liked(id);
+                }
+        },
+
+        async liked(id){
+
+            const response = await axios.put(`api/cards/${id}/like`);
+            console.log(response);
+
+            this.list = this.list.map((card)=>{
+                if(card.id === response.data.cards_id){
+                    card.likes_count += 1;
+                    card.already_liked = true;
+
+                }
+
+                return card;
             })
-           
-        //    const data = await this.fetchCards($state)
-            
-        //         if(!data){
-        //             $state.error()
-        //         }else if(data.length){
-        //             this.list.push(...data)
-        //             $state.loaded()
-        //         }else if(data.length === 0){
-        //             $state.complete()
-        //         }
-
-       },
-
-       
-
-       onLikeClick({id,liked}){
-        if(!this.$store.getters['auth/check']){
-            alert('いいね機能はログインしてから使えます！');
-            return false;
-        }
-
-        console.log(liked);
-
-        if(liked){
-            this.unliked(id);
-        }else{
-            this.liked(id);
-        }
-       },
-
-       async liked(id){
-
-        const response = await axios.put(`api/cards/${id}/like`);
-        console.log(response);
-
-        this.list = this.list.map((card)=>{
-            if(card.id === response.data.id){
-                card.likes_count += 1;
-                card.already_liked = true;
-
-            }
-
-            return card;
-        })
-        
-       },
-
-       async unliked(id){
-        console.log('unliked');
-
-        const response = await axios.delete(`/api/cards/${id}/unlike`);
-
-        this.list = this.list.map((card)=>{
-            if(card.id === response.data.id){
-                card.likes_count -= 1;
-                card.already_liked = false;
-            }
-
-            return card;
-        });
-       }
-       
-    //    async fetchCards($state){
-
-        // axios.get('/api/cards/index',{
-        //     params: {
-        //         page: this.page,
-        //         per_page: 1
-        //     },
-        // }).then(({ data }) => {
-        //     console.log({ data })
-        //     setTimeout(() => {
-        //         if(this.page < data.data.length){
-        //             this.page += 1
-        //             this.list.push(...data.data)
-        //             console.log('読み込み')
-        //             $state.loaded()
-        //         }else{
-        //             console.log('終了')
-        //             $state.complete()
-        //         }
-        //     },1500)
-        // }).catch(() => {
-        //     console.log('終了')
-        //     $state.complete()
-        // })
-
-        // await this.sleep(1500);
-        // await axios.get('/api/cards/index').then((res) => {
-
-        //     console.log(res.data.data)
-
-        //     let cards =[]
-
-            // if(res.status !== OK){
-            //     this.$store.commit('error/setCode',res.status);
-            //     return false;
-            // }
-
-            // cards.push(res.data.data)
-
-            // console.log(cards);
-
-            // // this.totalCount = res.data.total
-
-            // return cards
-
-            // let data = []
-            // let num = this.list.length
-            // if (num < 200) { // 最大200件まで
-            //     for (let i = 1; i <= 20; i++) {
-            //     data.push({ id: num + i , title: `記事タイトル${num + i}` })
-            //     }
-            // }
-            // return data
-
             
         },
 
-    //    sleep(time){
-    //         return new Promise(resolve => {
-    //             setTimeout(() => {
-    //                 resolve()
-    //             },time)
-    //         })
-    //    }
-       
+        async unliked(id){
+            console.log('unliked');
+
+            const response = await axios.delete(`/api/cards/${id}/unlike`);
+
+            this.list = this.list.map((card)=>{
+                if(card.id === response.data.cards_id){
+                    card.likes_count -= 1;
+                    card.already_liked = false;
+                }
+
+                return card;
+            });
+        }
+        
     
-    // watch: {
-    //     list(){
-    //         console.log('change');
-    //     }
-    // }
+    },
 }
 </script>
