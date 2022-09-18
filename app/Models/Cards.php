@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class Cards extends Model
 {
@@ -21,8 +22,12 @@ class Cards extends Model
      */
 
     protected $appends =[
-        'url'
+        'url','likes_count','already_liked' 
     ];
+
+    // protected $visible = [
+    //     'id','url','likes_count','already_liked'
+    // ];
 
     public function __construct(array $attributes = [])
     {
@@ -75,6 +80,10 @@ class Cards extends Model
         return $this->belongsTo('App\Models\User','user_id','id','users');
     }
 
+    public function favorite(){
+        return $this->belongsToMany('App\Models\User','favorites','cards_id','user_id');
+    }
+
     /**
      * URLアクセサ
      * @return string
@@ -83,6 +92,33 @@ class Cards extends Model
     public function getUrlAttribute(){
         return Storage::url($this->attributes['posted_image']);
     }
+
+    /**
+     * いいね数アクセサ
+     * @return int
+     */
+
+    public function getLikesCountAttribute(){
+        return $this->favorite->count();
+    }
+
+    /**
+     * いいね済み判定アクセサ
+     * @return boolean
+     */
+
+     public function getAlreadyLikedAttribute(){
+
+        if(Auth::guest()){
+            return false;
+        }
+
+        return $this->favorite->contains(function($user){
+            return $user->id === Auth::user()->id;
+        });
+
+
+     }
 
 
 }

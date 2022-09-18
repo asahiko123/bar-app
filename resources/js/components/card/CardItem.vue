@@ -13,18 +13,27 @@
             <div class="card-wrapper">
 
                 <v-row justify="end">
-                    <v-card-actions>
-                        <v-btn
-                        class="card-action favorite"
+                    <v-card-actions
                         >
-                        <v-icon>mdi-cards-heart-outline</v-icon>
+                        <v-btn
+                        icon
+                        class="button button__like"
+                        @click.prevent="favorite"
+                        >
+                        <v-card color="white">
+                            <v-icon  :class="{ 'button__liked': item.already_liked }" >mdi-heart</v-icon>{{ item.likes_count }}
+                        </v-card>
+                        
+                        <!-- <v-icon v-if="!item.already_liked" class="icon icon-md-heart" >mdi-heart</v-icon>{{ item.likes_count }} -->
                         </v-btn>
                     </v-card-actions>
 
                 </v-row>
 
                 <v-row justify="start" class="name">
-                    <v-card-title>{{ item.user.account_name}}</v-card-title>
+                    <v-card color="white">
+                        <v-card-title>{{ item.user.account_name}}</v-card-title>
+                    </v-card>
                 </v-row>
                 
             </div>
@@ -41,6 +50,15 @@ export default{
         item:{
             type: Object,
             required: true,
+        }
+    },
+    methods:{
+        favorite(){
+            console.log('aaaa');
+            this.$emit('like',{
+                id: this.item.id,
+                liked: this.item.already_liked,
+            })
         }
     }
 }
@@ -61,6 +79,10 @@ export default{
             position: absolute;
             bottom: 0;
         }
+    }
+
+    .button__liked{
+        color: red !important;
     }
 
 

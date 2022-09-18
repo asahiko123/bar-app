@@ -27,7 +27,7 @@ class CardsController extends Controller
     public function index()
     {
 
-        $cards = Cards::with(['user'])
+        $cards = Cards::with(['user','favorite'])
                 ->orderBy('created_at','desc')
                 ->paginate(4);
 
@@ -97,7 +97,9 @@ class CardsController extends Controller
      */
     public function show($id)
     {
-        //
+        $card = Cards::where('id', $id)->with(['user','favorite'])->first();
+
+        return $card?? abort(404);
     }
 
     /**
@@ -132,5 +134,29 @@ class CardsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function like(string $id){
+
+        $card = Cards::where('id',$id)->with(['favorites'])->first();
+
+        if(!$card){
+            abort(404);
+        }
+
+        $card->favorite()->detach(Auth::user()->id);
+        $card->favorite()->attach(Auth::user()->id);
+
+        return ["cards_id" => $id];
+    }
+
+    public function unlike(string $id){
+
+        $card = Card::where('id', $id)->with(['favorite'])->first();
+
+        $card->favorite()->detach(Auth::user()->id);
+
+        return ["cards_id" => $id];
+
     }
 }

@@ -3016,11 +3016,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     item: {
       type: Object,
       required: true
+    }
+  },
+  methods: {
+    favorite: function favorite() {
+      console.log('aaaa');
+      this.$emit('like', {
+        id: this.item.id,
+        liked: this.item.already_liked
+      });
     }
   }
 });
@@ -3084,18 +3102,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -3137,6 +3143,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                       (_this$list = _this.list).push.apply(_this$list, _toConsumableArray(data.data));
 
+                      console.log(_this.list);
                       console.log('読み込み');
                       $state.loaded();
                     } else {
@@ -3163,6 +3170,87 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee);
+      }))();
+    },
+    onLikeClick: function onLikeClick(_ref2) {
+      var id = _ref2.id,
+          liked = _ref2.liked;
+
+      if (!this.$store.getters['auth/check']) {
+        alert('いいね機能はログインしてから使えます！');
+        return false;
+      }
+
+      console.log(liked);
+
+      if (liked) {
+        this.unliked(id);
+      } else {
+        this.liked(id);
+      }
+    },
+    liked: function liked(id) {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        var response;
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().put("api/cards/".concat(id, "/like"));
+
+              case 2:
+                response = _context2.sent;
+                console.log(response);
+                _this2.list = _this2.list.map(function (card) {
+                  if (card.id === response.data.id) {
+                    card.likes_count += 1;
+                    card.already_liked = true;
+                  }
+
+                  return card;
+                });
+
+              case 5:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    unliked: function unliked(id) {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        var response;
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                console.log('unliked');
+                _context3.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default()["delete"]("/api/cards/".concat(id, "/unlike"));
+
+              case 3:
+                response = _context3.sent;
+                _this3.list = _this3.list.map(function (card) {
+                  if (card.id === response.data.id) {
+                    card.likes_count -= 1;
+                    card.already_liked = false;
+                  }
+
+                  return card;
+                });
+
+              case 5:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
       }))();
     } //    async fetchCards($state){
     // axios.get('/api/cards/index',{
@@ -3216,11 +3304,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   //         })
   //    }
   // watch: {
-  //     $route: {
-  //         async handler(){
-  //             await this.fetchCards()
-  //         },
-  //         immediate: true
+  //     list(){
+  //         console.log('change');
   //     }
   // }
 
@@ -4599,7 +4684,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".card-wrapper {\n  width: 100% !important;\n  height: 100% !important;\n  position: relative;\n  padding-bottom: 50px;\n}\n.card-wrapper .name {\n  position: absolute;\n  bottom: 0;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".card-wrapper {\n  width: 100% !important;\n  height: 100% !important;\n  position: relative;\n  padding-bottom: 50px;\n}\n.card-wrapper .name {\n  position: absolute;\n  bottom: 0;\n}\n.button__liked {\n  color: red !important;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8129,8 +8214,38 @@ var render = function () {
                         [
                           _c(
                             "v-btn",
-                            { staticClass: "card-action favorite" },
-                            [_c("v-icon", [_vm._v("mdi-cards-heart-outline")])],
+                            {
+                              staticClass: "button button__like",
+                              attrs: { icon: "" },
+                              on: {
+                                click: function ($event) {
+                                  $event.preventDefault()
+                                  return _vm.favorite.apply(null, arguments)
+                                },
+                              },
+                            },
+                            [
+                              _c(
+                                "v-card",
+                                { attrs: { color: "white" } },
+                                [
+                                  _c(
+                                    "v-icon",
+                                    {
+                                      class: {
+                                        button__liked: _vm.item.already_liked,
+                                      },
+                                    },
+                                    [_vm._v("mdi-heart")]
+                                  ),
+                                  _vm._v(
+                                    _vm._s(_vm.item.likes_count) +
+                                      "\n                    "
+                                  ),
+                                ],
+                                1
+                              ),
+                            ],
                             1
                           ),
                         ],
@@ -8144,9 +8259,16 @@ var render = function () {
                     "v-row",
                     { staticClass: "name", attrs: { justify: "start" } },
                     [
-                      _c("v-card-title", [
-                        _vm._v(_vm._s(_vm.item.user.account_name)),
-                      ]),
+                      _c(
+                        "v-card",
+                        { attrs: { color: "white" } },
+                        [
+                          _c("v-card-title", [
+                            _vm._v(_vm._s(_vm.item.user.account_name)),
+                          ]),
+                        ],
+                        1
+                      ),
                     ],
                     1
                   ),
@@ -8195,6 +8317,7 @@ var render = function () {
             key: item.index,
             staticClass: "grid__item d-flex justify-center",
             attrs: { item: item },
+            on: { like: _vm.onLikeClick },
           })
         }),
         _vm._v(" "),
