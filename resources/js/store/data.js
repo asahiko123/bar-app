@@ -13,6 +13,9 @@ const getters = {
 
     getDialog(state){
         return state.dialog;
+    },
+    getBarName(state){
+        return state.barName;
     }
 
 }

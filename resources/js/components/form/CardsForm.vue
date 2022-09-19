@@ -170,6 +170,7 @@ export default{
     computed:{
 
         barName(){
+            this.formBarName();
             return this.$store.state.data.barName;
         }
     },
@@ -233,6 +234,9 @@ export default{
             // }
 
 
+        },
+        formBarName(){
+            this.form.bar = this.$store.state.data.barName;
         }
     },
     components: { 
