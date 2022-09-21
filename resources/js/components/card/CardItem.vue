@@ -23,7 +23,7 @@
                         <v-card color="white">
                             <v-icon  :class="{ 'button__liked': item.already_liked }" >mdi-heart</v-icon>{{ item.likes_count }}
                         </v-card>
-                        
+                            
                         <!-- <v-icon v-if="!item.already_liked" class="icon icon-md-heart" >mdi-heart</v-icon>{{ item.likes_count }} -->
                         </v-btn>
                     </v-card-actions>
@@ -31,8 +31,8 @@
                 </v-row>
 
                 <v-row justify="start" class="name">
-                    <v-card color="white">
-                        <v-card-title>{{ item.user.account_name}}</v-card-title>
+                    <v-card color="transparent">
+                        <v-card-title class="barName">{{ item.bar }}</v-card-title>
                     </v-card>
                 </v-row>
                 
@@ -84,6 +84,10 @@ export default{
 
     .button__liked{
         color: red !important;
+    }
+
+    .barName{
+        color: white !important;
     }
 
 

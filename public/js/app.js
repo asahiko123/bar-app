@@ -3898,10 +3898,9 @@ __webpack_require__.r(__webpack_exports__);
           setTimeout(pagination.nextPage(), 1000);
         } else {
           /* vueコンポーネントを縦並びにして店舗をリスト化する
-          
-             vue.extend : vueの派生クラス（サブクラス）を生成
+               vue.extend : vueの派生クラス（サブクラス）を生成
              instance   : 1店舗分のコンポーネントを生成  
-             instance.$mount: HTMLにコンポーネントをマウント
+             instance.$mount: 既存のhtmlとvueが生成するDOMを入れ替え
              instance.$el : vueが作用する要素(HTMLタグ)
           
           */
@@ -4533,7 +4532,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".card-wrapper {\n  width: 100% !important;\n  height: 100% !important;\n  position: relative;\n  padding-bottom: 50px;\n}\n.card-wrapper .name {\n  position: absolute;\n  bottom: 0;\n}\n.button__liked {\n  color: red !important;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".card-wrapper {\n  width: 100% !important;\n  height: 100% !important;\n  position: relative;\n  padding-bottom: 50px;\n}\n.card-wrapper .name {\n  position: absolute;\n  bottom: 0;\n}\n.button__liked {\n  color: red !important;\n}\n.barName {\n  color: white !important;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8110,10 +8109,10 @@ var render = function () {
                     [
                       _c(
                         "v-card",
-                        { attrs: { color: "white" } },
+                        { attrs: { color: "transparent" } },
                         [
-                          _c("v-card-title", [
-                            _vm._v(_vm._s(_vm.item.user.account_name)),
+                          _c("v-card-title", { staticClass: "barName" }, [
+                            _vm._v(_vm._s(_vm.item.bar)),
                           ]),
                         ],
                         1

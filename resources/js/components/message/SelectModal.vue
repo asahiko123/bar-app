@@ -147,10 +147,10 @@ export default{
                 }else{
 
                     /* vueコンポーネントを縦並びにして店舗をリスト化する
-                    
+
                        vue.extend : vueの派生クラス（サブクラス）を生成
                        instance   : 1店舗分のコンポーネントを生成  
-                       instance.$mount: HTMLにコンポーネントをマウント
+                       instance.$mount: 既存のhtmlとvueが生成するDOMを入れ替え
                        instance.$el : vueが作用する要素(HTMLタグ)
                     
                     */
