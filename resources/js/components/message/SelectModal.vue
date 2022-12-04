@@ -158,18 +158,22 @@ export default{
                     for(let i = 0; i < this.placesList.length;i++){
                         let place = this.placesList[i]
 
-                        let content = place.name
+                        let bar = place.name;
+                        let adress = place.vicinity;
 
-                        var ComponentClass = Vue.extend(BarList);
-                        var instance = new ComponentClass({
+                        let ComponentClass = Vue.extend(BarList);
+                        let instance = new ComponentClass({
                             propsData: {
-                                barName: content
+                                barName: bar,
+                                barAddress : adress
                             }
                         });
 
                         instance.$mount();
                         let loading = document.getElementsByClassName("loading");
                         loading[0].innerHTML = "";
+
+                        console.log(instance.$el);
 
                         document.getElementById("results").appendChild(instance.$el);
 
