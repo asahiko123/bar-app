@@ -4532,7 +4532,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".card-wrapper {\n  width: 100% !important;\n  height: 100% !important;\n  position: relative;\n  padding-bottom: 50px;\n}\n.card-wrapper .name {\n  position: absolute;\n  bottom: 0;\n}\n.button__liked {\n  color: red !important;\n}\n.barName {\n  color: white !important;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".card-wrapper {\n  width: 100% !important;\n  height: 100% !important;\n  position: absolute;\n  bottom: 0;\n  background-image: linear-gradient(rgba(58, 66, 66, 0), rgba(58, 66, 66, 0.2), rgba(58, 66, 66, 0.7), rgba(58, 66, 66, 0.8));\n}\n.card-wrapper .name {\n  position: absolute;\n  bottom: 0;\n}\n.button__liked {\n  color: red !important;\n}\n.barName {\n  color: white !important;\n}\n.row {\n  margin: 0;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

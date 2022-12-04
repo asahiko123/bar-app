@@ -72,10 +72,11 @@ export default{
         width: 100% !important;
         height: 100% !important;
 
-        position: relative;
-        padding-bottom: 50px;
+        position: absolute;
+        bottom: 0;
     
     
+        background-image: linear-gradient(rgba(58,66,66,0.0), rgba(58,66,66,0.2), rgba(58,66,66,0.7), rgba(58,66,66,0.8));
         .name{
             position: absolute;
             bottom: 0;
@@ -88,6 +89,10 @@ export default{
 
     .barName{
         color: white !important;
+    }
+
+    .row{
+        margin: 0;
     }
 
 
