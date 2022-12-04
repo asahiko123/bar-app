@@ -8044,8 +8044,8 @@ var render = function () {
               attrs: {
                 src: _vm.item.url,
                 alt: "" + _vm.item.user.account_name,
-                width: "500",
-                height: "400",
+                width: "563",
+                height: "563",
               },
             },
             [

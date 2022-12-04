@@ -8,7 +8,7 @@
             <v-img 
                 :src="item.url" 
                 :alt="`${item.user.account_name}`" 
-                width="500" height="400"
+                width="563" height="563"
             >
             <div class="card-wrapper">
 
