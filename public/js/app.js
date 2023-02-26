@@ -8460,7 +8460,7 @@ var render = function () {
             "v-card",
             {
               staticClass: "mx-auto my-12",
-              attrs: { "max-width": "500" },
+              attrs: { width: "700" },
               scopedSlots: _vm._u([
                 {
                   key: "loader",
@@ -8518,7 +8518,7 @@ var render = function () {
               _vm._v(" "),
               _vm._v(" "),
               _c("v-img", {
-                attrs: { cover: "", height: "500", src: _vm.data.url },
+                attrs: { cover: "", height: "1200", src: _vm.data.url },
               }),
               _vm._v(" "),
               _c(
@@ -8644,7 +8644,7 @@ var render = function () {
       _c(
         "Router-Link",
         {
-          staticClass: "card-overlay",
+          staticClass: "card-overlay d-flex justify-center",
           attrs: { to: { path: "/cards/" + _vm.item.id } },
         },
         [

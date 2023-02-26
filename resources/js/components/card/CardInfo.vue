@@ -4,7 +4,7 @@
         <v-app>
             <v-card
             class="mx-auto my-12"
-            max-width="500"
+            width="700"
             >
             <v-card-actions>
                 <v-list-item class="w-100">
@@ -35,7 +35,7 @@
         
             <v-img
                 cover
-                height="500"
+                height="1200"
                 :src="data.url"
             ></v-img>
         

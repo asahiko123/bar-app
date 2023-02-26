@@ -2,7 +2,7 @@
     <div class="card">
 
         <Router-Link
-            class="card-overlay"
+            class="card-overlay d-flex justify-center"
             :to ="{path: `/cards/${item.id}`}"
         >
         {{ item }}
