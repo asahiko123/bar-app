@@ -98,7 +98,7 @@ class CardsController extends Controller
     public function show($id)
     {
         $card = Cards::where('id', $id)->with(['user','favorite'])->first();
-
+        
         return $card?? abort(404);
     }
 

@@ -32,6 +32,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('/cards',[CardsController::class, 'create'])->name('cards.create');
     Route::put('cards/{id}/like',[FavoriteController::class,'like'])->name('cards.like');
     Route::delete('cards/{id}/unlike',[FavoriteController::class,'unlike'])->name('cards.unlike');
+    Route::get('/cards/{id}',[CardsController::class,'show'])->name('cards.show');
 
 });
 

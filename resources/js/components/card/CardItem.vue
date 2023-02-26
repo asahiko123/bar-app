@@ -3,8 +3,9 @@
 
         <Router-Link
             class="card-overlay"
-            :to ="`/cards/${item.id}`"
+            :to ="{path: `/cards/${item.id}`}"
         >
+        {{ item }}
             <v-img 
                 :src="item.url" 
                 :alt="`${item.user.account_name}`" 

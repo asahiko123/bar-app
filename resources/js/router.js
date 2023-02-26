@@ -8,6 +8,7 @@ import Login from "@/components/auth/LoginForm.vue";
 import Register from "@/components/auth/RegisterForm.vue";
 import SystemErr from "@/pages/errors/System.vue";
 import CardsForm from "@/components/form/CardsForm.vue";
+import CardInfo from "@/components/card/CardInfo.vue";
 // import CardList from "@/components/card/CardList.vue";
 
 Vue.use(VueRouter);
@@ -47,6 +48,13 @@ const routes = [
         path: "/cards/new",
         name: "cardsForm",
         component: CardsForm,
+    },
+    {
+        path: "/cards/:id",
+        name: "cardInfo",
+        component: CardInfo,
+        props: true
+
     }
 ];
 

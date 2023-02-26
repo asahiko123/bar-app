@@ -157,6 +157,7 @@ export default{
 
                     for(let i = 0; i < this.placesList.length;i++){
                         let place = this.placesList[i]
+                        console.log(place);
 
                         let bar = place.name;
                         let adress = place.vicinity;

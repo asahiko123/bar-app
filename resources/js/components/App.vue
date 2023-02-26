@@ -39,7 +39,7 @@
                 </v-tabs>
             </template>
 
-            <v-container v-if="!isLogin" class="d-flex justify-end mb-6">
+            <v-container v-if="!isLogin" class="d-flex justify-end mb-6 mr-0">
                 <v-btn color="link" min-height="20" text>
                     <v-row class="d-flex flex-column">
                         <v-icon>mdi-account-arrow-left</v-icon>
@@ -64,14 +64,20 @@
                 </v-btn>
             </v-container>
 
-            <v-container v-else class="d-flex justify-end mb-6">
+            <v-container v-else class="d-flex justify-end mb-6 mr-0 ">
                 <span v-if="isLogin">
                     {{ username }}
                 </span>
-                <v-btn color="link" min-height="20" text @click="logout">
+                <v-btn color="link" min-height="20" text @click="logout" class="pl-0 logout">
                     <v-row class="d-flex flex-column">
-                        <v-icon>mdi-account-arrow-left</v-icon>
+                        <v-icon large>mdi-account-arrow-left</v-icon>
                         <v-col class="logout">ログアウト</v-col>
+                    </v-row>
+                </v-btn>
+                <v-btn color="link" min-height="20" text @click="logout" class="pl-0 mypage">
+                    <v-row class="d-flex flex-column">
+                        <v-icon large>mdi-account-circle</v-icon>
+                        <v-col class="mypage">マイページ</v-col>
                     </v-row>
                 </v-btn>
             </v-container>
@@ -158,4 +164,19 @@ a.tab-link.map,
 a.tab-link.aboutUs {
     color: hsla(0, 0%, 100%, 0.6);
 }
+
+.logout {
+    font-size:small;
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.mypage {
+    font-size:small;
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
 </style>
